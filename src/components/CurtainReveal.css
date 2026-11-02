@@ -1,0 +1,292 @@
+/* WAAK — Cinematic Velvet Curtain Reveal Styling */
+
+.curtain-reveal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  overflow: hidden;
+  pointer-events: auto;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.curtain-reveal-overlay.finished,
+.curtain-reveal-overlay.unmounted {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Curtain Panel Base */
+.curtain-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.5%;
+  height: 100%;
+  overflow: hidden;
+  will-change: transform;
+  transition: transform 1.5s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.curtain-panel-left {
+  left: 0;
+  transform: translateX(0);
+  transform-origin: left center;
+}
+
+.curtain-panel-right {
+  right: 0;
+  transform: translateX(0);
+  transform-origin: right center;
+}
+
+/* Parting Animation State */
+.curtain-reveal-overlay.opening .curtain-panel-left {
+  transform: translateX(-100%) scaleX(0.92);
+}
+
+.curtain-reveal-overlay.opening .curtain-panel-right {
+  transform: translateX(100%) scaleX(0.92);
+}
+
+/* Velvet Fabric Texture Layer */
+.curtain-fabric-texture {
+  position: absolute;
+  inset: 0;
+  background-color: #3b080f;
+  background-image: url('/assets/curtain-velvet-texture.jpg');
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: luminosity;
+  opacity: 0.85;
+}
+
+/* Realistic Vertical Velvet Undulating Folds */
+.curtain-folds {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(15, 2, 4, 0.92) 0px,
+    rgba(40, 6, 12, 0.6) 24px,
+    rgba(90, 18, 26, 0.3) 48px,
+    rgba(150, 32, 48, 0.55) 72px,
+    rgba(90, 18, 26, 0.3) 96px,
+    rgba(40, 6, 12, 0.6) 120px,
+    rgba(15, 2, 4, 0.92) 144px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+/* Atmospheric Ambient Sheen & Stage Lighting */
+.curtain-sheen {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.28) 0%, rgba(90, 18, 26, 0.3) 45%, rgba(18, 3, 5, 0.85) 100%),
+    linear-gradient(180deg, rgba(20, 3, 6, 0.65) 0%, transparent 20%, transparent 80%, rgba(15, 2, 4, 0.85) 100%);
+  pointer-events: none;
+}
+
+/* Internal Gathering Shadow */
+.curtain-shadow-gather {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.95);
+  pointer-events: none;
+}
+
+/* Antique Gold Seam Trim at Meeting Edge */
+.curtain-edge-trim {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(197, 162, 101, 0.2) 0%,
+    rgba(197, 162, 101, 0.85) 25%,
+    rgba(244, 239, 230, 0.95) 50%,
+    rgba(197, 162, 101, 0.85) 75%,
+    rgba(197, 162, 101, 0.2) 100%
+  );
+  box-shadow: 0 0 8px rgba(197, 162, 101, 0.6);
+  z-index: 3;
+}
+
+.curtain-panel-left .curtain-edge-trim {
+  right: 0;
+}
+
+.curtain-panel-right .curtain-edge-trim {
+  left: 0;
+}
+
+/* Top Theatrical Valance / Pelmet */
+.curtain-pelmet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  background: linear-gradient(180deg, #1f0407 0%, #4a0d15 70%, transparent 100%);
+  border-bottom: 1px solid rgba(197, 162, 101, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  z-index: 10001;
+  pointer-events: none;
+  transition: transform 1.4s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.8s ease;
+}
+
+.curtain-reveal-overlay.opening .curtain-pelmet {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+/* Center Emblem & Wordmark */
+.curtain-emblem-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10002;
+  text-align: center;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: emblemAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.curtain-reveal-overlay.opening .curtain-emblem-wrap {
+  opacity: 0;
+  transform: translate(-50%, -56%) scale(1.05);
+}
+
+@keyframes emblemAppear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.curtain-ornament {
+  width: 44px;
+  height: 44px;
+  color: var(--color-gold);
+  filter: drop-shadow(0 2px 12px rgba(197, 162, 101, 0.55));
+}
+
+.curtain-wordmark {
+  font-family: var(--font-serif);
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  color: var(--color-cream);
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 35px rgba(197, 162, 101, 0.45);
+}
+
+.curtain-tagline-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.curtain-tagline-line {
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 162, 101, 0.7), transparent);
+}
+
+.curtain-tagline {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+  opacity: 0.9;
+}
+
+/* Accessible Skip Intro Button */
+.curtain-skip-btn {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  z-index: 10005;
+  background: rgba(28, 5, 8, 0.82);
+  border: 1px solid rgba(197, 162, 101, 0.55);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.curtain-skip-btn:hover,
+.curtain-skip-btn:focus-visible {
+  background: rgba(197, 162, 101, 0.28);
+  border-color: var(--color-gold);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(197, 162, 101, 0.45);
+  transform: translateY(-1px);
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.curtain-skip-icon {
+  font-size: 13px;
+  color: var(--color-gold);
+  transition: transform 0.2s ease;
+}
+
+.curtain-skip-btn:hover .curtain-skip-icon {
+  transform: translateX(3px);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .curtain-reveal-overlay {
+    display: none !important;
+  }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .curtain-skip-btn {
+    top: 16px;
+    right: 16px;
+    padding: 6px 14px;
+    font-size: 10px;
+  }
+  .curtain-ornament {
+    width: 36px;
+    height: 36px;
+  }
+  .curtain-wordmark {
+    font-size: 32px;
+    letter-spacing: 0.22em;
+  }
+}
