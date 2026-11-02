@@ -1,0 +1,6220 @@
+.div {
+  aspect-ratio: 1 / 1;
+  background-color: rgb(84, 30, 37);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 21px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transform-origin: 10.5px 10.5px;
+  width: 21px;
+}
+
+.div-2 {
+  aspect-ratio: 1 / 1;
+  background-color: rgb(84, 30, 37);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 21px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 10.5px 10.5px;
+  width: 21px;
+}
+
+.div-3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 720px 0px;
+  width: 1440px;
+}
+
+.logo {
+  aspect-ratio: 0.6 / 1;
+  background-color: rgb(0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  bottom: -2px;
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 20px;
+  left: 6px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  right: -6px;
+  text-align: start;
+  top: -2px;
+  transform-origin: 6px 10px;
+  transform: matrix(1, 0, 0, 1, -6, 0);
+  width: 12px;
+}
+
+.text {
+  aspect-ratio: 9.7 / 1;
+  background-color: rgb(0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 10px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 48.5px 5px;
+  width: 97px;
+}
+
+.div-4 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 2136.27px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 720px 1068.13px;
+  width: 1440px;
+}
+
+.div-5 {
+  align-items: flex-start;
+  background-color: rgb(255, 255, 255);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  justify-content: flex-start;
+  min-height: 2136.27px;
+  object-fit: fill;
+  overflow: visible;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 1068.13px;
+  width: 1440px;
+}
+
+.div-6 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: contents;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 50% 50%;
+}
+
+.waak-header {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 80px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 40px;
+  width: 1440px;
+}
+
+.desktop {
+  align-items: center;
+  background-color: rgb(244, 241, 232);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 80px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 40px;
+  width: 1440px;
+}
+
+.balanced-header-row {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 80px;
+  justify-content: flex-start;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  padding-left: 36px;
+  padding-right: 36px;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 40px;
+  width: 1440px;
+}
+
+.div-7 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 80px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 720px 40px;
+  width: 1440px;
+}
+
+.img {
+  aspect-ratio: auto 2172 / 724;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 80px;
+  min-height: 0;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 720px 40px;
+  width: 1440px;
+}
+
+.account-area {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 1 0 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 44px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 309.5px 22px;
+  width: 619px;
+  z-index: 1;
+}
+
+.account {
+  align-items: center;
+  background-color: rgb(244, 241, 232);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 0);
+  border-radius: 4px;
+  border-style: outset;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 44px;
+  justify-content: center;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: relative;
+  text-align: center;
+  transform-origin: 22px 22px;
+  width: 44px;
+}
+
+.original-waak-logo {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 46px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 65px 23px;
+  width: 130px;
+  z-index: 1;
+}
+
+.div-8 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 46px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 65px 23px;
+  width: 130px;
+}
+
+.img-2 {
+  aspect-ratio: auto 2172 / 724;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 46px;
+  min-height: 0;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 65px 23px;
+  width: 130px;
+}
+
+.wishlist-and-cart {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 1 0 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 8px;
+  grid-auto-flow: row;
+  height: 44px;
+  justify-content: flex-end;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 309.5px 22px;
+  width: 619px;
+  z-index: 1;
+}
+
+.wishlist {
+  align-items: center;
+  background-color: rgb(244, 241, 232);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 238);
+  border-radius: 4px;
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 44px;
+  justify-content: center;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 22px 22px;
+  width: 44px;
+}
+
+.div-9 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  bottom: 81px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  left: 720.5px;
+  margin-bottom: -1px;
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-top: -1px;
+  min-height: 0;
+  object-fit: fill;
+  overflow: hidden;
+  position: absolute;
+  right: 720.5px;
+  text-align: start;
+  transform-origin: 0.5px 0.5px;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.balanced-header-row-2 {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 80px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: clip;
+  padding-left: 36px;
+  padding-right: 36px;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 40px;
+  width: 1440px;
+}
+
+.img-3 {
+  aspect-ratio: auto 2172 / 724;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 80px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 720px 40px;
+  width: 1440px;
+}
+
+.account-2 {
+  align-items: center;
+  background-color: rgb(244, 241, 232);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 4px;
+  border-style: outset;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 44px;
+  justify-content: center;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: relative;
+  text-align: center;
+  transform-origin: 22px 22px;
+  width: 44px;
+}
+
+.img-4 {
+  aspect-ratio: auto 2172 / 724;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 46px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 65px 23px;
+  width: 130px;
+}
+
+.div-10 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  bottom: 81px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  left: 720.5px;
+  margin-bottom: -1px;
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-top: -1px;
+  object-fit: fill;
+  overflow: hidden;
+  position: absolute;
+  right: 720.5px;
+  text-align: start;
+  transform-origin: 0.5px 0.5px;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.account-dropdown {
+  align-items: flex-start;
+  background-color: rgb(244, 241, 232);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 4px;
+  bottom: -188px;
+  box-shadow: rgba(54, 28, 23, 0.12) 0px 10px 28px 0px;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 196px;
+  justify-content: flex-start;
+  left: 36px;
+  object-fit: fill;
+  overflow: clip;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  place-items: flex-start normal;
+  position: absolute;
+  right: 1188px;
+  text-align: start;
+  top: 72px;
+  transform-origin: 108px 98px;
+  width: 216px;
+  z-index: 8;
+}
+
+.sign-in {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 238);
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 45px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 100px 22.5px;
+  width: 200px;
+}
+
+.label {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 21px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 21.0234px 10.5px;
+  white-space: pre;
+  width: 42.0469px;
+}
+
+.p {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(84, 30, 37);
+  color: rgb(84, 30, 37);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 21px;
+  letter-spacing: -0.28px;
+  line-height: 21px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 21.0234px 10.5px;
+  white-space: pre;
+  width: 42.0469px;
+}
+
+.my-orders {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 0);
+  border-style: outset;
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 45px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: center;
+  transform-origin: 100px 22.5px;
+  width: 200px;
+}
+
+.label-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 21px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transform-origin: 33.2422px 10.5px;
+  white-space: pre;
+  width: 66.4844px;
+}
+
+.p-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(84, 30, 37);
+  color: rgb(84, 30, 37);
+  cursor: default;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 21px;
+  letter-spacing: -0.28px;
+  line-height: 21px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 33.2422px 10.5px;
+  white-space: pre;
+  width: 66.4844px;
+}
+
+.label-3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 21px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transform-origin: 37.1016px 10.5px;
+  white-space: pre;
+  width: 74.2031px;
+}
+
+.p-3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(84, 30, 37);
+  color: rgb(84, 30, 37);
+  cursor: default;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 21px;
+  letter-spacing: -0.28px;
+  line-height: 21px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 37.1016px 10.5px;
+  white-space: pre;
+  width: 74.2031px;
+}
+
+.logout-disabled {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 0);
+  border-style: outset;
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 45px;
+  justify-content: flex-start;
+  object-fit: fill;
+  opacity: 0.4;
+  overflow: visible;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: center;
+  transform-origin: 100px 22.5px;
+  width: 200px;
+}
+
+.label-4 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 21px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transform-origin: 23.1641px 10.5px;
+  white-space: pre;
+  width: 46.3281px;
+}
+
+.p-4 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(84, 30, 37);
+  color: rgb(84, 30, 37);
+  cursor: default;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 21px;
+  letter-spacing: -0.28px;
+  line-height: 21px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 23.1641px 10.5px;
+  white-space: pre;
+  width: 46.3281px;
+}
+
+.ivory-with-authority-campaign {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 810px;
+  justify-content: center;
+  min-height: 640px;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 405px;
+  width: 1440px;
+}
+
+.div-11 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 810px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 720px 405px;
+  width: 1440px;
+}
+
+.img-5 {
+  aspect-ratio: auto 2172 / 724;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 810px;
+  min-height: 0;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 720px 405px;
+  width: 1440px;
+}
+
+.original-handmade-paper-centre-crop {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 810px;
+  left: -600px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  right: -360px;
+  text-align: start;
+  transform-origin: 1200px 405px;
+  width: 2400px;
+  z-index: 0;
+}
+
+.div-12 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 810px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 1200px 405px;
+  width: 2400px;
+}
+
+.img-6 {
+  aspect-ratio: auto 2172 / 724;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 810px;
+  min-height: 0;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 1200px 405px;
+  width: 2400px;
+}
+
+.original-burgundy-calligraphy-artwork {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  bottom: 98px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 648px;
+  left: 907.203px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  right: 72px;
+  text-align: start;
+  top: 64px;
+  transform-origin: 230.398px 324px;
+  transform: matrix(0.994522, 0.104528, -0.104528, 0.994522, 0, 0);
+  width: 460.797px;
+  z-index: 1;
+}
+
+.div-13 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 648px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 230.398px 324px;
+  width: 460.797px;
+}
+
+.img-7 {
+  aspect-ratio: auto 485 / 802;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 648px;
+  min-height: 0;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 230.398px 324px;
+  width: 460.797px;
+}
+
+.campaign-content {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 660.188px;
+  justify-content: center;
+  max-width: 1440px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 181px;
+  padding-left: 72px;
+  padding-right: 72px;
+  padding-top: 181px;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 330.094px;
+  width: 1440px;
+  z-index: 2;
+}
+
+.campaign-label {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 16.5px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 648px 8.25px;
+  white-space: pre-wrap;
+  width: 1296px;
+}
+
+.p-5 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(84, 30, 37);
+  color: rgb(84, 30, 37);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: 11px;
+  font-stretch: 100%;
+  font-weight: 500;
+  grid-auto-flow: row;
+  height: 16.5px;
+  letter-spacing: 2px;
+  line-height: 16.5px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 648px 8.25px;
+  white-space: pre-wrap;
+  width: 1296px;
+}
+
+.editorial-copy {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 24px;
+  grid-auto-flow: row;
+  height: 281.688px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 311.039px 140.844px;
+  width: 622.078px;
+}
+
+.ivory-with-authority {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 159.594px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 311.039px 79.7969px;
+  width: 622.078px;
+}
+
+.h1 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(84, 30, 37);
+  color: rgb(84, 30, 37);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: "Bodoni Moda", "Bodoni Moda Placeholder", serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 76px;
+  font-stretch: 100%;
+  font-weight: 500;
+  grid-auto-flow: row;
+  height: 159.594px;
+  letter-spacing: -2px;
+  line-height: 79.8px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 311.039px 79.7969px;
+  width: 622.078px;
+}
+
+.campaign-supporting-text {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 25.5938px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 311.039px 12.7969px;
+  white-space: pre-wrap;
+  width: 622.078px;
+}
+
+.p-6 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(84, 30, 37);
+  color: rgb(84, 30, 37);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: 16px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 25.5938px;
+  line-height: 25.6px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 311.039px 12.7969px;
+  white-space: pre-wrap;
+  width: 622.078px;
+}
+
+.explore-the-collection-destination-pending {
+  align-items: center;
+  background-color: rgb(84, 30, 37);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 0);
+  border-style: outset;
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 48.5px;
+  justify-content: center;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 16px;
+  place-items: center normal;
+  position: relative;
+  text-align: center;
+  transform-origin: 111px 24.25px;
+  width: 222px;
+}
+
+.cta-label {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 16.5px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transform-origin: 87px 8.25px;
+  white-space: pre;
+  width: 174px;
+}
+
+.p-7 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  cursor: default;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: 11px;
+  font-stretch: 100%;
+  font-weight: 500;
+  grid-auto-flow: row;
+  height: 16.5px;
+  letter-spacing: 1px;
+  line-height: 16.5px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 87px 8.25px;
+  white-space: pre;
+  width: 174px;
+}
+
+.waak-collection-section {
+  align-items: center;
+  background-color: rgb(103, 44, 23);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  justify-content: flex-start;
+  min-height: 1246.27px;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 623.133px;
+  width: 1440px;
+}
+
+.approved-terracotta-wall-original-photo {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  bottom: -653.734px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1900px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 720px 950px;
+  width: 1440px;
+}
+
+.div-14 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1900px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 720px 950px;
+  width: 1440px;
+}
+
+.img-8 {
+  aspect-ratio: auto 1448 / 1086;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1900px;
+  min-height: 0;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 720px 950px;
+  width: 1440px;
+}
+
+.continuous-collection-content {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 40px;
+  grid-auto-flow: row;
+  height: 1246.27px;
+  justify-content: flex-start;
+  max-width: 1440px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 64px;
+  padding-left: 56px;
+  padding-right: 56px;
+  padding-top: 64px;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 623.133px;
+  width: 1440px;
+}
+
+.shop-by-category {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 24px;
+  grid-auto-flow: row;
+  height: 159.203px;
+  justify-content: flex-start;
+  min-height: 0;
+  object-fit: fill;
+  overflow: auto hidden;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 664px 79.6016px;
+  width: 1328px;
+}
+
+.kurta-sets {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 0);
+  border-style: outset;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 1 0 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 12px;
+  grid-auto-flow: row;
+  height: 159.203px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  place-items: center normal;
+  position: relative;
+  text-align: center;
+  transform-origin: 84.5703px 79.6016px;
+  width: 169.141px;
+}
+
+.div-15 {
+  aspect-ratio: 1 / 1;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: contents;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 50% 50%;
+  width: min(120px, 100%);
+}
+
+.category-photography {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  position: relative;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.div-16 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.img-9 {
+  aspect-ratio: auto 800 / 1422;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  min-height: 0;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.category-label {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transform-origin: 80.5703px 9.60156px;
+  white-space: pre-wrap;
+  width: 161.141px;
+}
+
+.p-8 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 80.5703px 9.60156px;
+  white-space: pre-wrap;
+  width: 161.141px;
+}
+
+.indian-wear {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 0);
+  border-style: outset;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 1 0 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 12px;
+  grid-auto-flow: row;
+  height: 159.203px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  place-items: center normal;
+  position: relative;
+  text-align: center;
+  transform-origin: 84.5781px 79.6016px;
+  width: 169.156px;
+}
+
+.img-10 {
+  aspect-ratio: auto 1200 / 1800;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  min-height: 0;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.category-label-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transform-origin: 80.5781px 9.60156px;
+  white-space: pre-wrap;
+  width: 161.156px;
+}
+
+.p-9 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 80.5781px 9.60156px;
+  white-space: pre-wrap;
+  width: 161.156px;
+}
+
+.img-11 {
+  aspect-ratio: auto 800 / 1067;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  min-height: 0;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.img-12 {
+  aspect-ratio: auto 800 / 1200;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  min-height: 0;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.all-products {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 0);
+  border-style: outset;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 1 0 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 12px;
+  grid-auto-flow: row;
+  height: 128px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  place-items: center normal;
+  position: relative;
+  text-align: center;
+  transform-origin: 84.5703px 64px;
+  width: 169.141px;
+}
+
+.category-label-3 {
+  aspect-ratio: 1 / 1;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transform-origin: 60px 60px;
+  white-space: pre-wrap;
+  width: 120px;
+}
+
+.p-10 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(84, 30, 37);
+  color: rgb(84, 30, 37);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 9.60156px;
+  white-space: pre-wrap;
+  width: 120px;
+}
+
+.collection-heading {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 12px;
+  grid-auto-flow: row;
+  height: 79.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 664px 39.6016px;
+  width: 1328px;
+}
+
+.explore-the-collection {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 48px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 664px 24px;
+  white-space: pre-wrap;
+  width: 1328px;
+}
+
+.h2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: "Bodoni Moda", "Bodoni Moda Placeholder", serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 40px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 48px;
+  letter-spacing: 1px;
+  line-height: 48px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 664px 24px;
+  white-space: pre-wrap;
+  width: 1328px;
+}
+
+.demo-catalogue-note {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 664px 9.60156px;
+  white-space: pre-wrap;
+  width: 1328px;
+}
+
+.p-11 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 664px 9.60156px;
+  white-space: pre-wrap;
+  width: 1328px;
+}
+
+.collection-filter-toolbar {
+  align-items: flex-end;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 16px;
+  grid-auto-flow: row;
+  height: 112.391px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  place-items: flex-end normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 664px 56.1953px;
+  width: 1328px;
+}
+
+.price-filter {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 1 0 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 8px;
+  grid-auto-flow: row;
+  height: 71.2031px;
+  justify-content: flex-start;
+  min-width: 170px;
+  object-fit: fill;
+  overflow: visible;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 160px 35.6016px;
+  width: 320px;
+}
+
+.div-17 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 160px 9.60156px;
+  white-space: pre-wrap;
+  width: 320px;
+}
+
+.p-12 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  cursor: default;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 160px 9.60156px;
+  white-space: pre-wrap;
+  width: 320px;
+}
+
+.div-18 {
+  background-color: rgb(84, 30, 37);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 2px;
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 44px;
+  min-height: 0;
+  object-fit: fill;
+  overflow: hidden;
+  padding-right: 12px;
+  position: relative;
+  text-align: start;
+  transform-origin: 160px 22px;
+  width: 320px;
+}
+
+.select {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(243, 233, 210);
+  color: rgb(243, 233, 210);
+  cursor: default;
+  display: inline-block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 44px;
+  line-height: 14.4px;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 10px;
+  place-items: center normal;
+  position: static;
+  text-align: start;
+  transform-origin: 154px 22px;
+  white-space: nowrap;
+  width: 308px;
+}
+
+.option {
+  align-items: center;
+  background-color: rgb(61, 40, 21);
+  background-position: 0% 0%;
+  border-color: rgb(247, 238, 216);
+  color: rgb(247, 238, 216);
+  cursor: default;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 6px;
+  grid-auto-flow: row;
+  line-height: 14.4px;
+  min-height: 24px;
+  min-width: 24px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  place-items: center normal;
+  position: static;
+  text-align: start;
+  transform-origin: 50% 50%;
+  white-space: nowrap;
+}
+
+.option-2 {
+  align-items: center;
+  background-color: rgb(61, 40, 21);
+  background-position: 0% 0%;
+  border-color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.4);
+  cursor: default;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 6px;
+  grid-auto-flow: row;
+  line-height: 14.4px;
+  min-height: 24px;
+  min-width: 24px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  place-items: center normal;
+  position: static;
+  text-align: start;
+  transform-origin: 50% 50%;
+  white-space: nowrap;
+}
+
+.p-13 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-basis: 100%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 100%;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.1875px;
+  line-height: 19.2px;
+  margin-top: 6px;
+  object-fit: fill;
+  opacity: 0.9;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 664px 9.59375px;
+  width: 1328px;
+}
+
+.results-and-clear-filters {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 16px;
+  grid-auto-flow: row;
+  height: 35.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 664px 17.6016px;
+  width: 1328px;
+}
+
+.matching-product-count {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 1 0 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 607.055px 9.60156px;
+  width: 1214.11px;
+}
+
+.matching-product-count-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 607.055px 9.60156px;
+  white-space: pre-wrap;
+  width: 1214.11px;
+}
+
+.p-14 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 607.055px 9.60156px;
+  white-space: pre-wrap;
+  width: 1214.11px;
+}
+
+.clear-filters {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 0);
+  border-style: outset;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 35.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: center;
+  transform-origin: 48.9453px 17.6016px;
+  width: 97.8906px;
+}
+
+.div-19 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transform-origin: 32.9453px 9.60156px;
+  white-space: pre;
+  width: 65.8906px;
+}
+
+.p-15 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(84, 30, 37);
+  color: rgb(84, 30, 37);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 32.9453px 9.60156px;
+  white-space: pre;
+  width: 65.8906px;
+}
+
+.product-grid {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: grid;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 32px 20px;
+  grid-auto-flow: row;
+  grid-auto-rows: minmax(0px, 1fr);
+  grid-template-columns: 317px 317px 317px 317px;
+  grid-template-rows: 485.062px;
+  justify-content: center;
+  min-height: 485.062px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 664px 242.531px;
+  width: 1328px;
+}
+
+.demo-product-card {
+  align-items: center;
+  align-self: start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 12px;
+  grid-auto-flow: row;
+  justify-content: flex-start;
+  min-height: 485.062px;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 158.5px 242.531px;
+  width: 317px;
+}
+
+.replaceable-product-photography {
+  align-items: center;
+  aspect-ratio: 0.75 / 1;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 10px;
+  grid-auto-flow: row;
+  justify-content: center;
+  min-height: 422.656px;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 158.5px 211.328px;
+  width: 317px;
+}
+
+.div-20 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 422.656px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 158.5px 211.328px;
+  width: 317px;
+}
+
+.img-13 {
+  aspect-ratio: auto 1200 / 1800;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 422.656px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 158.5px 211.328px;
+  width: 317px;
+}
+
+.product-name {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  justify-content: flex-start;
+  min-height: 19.2031px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 158.5px 9.60156px;
+  white-space: pre-wrap;
+  width: 317px;
+}
+
+.h3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  min-height: 19.2031px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 158.5px 9.60156px;
+  white-space: pre-wrap;
+  width: 317px;
+}
+
+.product-data-marker {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  bottom: 484.062px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  min-height: 0;
+  object-fit: fill;
+  opacity: 0;
+  overflow: clip;
+  position: absolute;
+  right: 316px;
+  text-align: start;
+  transform-origin: 0.5px 0.5px;
+  width: 1px;
+}
+
+.structured-demo-filter-data {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  justify-content: flex-start;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  position: absolute;
+  text-align: start;
+  transform-origin: 0.5px 0.5px;
+  white-space: pre-wrap;
+  width: 1px;
+}
+
+.p-16 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: 1px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  line-height: 1.2px;
+  min-height: 45.7188px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 0.5px 22.8594px;
+  white-space: pre-wrap;
+  width: 1px;
+}
+
+.img-14 {
+  aspect-ratio: auto 800 / 1067;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 422.656px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 158.5px 211.328px;
+  width: 317px;
+}
+
+.p-17 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: 1px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  line-height: 1.2px;
+  min-height: 54.1406px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 0.5px 27.0703px;
+  white-space: pre-wrap;
+  width: 1px;
+}
+
+.img-15 {
+  aspect-ratio: auto 800 / 1422;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 422.656px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 158.5px 211.328px;
+  width: 317px;
+}
+
+.p-18 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: 1px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  line-height: 1.2px;
+  min-height: 43.3125px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 0.5px 21.6562px;
+  white-space: pre-wrap;
+  width: 1px;
+}
+
+.img-16 {
+  aspect-ratio: auto 800 / 1200;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 422.656px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 158.5px 211.328px;
+  width: 317px;
+}
+
+.p-19 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: 1px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  line-height: 1.2px;
+  min-height: 44.5156px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 0.5px 22.2578px;
+  white-space: pre-wrap;
+  width: 1px;
+}
+
+.demo-product-card-2 {
+  align-items: center;
+  align-self: start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 12px;
+  grid-auto-flow: row;
+  justify-content: flex-start;
+  min-height: 100%;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 50% 50%;
+  width: 100%;
+}
+
+.replaceable-product-photography-2 {
+  align-items: center;
+  aspect-ratio: 0.75 / 1;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 10px;
+  grid-auto-flow: row;
+  justify-content: center;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 50% 50%;
+  width: 100%;
+}
+
+.div-21 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 50% 50%;
+}
+
+.img-17 {
+  aspect-ratio: auto 800 / 1200;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 100%;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 50% 50%;
+  width: 100%;
+}
+
+.product-name-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 50% 50%;
+  white-space: pre-wrap;
+  width: 100%;
+}
+
+.h3-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 50% 50%;
+  white-space: pre-wrap;
+}
+
+.product-data-marker-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  min-height: 0;
+  object-fit: fill;
+  opacity: 0;
+  overflow: clip;
+  position: absolute;
+  text-align: start;
+  transform-origin: 50% 50%;
+  width: 1px;
+}
+
+.structured-demo-filter-data-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  justify-content: flex-start;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  position: absolute;
+  text-align: start;
+  transform-origin: 50% 50%;
+  white-space: pre-wrap;
+  width: 1px;
+}
+
+.p-20 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: 1px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  line-height: 1.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 50% 50%;
+  white-space: pre-wrap;
+}
+
+.no-matching-products {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 12px;
+  grid-auto-flow: row;
+  height: min-content;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 48px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 48px;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 50% 50%;
+  width: 100%;
+}
+
+.h2-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: "Bodoni Moda", "Bodoni Moda Placeholder", serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 40px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  letter-spacing: 1px;
+  line-height: 48px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 50% 50%;
+  white-space: pre-wrap;
+}
+
+.view-all-products {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0px 0px;
+  border-color: rgb(0, 0, 0);
+  border-style: outset;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 47.2031px;
+  justify-content: center;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 14px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 14px;
+  place-items: center normal;
+  position: relative;
+  text-align: center;
+  transform-origin: 85.9609px 23.6016px;
+  width: 171.922px;
+}
+
+.div-22 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  transform-origin: 61.9609px 9.60156px;
+  white-space: pre;
+  width: 123.922px;
+}
+
+.p-21 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 61.9609px 9.60156px;
+  white-space: pre;
+  width: 123.922px;
+}
+
+.shop-by-category-2 {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 24px;
+  grid-auto-flow: row;
+  height: 159.203px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: auto hidden;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 664px 79.6016px;
+  width: 1328px;
+}
+
+.category-photography-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  object-fit: fill;
+  overflow: clip;
+  position: relative;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.img-18 {
+  aspect-ratio: auto 800 / 1422;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.img-19 {
+  aspect-ratio: auto 1200 / 1800;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.img-20 {
+  aspect-ratio: auto 800 / 1067;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.img-21 {
+  aspect-ratio: auto 800 / 1200;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 120px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 60px;
+  width: 120px;
+}
+
+.div-23 {
+  background-color: rgb(84, 30, 37);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 2px;
+  color: rgb(0, 0, 0);
+  cursor: default;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 44px;
+  object-fit: fill;
+  overflow: hidden;
+  padding-right: 12px;
+  position: relative;
+  text-align: start;
+  transform-origin: 160px 22px;
+  width: 320px;
+}
+
+.select-2 {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(243, 233, 210);
+  color: rgb(243, 233, 210);
+  cursor: default;
+  display: inline-block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 44px;
+  line-height: 14.4px;
+  object-fit: fill;
+  overflow: clip;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 10px;
+  place-items: center normal;
+  position: static;
+  text-align: start;
+  transform-origin: 154px 22px;
+  white-space: nowrap;
+  width: 308px;
+}
+
+.product-grid-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: grid;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 32px 20px;
+  grid-auto-flow: row;
+  grid-auto-rows: minmax(0px, 1fr);
+  grid-template-columns: 317px 317px 317px 317px;
+  grid-template-rows: 485.062px;
+  height: 485.062px;
+  justify-content: center;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 664px 242.531px;
+  width: 1328px;
+}
+
+.demo-product-card-3 {
+  align-items: center;
+  align-self: start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 12px;
+  grid-auto-flow: row;
+  height: 100%;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 50% 50%;
+  width: 100%;
+}
+
+.img-22 {
+  aspect-ratio: auto 1200 / 1800;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 100%;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 50% 50%;
+  width: 100%;
+}
+
+.product-data-marker-3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  object-fit: fill;
+  opacity: 0;
+  overflow: clip;
+  position: absolute;
+  text-align: start;
+  transform-origin: 50% 50%;
+  width: 1px;
+}
+
+.structured-demo-filter-data-3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: clip;
+  position: absolute;
+  text-align: start;
+  transform-origin: 50% 50%;
+  white-space: pre-wrap;
+  width: 1px;
+}
+
+.img-23 {
+  aspect-ratio: auto 800 / 1067;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 100%;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 50% 50%;
+  width: 100%;
+}
+
+.demo-product-card-4 {
+  align-items: center;
+  align-self: start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 12px;
+  grid-auto-flow: row;
+  height: 485.062px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 158.5px 242.531px;
+  width: 317px;
+}
+
+.replaceable-product-photography-3 {
+  align-items: center;
+  aspect-ratio: 0.75 / 1;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 10px;
+  grid-auto-flow: row;
+  height: 422.656px;
+  justify-content: center;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 158.5px 211.328px;
+  width: 317px;
+}
+
+.div-24 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 422.656px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 158.5px 211.328px;
+  width: 317px;
+}
+
+.img-24 {
+  aspect-ratio: auto 800 / 1422;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 422.656px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 158.5px 211.328px;
+  width: 317px;
+}
+
+.product-name-3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 158.5px 9.60156px;
+  white-space: pre-wrap;
+  width: 317px;
+}
+
+.h3-3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 19.2031px;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 158.5px 9.60156px;
+  white-space: pre-wrap;
+  width: 317px;
+}
+
+.product-data-marker-4 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  bottom: 484.062px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  object-fit: fill;
+  opacity: 0;
+  overflow: clip;
+  position: absolute;
+  right: 316px;
+  text-align: start;
+  transform-origin: 0.5px 0.5px;
+  width: 1px;
+}
+
+.structured-demo-filter-data-4 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: clip;
+  position: absolute;
+  text-align: start;
+  transform-origin: 0.5px 0.5px;
+  white-space: pre-wrap;
+  width: 1px;
+}
+
+.p-22 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: 1px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 43.3125px;
+  line-height: 1.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 0.5px 21.6562px;
+  white-space: pre-wrap;
+  width: 1px;
+}
+
+.img-25 {
+  aspect-ratio: auto 800 / 1200;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 100%;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 50% 50%;
+  width: 100%;
+}
+
+.img-26 {
+  aspect-ratio: auto 800 / 1200;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 422.656px;
+  object-fit: cover;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 158.5px 211.328px;
+  width: 317px;
+}
+
+.p-23 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(244, 241, 232);
+  color: rgb(244, 241, 232);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-size: 1px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 44.5156px;
+  line-height: 1.2px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 0.5px 22.2578px;
+  white-space: pre-wrap;
+  width: 1px;
+}
+
+.div-25 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 78px;
+  justify-content: flex-end;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  position: fixed;
+  text-align: start;
+  top: 822px;
+  transform-origin: 720px 39px;
+  width: 1440px;
+  z-index: 2147483647;
+}
+
+.light {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 10px;
+  grid-auto-flow: row;
+  height: 38px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 70px 19px;
+  width: 140px;
+}
+
+.backdrop {
+  background-color: rgb(255, 255, 255);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  border-radius: 10px;
+  bottom: 1px;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px 0.602187px 1.56569px -1.5px, rgba(0, 0, 0, 0.14) 0px 2.28853px 5.95019px -3px, rgba(0, 0, 0, 0.02) 0px 10px 26px -4.5px;
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 36px;
+  left: 1px;
+  min-height: 0;
+  object-fit: fill;
+  overflow: hidden;
+  position: absolute;
+  right: 1px;
+  text-align: start;
+  top: 1px;
+  transform-origin: 69px 18px;
+  width: 138px;
+}
+
+.content {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  bottom: 3px;
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 10px;
+  grid-auto-flow: row;
+  height: 16px;
+  justify-content: flex-start;
+  left: 70px;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: absolute;
+  right: -49px;
+  text-align: start;
+  top: 19px;
+  transform-origin: 59.5px 8px;
+  transform: matrix(1, 0, 0, 1, -59.5, -8);
+  width: 119px;
+}
+
+.div-26 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 16px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 6px 8px;
+  width: 12px;
+}
+
+.p-24 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  bottom: -27px;
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 70px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  top: -27px;
+  transform-origin: 59.5px 35px;
+  transform: matrix(0.001, 0, 0, 0.001, 0, 0);
+  width: 119px;
+}
+
+.bottom {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  border-radius: 11px;
+  box-shadow: rgb(0, 0, 0) 0px 0px 0px 1px inset;
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 38px;
+  object-fit: fill;
+  opacity: 0.06;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 70px 19px;
+  width: 140px;
+}
+
+.border {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 238);
+  border-radius: 11px;
+  box-shadow: rgb(0, 0, 0) 0px 0px 0px 1px inset;
+  color: rgb(0, 0, 238);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 38px;
+  object-fit: fill;
+  opacity: 0.04;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 70px 19px;
+  width: 140px;
+}
+
+.div-27 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  object-fit: fill;
+  overflow: hidden;
+  position: absolute;
+  right: 1440px;
+  text-align: start;
+  top: 900px;
+  transform-origin: 0px 0px;
+  z-index: 0;
+}
+
+.div-28 {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  bottom: 435px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 8px;
+  grid-auto-flow: row;
+  height: 30px;
+  left: 1400px;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: fixed;
+  right: 10px;
+  text-align: start;
+  top: 435px;
+  transform-origin: 15px 15px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  width: 30px;
+  z-index: 2147483647;
+}
+
+.span {
+  background-color: rgba(34, 34, 34, 0.8);
+  background-position: 0% 0%;
+  border-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  bottom: 3.5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 0px 0px, rgba(255, 255, 255, 0.15) 0px 0px 0px 1px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: "Inter Variable UI", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif, emoji, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 450;
+  grid-auto-flow: row;
+  height: 23px;
+  left: -103px;
+  object-fit: fill;
+  opacity: 0;
+  overflow: visible;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  position: fixed;
+  right: 40px;
+  text-align: start;
+  top: 3.5px;
+  transform-origin: 46.5px 11.5px;
+  width: 93px;
+}
+
+.button {
+  align-items: center;
+  background-color: rgba(34, 34, 34, 0.8);
+  background-position: 0% 0%;
+  border-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 0px 0px, rgba(255, 255, 255, 0.15) 0px 0px 0px 1px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 30px;
+  justify-content: center;
+  object-fit: fill;
+  overflow: visible;
+  place-items: center normal;
+  position: static;
+  text-align: start;
+  transform-origin: 15px 15px;
+  width: 30px;
+}
+
+.svg {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 14px;
+  min-height: 0;
+  object-fit: fill;
+  overflow: hidden;
+  position: static;
+  text-align: start;
+  transform-origin: 7px 7px;
+  width: 14px;
+}
+
+.iframe {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  clip-path: circle(1px at calc(100% - 1px) calc(100% - 1px));
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 900px;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  position: fixed;
+  text-align: start;
+  transform-origin: 720px 450px;
+  width: 1440px;
+  z-index: 2147483646;
+}
+
+.div-29 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1080px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 720px 540px;
+  width: 1440px;
+}
+
+.div-30 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1080px;
+  min-height: 900px;
+  object-fit: fill;
+  overflow: clip;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 540px;
+  width: 1440px;
+}
+
+.div-31 {
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("https://framerusercontent.com/images/PFr8zNypycthgd4PRnNWGfsBeJM.png?lossless=1&width=1672&height=941");
+  background-position: 0% 0%;
+  background-size: 836px;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1080px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 720px 540px;
+  width: 1440px;
+}
+
+.div-32 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  bottom: 214.203px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 655.797px;
+  left: 720px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  right: 388.906px;
+  text-align: start;
+  top: 210px;
+  transform-origin: 165.547px 327.898px;
+  transform: matrix(1, 0, 0, 1, -165.547, 0);
+  width: 331.094px;
+}
+
+.div-33 {
+  align-items: center;
+  background-color: rgb(245, 239, 229);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 655.797px;
+  justify-content: center;
+  min-height: 610px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 72px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 72px;
+  place-items: center normal;
+  position: static;
+  text-align: start;
+  transform-origin: 165.547px 327.898px;
+  width: 331.094px;
+}
+
+.div-34 {
+  background-color: rgb(255, 252, 247);
+  background-position: 0% 0%;
+  border-color: rgb(217, 199, 179);
+  border-style: solid;
+  border-top-width: 1px;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 511.797px;
+  max-width: 440px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 38px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 38px;
+  position: static;
+  text-align: start;
+  transform-origin: 145.547px 255.898px;
+  width: 291.094px;
+}
+
+.div-35 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 125.797px;
+  margin-bottom: 32px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 114.547px 62.8984px;
+  width: 229.094px;
+}
+
+.div-36 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(187, 148, 99);
+  color: rgb(187, 148, 99);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 34px;
+  letter-spacing: 3px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 114.547px 17px;
+  width: 229.094px;
+}
+
+.div-37 {
+  background-color: rgb(187, 148, 99);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 1px;
+  margin-bottom: 16px;
+  margin-left: 86.5469px;
+  margin-right: 86.5469px;
+  margin-top: 16px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 28px 0.5px;
+  width: 56px;
+}
+
+.h2-3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(85, 29, 43);
+  color: rgb(85, 29, 43);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Georgia, serif;
+  font-size: 26px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 30px;
+  margin-bottom: 8px;
+  margin-top: 16px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 114.547px 15px;
+  width: 229.094px;
+}
+
+.p-25 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(73, 48, 45);
+  color: rgb(73, 48, 45);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 20.7969px;
+  line-height: 20.8px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 114.547px 10.3984px;
+  width: 229.094px;
+}
+
+.form {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 16px;
+  grid-auto-flow: row;
+  height: 223px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 114.547px 111.5px;
+  width: 229.094px;
+}
+
+.label-5 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(73, 48, 45);
+  color: rgb(73, 48, 45);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 7px;
+  grid-auto-flow: row;
+  height: 68px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 114.547px 34px;
+  width: 229.094px;
+}
+
+.input {
+  background-color: rgb(255, 255, 255);
+  background-position: 0% 0%;
+  border-color: rgb(217, 199, 179);
+  border-radius: 4px;
+  border-style: solid;
+  border-top-width: 1px;
+  color: rgb(73, 48, 45);
+  cursor: text;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 15px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 47px;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  padding-bottom: 14px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 14px;
+  position: static;
+  text-align: start;
+  transform-origin: 114.547px 23.5px;
+  width: 229.094px;
+}
+
+.button-2 {
+  background-color: rgb(85, 29, 43);
+  background-position: 0% 0%;
+  border-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 45px;
+  letter-spacing: 1.2px;
+  margin-top: 10px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  position: static;
+  text-align: center;
+  transform-origin: 114.547px 22.5px;
+  width: 229.094px;
+}
+
+.button-3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(85, 29, 43);
+  color: rgb(85, 29, 43);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 31px;
+  margin-left: 7.0625px;
+  margin-right: 7.07812px;
+  margin-top: 22px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  position: static;
+  text-align: center;
+  transform-origin: 107.477px 15.5px;
+  width: 214.953px;
+}
+
+.button-4 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(85, 29, 43);
+  color: rgb(85, 29, 43);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 31px;
+  margin-left: 9.70312px;
+  margin-right: 9.70312px;
+  margin-top: 22px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  position: static;
+  text-align: center;
+  transform-origin: 104.844px 15.5px;
+  width: 209.688px;
+}
+
+.div-38 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 900px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 720px 450px;
+  width: 1440px;
+}
+
+.div-39 {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 900px;
+  justify-content: flex-start;
+  min-height: 900px;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 450px;
+  width: 1440px;
+}
+
+.div-40 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 900px;
+  object-fit: fill;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  transform-origin: 720px 450px;
+  width: 1440px;
+}
+
+.img-27 {
+  aspect-ratio: auto 1600 / 660;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 900px;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  position: static;
+  text-align: start;
+  transform-origin: 720px 450px;
+  width: 1440px;
+}
+
+.product-content {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 40px;
+  grid-auto-flow: row;
+  height: 714px;
+  justify-content: flex-start;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  padding-bottom: 60px;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 60px;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 720px 357px;
+  width: 1440px;
+}
+
+.product-gallery {
+  align-items: center;
+  background-color: rgb(243, 235, 223);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 1 0 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 12px;
+  grid-auto-flow: row;
+  height: 630px;
+  justify-content: flex-start;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 320px 315px;
+  width: 640px;
+}
+
+.main-image {
+  background-color: rgb(217, 197, 169);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 480px;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  position: relative;
+  text-align: start;
+  transform-origin: 320px 240px;
+  width: 640px;
+}
+
+.thumbnail-row {
+  align-items: center;
+  background-color: rgb(243, 235, 223);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 10px;
+  grid-auto-flow: row;
+  height: 95px;
+  justify-content: center;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 320px 47.5px;
+  width: 640px;
+}
+
+.thumbnail-1 {
+  align-items: center;
+  background-color: rgb(217, 197, 169);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 1 0 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 10px;
+  grid-auto-flow: row;
+  height: 95px;
+  justify-content: center;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 76.25px 47.5px;
+  width: 152.5px;
+}
+
+.product-information {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 1 0 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 16px;
+  grid-auto-flow: row;
+  height: 630px;
+  justify-content: flex-start;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  place-items: flex-start normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 320px 315px;
+  width: 640px;
+}
+
+.div-41 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 33.5938px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 66px 16.7969px;
+  white-space: pre;
+  width: 132px;
+}
+
+.p-26 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(129, 91, 74);
+  color: rgb(129, 91, 74);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: "Tai Heritage Pro", "Tai Heritage Pro Placeholder", serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 16.7969px;
+  line-height: 16.8px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 66px 8.39844px;
+  white-space: pre;
+  width: 132px;
+}
+
+.br {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(129, 91, 74);
+  color: rgb(129, 91, 74);
+  display: inline;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: "Tai Heritage Pro", "Tai Heritage Pro Placeholder", serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  line-height: 16.8px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 0px 0px;
+  white-space: pre;
+}
+
+.div-42 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 45.5938px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 139px 22.7969px;
+  white-space: pre;
+  width: 278px;
+}
+
+.p-27 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Rosario, "Rosario Placeholder", sans-serif;
+  font-size: 38px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 45.5938px;
+  line-height: 45.6px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 139px 22.7969px;
+  white-space: pre;
+  width: 278px;
+}
+
+.div-43 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 28.7969px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 40px 14.3984px;
+  white-space: pre;
+  width: 80px;
+}
+
+.p-28 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Rosario, "Rosario Placeholder", sans-serif;
+  font-size: 24px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 28.7969px;
+  line-height: 28.8px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 40px 14.3984px;
+  white-space: pre;
+  width: 80px;
+}
+
+.div-44 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 45px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 78.3281px 22.5px;
+  width: 156.656px;
+}
+
+.div-45 {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 8px;
+  grid-auto-flow: row;
+  height: 45px;
+  object-fit: fill;
+  overflow: visible;
+  place-items: flex-start normal;
+  position: static;
+  text-align: start;
+  transform-origin: 78.3281px 22.5px;
+  width: 156.656px;
+}
+
+.button-5 {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 10px;
+  grid-auto-flow: row;
+  height: 45px;
+  letter-spacing: 0.5px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  place-items: center normal;
+  position: static;
+  text-align: center;
+  transform-origin: 78.3281px 22.5px;
+  width: 156.656px;
+}
+
+.span-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 25px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 25px;
+  letter-spacing: 0.5px;
+  line-height: 25px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: center;
+  transform-origin: 12.75px 12.5px;
+  width: 25.5px;
+}
+
+.div-46 {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 8px;
+  grid-auto-flow: row;
+  height: 67px;
+  object-fit: fill;
+  overflow: visible;
+  place-items: flex-start normal;
+  position: static;
+  text-align: start;
+  transform-origin: 108.727px 33.5px;
+  width: 217.453px;
+}
+
+.div-47 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(129, 91, 74);
+  color: rgb(129, 91, 74);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 14px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 108.727px 7px;
+  width: 217.453px;
+}
+
+.a {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  cursor: pointer;
+  display: inline;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  text-decoration-line: underline;
+  transform-origin: 0px 0px;
+}
+
+.div-48 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 48px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 54px 24px;
+  white-space: pre;
+  width: 108px;
+}
+
+.p-29 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Rosario, "Rosario Placeholder", sans-serif;
+  font-size: 20px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 24px;
+  line-height: 24px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 54px 12px;
+  white-space: pre;
+  width: 108px;
+}
+
+.br-2 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  display: inline;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Rosario, "Rosario Placeholder", sans-serif;
+  font-size: 20px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  line-height: 24px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 0px 0px;
+  white-space: pre;
+}
+
+.div-49 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 48px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 320px 24px;
+  width: 640px;
+}
+
+.div-50 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 48px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 320px 24px;
+  width: 640px;
+}
+
+.div-51 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 10px;
+  grid-auto-flow: row;
+  height: 48px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 320px 24px;
+  width: 640px;
+}
+
+.button-6 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(189, 170, 152);
+  border-style: solid;
+  border-top-width: 2px;
+  color: rgb(89, 36, 50);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 1 1 0px;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 48px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 1px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 1px;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 24px;
+  width: 120px;
+}
+
+.button-7 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(189, 170, 152);
+  border-style: solid;
+  border-top-width: 2px;
+  color: rgb(153, 145, 139);
+  cursor: not-allowed;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 1 1 0px;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 48px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 1px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 1px;
+  position: static;
+  text-align: center;
+  text-decoration-line: line-through;
+  transform-origin: 60px 24px;
+  width: 120px;
+}
+
+.div-52 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 70px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 320px 35px;
+  width: 640px;
+}
+
+.button-8 {
+  background-color: rgb(89, 36, 50);
+  background-position: 0% 0%;
+  border-color: rgb(189, 170, 152);
+  border-style: solid;
+  border-top-width: 2px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 1 1 0px;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 48px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 1px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 1px;
+  position: static;
+  text-align: center;
+  transform-origin: 60px 24px;
+  width: 120px;
+}
+
+.div-53 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(129, 91, 74);
+  color: rgb(129, 91, 74);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 14px;
+  margin-top: 8px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 320px 7px;
+  width: 640px;
+}
+
+.add-to-cart {
+  align-items: center;
+  background-color: rgb(89, 36, 50);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  border-radius: 3px;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  gap: 10px;
+  grid-auto-flow: row;
+  height: 52px;
+  justify-content: center;
+  min-height: 0;
+  object-fit: fill;
+  overflow: clip;
+  place-items: center normal;
+  position: relative;
+  text-align: start;
+  transform-origin: 320px 26px;
+  width: 640px;
+}
+
+.div-54 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  height: 22.4062px;
+  justify-content: flex-start;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 55.1641px 11.2031px;
+  white-space: pre;
+  width: 110.328px;
+}
+
+.p-30 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-feature-settings: "blwf", "cv03", "cv04", "cv09", "cv11";
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 500;
+  grid-auto-flow: row;
+  height: 22.4062px;
+  letter-spacing: 1.12px;
+  line-height: 22.4px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: justify;
+  transform-origin: 55.1641px 11.2031px;
+  white-space: pre;
+  width: 110.328px;
+}
+
+.div-55 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 165px;
+  object-fit: fill;
+  overflow: visible;
+  position: relative;
+  text-align: start;
+  transform-origin: 320px 82.5px;
+  width: 640px;
+}
+
+.div-56 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 165px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 320px 82.5px;
+  width: 640px;
+}
+
+.div-57 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgb(209, 189, 164);
+  border-style: none none solid;
+  color: rgb(0, 0, 0);
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-stretch: 100%;
+  font-weight: 400;
+  grid-auto-flow: row;
+  min-height: 55px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: start;
+  transform-origin: 320px 27.5px;
+  width: 640px;
+}
+
+.button-9 {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 500;
+  gap: 16px;
+  grid-auto-flow: row;
+  height: 54px;
+  justify-content: space-between;
+  min-height: 54px;
+  object-fit: fill;
+  overflow: visible;
+  padding-bottom: 14px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 14px;
+  place-items: center normal;
+  position: static;
+  text-align: left;
+  transform-origin: 320px 27px;
+  width: 640px;
+}
+
+.span-3 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 500;
+  grid-auto-flow: row;
+  height: 16px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: left;
+  transform-origin: 61.0859px 8px;
+  width: 122.172px;
+}
+
+.span-4 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 22px;
+  font-stretch: 100%;
+  font-weight: 300;
+  grid-auto-flow: row;
+  height: 22px;
+  line-height: 22px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: left;
+  transform-origin: 6.42969px 11px;
+  width: 12.8594px;
+}
+
+.span-5 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 500;
+  grid-auto-flow: row;
+  height: 16px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: left;
+  transform-origin: 43.1797px 8px;
+  width: 86.3594px;
+}
+
+.span-6 {
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 0% 0%;
+  border-color: rgb(89, 36, 50);
+  color: rgb(89, 36, 50);
+  cursor: pointer;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-weight: 500;
+  grid-auto-flow: row;
+  height: 16px;
+  object-fit: fill;
+  overflow: visible;
+  position: static;
+  text-align: left;
+  transform-origin: 60.3203px 8px;
+  width: 120.641px;
+}
