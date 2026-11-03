@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react"
-import { Product, PRODUCTS, findProduct } from "../data/products"
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react"
+import { Product, PRODUCTS } from "../data/products"
+import { api } from "../services/api"
 
 export interface CartItem {
   product: Product
@@ -8,6 +9,10 @@ export interface CartItem {
 }
 
 interface AppContextType {
+  products: Product[]
+  catalogLoading: boolean
+  catalogError: string | null
+  refetchCatalog: () => Promise<void>
   currentRoute: string
   selectedProductId: string | null
   activeCategory: string
@@ -29,6 +34,7 @@ interface AppContextType {
   cartCount: number
   wishlistCount: number
   selectedProduct: Product | undefined
+  findProduct: (idOrSlug: string) => Product | undefined
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -47,6 +53,78 @@ export function AppProvider({ children }: { children: ReactNode }) {
   })
 
   const [activeCategory, setActiveCategory] = useState<string>("All")
+  
+  // Dynamic catalog state
+  const [products, setProducts] = useState<Product[]>(PRODUCTS)
+  const [catalogLoading, setCatalogLoading] = useState<boolean>(true)
+  const [catalogError, setCatalogError] = useState<string | null>(null)
+
+  const fetchCatalog = useCallback(async () => {
+    setCatalogLoading(true)
+    setCatalogError(null)
+    try {
+      const data = await api.products.list()
+      if (data && Array.isArray(data.products) && data.products.length > 0) {
+        // Map backend products to our luxury Product model, enriching with static merchandising
+        const mappedBackendProducts: Product[] = data.products.map((bp: any) => {
+          const staticMatch = PRODUCTS.find((sp) => sp.id === bp.id || sp.backendId === bp.id || sp.slug === bp.id)
+
+          const availableSizes = Array.isArray(bp.variants) && bp.variants.length > 0
+            ? bp.variants.map((v: any) => v.size)
+            : (staticMatch?.availableSizes || ["38", "40", "42", "44"])
+
+          return {
+            id: bp.id,
+            slug: staticMatch?.slug || bp.id,
+            backendId: bp.id,
+            name: bp.title?.toUpperCase() || staticMatch?.name || bp.id,
+            subtitle: bp.subtitle || staticMatch?.subtitle || "",
+            price: Number(bp.price),
+            originalPrice: staticMatch?.originalPrice || Math.round(Number(bp.price) * 1.15),
+            category: (bp.category === "Sherwanis" ? "Indian Wear" : bp.category === "Indo-Western" ? "Indo Western & Jodhpuri" : bp.category) as any,
+            subcategory: bp.category || staticMatch?.subcategory || "Occasionwear",
+            occasion: (bp.occasion || staticMatch?.occasion || "Wedding") as any,
+            isNewArrival: bp.is_new_arrival ?? staticMatch?.isNewArrival ?? false,
+            isBestSeller: bp.is_bestseller ?? staticMatch?.isBestSeller ?? false,
+            isSale: bp.on_sale ?? staticMatch?.isSale ?? false,
+            image: bp.thumbnail || staticMatch?.image || "/assets/products/ivory-sherwani.jpg",
+            gallery: (bp.images && bp.images.length > 0) ? bp.images : (staticMatch?.gallery || [bp.thumbnail]),
+            description: bp.description || staticMatch?.description || "",
+            fabric: staticMatch?.fabric || "Raw silk & bespoke Banarasi weave, dry clean only.",
+            shipping: staticMatch?.shipping || "Complimentary express insured shipping across India.",
+            availableSizes,
+            variants: bp.variants || staticMatch?.variants,
+            isAvailableInBackend: true,
+          }
+        })
+
+        // Also preserve archival preview products (products not currently in active backend seed)
+        const backendIds = new Set(data.products.map((bp: any) => bp.id))
+        const archivalProducts = PRODUCTS.filter((sp) => !backendIds.has(sp.id) && !backendIds.has(sp.backendId || ''))
+
+        setProducts([...mappedBackendProducts, ...archivalProducts])
+      } else {
+        // Fallback to static catalog definition if backend returned empty list
+        setProducts(PRODUCTS)
+      }
+    } catch (err: any) {
+      console.warn("Could not fetch dynamic catalog from backend API. Using cached luxury catalog:", err.message)
+      setCatalogError("Unable to establish real-time link with Atelier catalog. Displaying cached seasonal preview.")
+      setProducts(PRODUCTS)
+    } finally {
+      setCatalogLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchCatalog()
+  }, [fetchCatalog])
+
+  const findProduct = useCallback((idOrSlug: string): Product | undefined => {
+    if (!idOrSlug) return products[0]
+    return products.find((p) => p.id === idOrSlug || p.slug === idOrSlug || p.backendId === idOrSlug)
+  }, [products])
+
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem("waak_cart")
@@ -170,11 +248,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0)
   const wishlistCount = wishlist.length
-  const selectedProduct = findProduct(selectedProductId || "waak-01") || PRODUCTS[0]
+  const selectedProduct = findProduct(selectedProductId || "waak-01") || products[0]
 
   return (
     <AppContext.Provider
       value={{
+        products,
+        catalogLoading,
+        catalogError,
+        refetchCatalog: fetchCatalog,
         currentRoute,
         selectedProductId,
         activeCategory,
@@ -196,6 +278,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         cartCount,
         wishlistCount,
         selectedProduct,
+        findProduct,
       }}
     >
       {children}

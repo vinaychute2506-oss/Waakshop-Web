@@ -4,10 +4,10 @@ import { PRODUCTS, Product } from "./data/products"
 import { api } from "./services/api"
 
 export default function ProductDetail() {
-  const { selectedProduct, addToCart, wishlist, toggleWishlist, navigateTo } = useApp()
-  const product: Product = selectedProduct || PRODUCTS[0]
+  const { selectedProduct, selectedProductId, findProduct, products, addToCart, wishlist, toggleWishlist, navigateTo } = useApp()
+  const product: Product | undefined = selectedProduct || (selectedProductId ? findProduct(selectedProductId) : products[0])
 
-  const [activeImage, setActiveImage] = useState<string>(product.image)
+  const [activeImage, setActiveImage] = useState<string>(product ? product.image : "")
   const [selectedSize, setSelectedSize] = useState<string>("")
   const [quantity, setQuantity] = useState<number>(1)
   const [openAccordion, setOpenAccordion] = useState<string>("description")
@@ -19,10 +19,11 @@ export default function ProductDetail() {
   const [backendVariants, setBackendVariants] = useState<any[] | null>(null)
   const [loadingVariants, setLoadingVariants] = useState<boolean>(false)
 
-  const isWishlisted = wishlist.includes(product.id)
+  const isWishlisted = product ? wishlist.includes(product.id) : false
 
   // Fetch authoritative variants from backend whenever product changes
   useEffect(() => {
+    if (!product) return
     let isMounted = true
     setActiveImage(product.image)
     setValidationError("")
@@ -67,7 +68,40 @@ export default function ProductDetail() {
     }
 
     return () => { isMounted = false }
-  }, [product.id, product.backendId])
+  }, [product?.id, product?.backendId])
+
+  if (!product) {
+    return (
+      <div style={{ textAlign: "center", padding: "120px 24px", minHeight: "60vh", backgroundColor: "var(--color-cream-light, #fbf8f2)" }}>
+        <span style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-gold, #C5A265)", fontWeight: 600 }}>
+          WAAK Atelier Archive
+        </span>
+        <h2 style={{ fontFamily: "var(--font-serif, 'Cinzel', serif)", fontSize: "32px", color: "var(--color-burgundy, #5A121A)", margin: "16px 0" }}>
+          Silhouette Not Found
+        </h2>
+        <p style={{ color: "var(--color-muted, #7A6258)", maxWidth: "480px", margin: "0 auto 24px", fontSize: "14px" }}>
+          The garment reference you requested is not present in our current seasonal showcase.
+        </p>
+        <button
+          onClick={() => navigateTo("/")}
+          style={{
+            backgroundColor: "var(--color-burgundy, #5A121A)",
+            color: "#fff",
+            padding: "12px 28px",
+            border: "none",
+            borderRadius: "2px",
+            fontSize: "12px",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            fontWeight: 600,
+            cursor: "pointer",
+          }}
+        >
+          Return to Collection
+        </button>
+      </div>
+    )
+  }
 
   // Derive available sizes from backend or static catalog
   const effectiveSizes = backendVariants
@@ -75,7 +109,7 @@ export default function ProductDetail() {
     : (product.availableSizes || ["38", "40", "42", "44"])
 
   // Related products
-  const relatedProducts = PRODUCTS.filter(
+  const relatedProducts = products.filter(
     (p) => p.id !== product.id && (p.category === product.category || p.occasion === product.occasion)
   ).slice(0, 4)
 

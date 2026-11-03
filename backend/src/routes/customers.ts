@@ -90,6 +90,12 @@ router.post('/me/addresses', customerAuth, async (req: Request, res: Response) =
       return;
     }
 
+    const cleanPin = String(postal_code || '').trim();
+    if (!/^\d{6}$/.test(cleanPin)) {
+      res.status(400).json({ error: 'Invalid postal code format: Exactly 6 numeric digits required for Indian PIN code delivery (e.g. 110001).' });
+      return;
+    }
+
     if (is_default) {
       await pool.query('UPDATE customer_addresses SET is_default = false WHERE customer_id = $1', [req.customer!.id]);
     }

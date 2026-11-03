@@ -33,6 +33,12 @@ router.post('/carts/:id/checkout', optionalCustomerAuth, async (req: Request, re
       return;
     }
 
+    const cleanPin = String(shipping_address.postal_code || '').trim();
+    if (!/^\d{6}$/.test(cleanPin)) {
+      res.status(400).json({ error: 'Invalid postal code format: Exactly 6 numeric digits required for Indian PIN code delivery (e.g. 110001).' });
+      return;
+    }
+
     // 1. Fetch Cart and Items
     const itemsRes = await client.query(
       `SELECT

@@ -6,7 +6,17 @@ import CurtainReveal from "./components/CurtainReveal"
 import "./Home.css"
 
 export default function Home() {
-  const { navigateTo, activeCategory, setActiveCategory, wishlist, toggleWishlist } = useApp()
+  const {
+    products,
+    catalogLoading,
+    catalogError,
+    refetchCatalog,
+    navigateTo,
+    activeCategory,
+    setActiveCategory,
+    wishlist,
+    toggleWishlist,
+  } = useApp()
 
   // Track if hero elements should be revealed
   const [heroRevealed, setHeroRevealed] = useState(() => {
@@ -29,7 +39,7 @@ export default function Home() {
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       // Category filter
       if (activeCategory !== "All" && activeCategory !== "all") {
         if (activeCategory === "Best Seller") {
@@ -59,7 +69,7 @@ export default function Home() {
       if (sortBy === "newest") return (b.isNewArrival ? 1 : 0) - (a.isNewArrival ? 1 : 0)
       return 0 // featured default
     })
-  }, [activeCategory, selectedOccasion, selectedPriceRange, sortBy])
+  }, [products, activeCategory, selectedOccasion, selectedPriceRange, sortBy])
 
   const clearAllFilters = () => {
     setActiveCategory("All")
@@ -77,7 +87,7 @@ export default function Home() {
     }, 400)
   }
 
-  const newArrivals = PRODUCTS.filter((p) => p.isNewArrival).slice(0, 4)
+  const newArrivals = products.filter((p) => p.isNewArrival).slice(0, 4)
 
   const scrollToCollection = () => {
     const el = document.getElementById("collection-section")
@@ -204,7 +214,16 @@ export default function Home() {
           </div>
 
           <div className="new-arrivals-grid">
-            {newArrivals.map((prod, index) => {
+            {catalogLoading && products.length === 0 ? (
+              Array.from({ length: 4 }).map((_, i) => (
+                <div key={`na-skel-${i}`} className="new-arrival-card waak-skeleton-card">
+                  <div className="waak-skeleton-box" />
+                  <div className="waak-skeleton-line" style={{ width: "70%" }} />
+                  <div className="waak-skeleton-line waak-skeleton-line-short" />
+                </div>
+              ))
+            ) : (
+              newArrivals.map((prod, index) => {
               const hasAlternate = Boolean(prod.gallery && prod.gallery[1])
               return (
                 <div
@@ -235,7 +254,7 @@ export default function Home() {
                   </div>
                 </div>
               )
-            })}
+            }))}
           </div>
         </div>
       </section>
@@ -484,7 +503,7 @@ export default function Home() {
 
           <div className="filter-stats-row">
             <span style={{ color: "var(--color-muted)" }}>
-              Showing <strong>{filteredProducts.length}</strong> of {PRODUCTS.length} curated pieces
+              Showing <strong>{filteredProducts.length}</strong> of {products.length} curated pieces
               {(activeCategory !== "All" || selectedOccasion !== "All occasions" || selectedPriceRange !== "All prices") && (
                 <span> (Filtered)</span>
               )}
@@ -497,8 +516,56 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Dynamic Catalog Error / Offline Notice */}
+        {catalogError && (
+          <div style={{
+            backgroundColor: "rgba(90, 18, 26, 0.05)",
+            border: "1px solid rgba(197, 162, 101, 0.35)",
+            borderRadius: "4px",
+            padding: "12px 20px",
+            marginBottom: "24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            fontSize: "12px",
+            color: "var(--color-burgundy)",
+          }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <span style={{ color: "var(--color-gold)", fontSize: "14px" }}>✦</span>
+              <span>{catalogError}</span>
+            </div>
+            <button
+              onClick={() => refetchCatalog()}
+              style={{
+                background: "transparent",
+                border: "1px solid var(--color-burgundy)",
+                color: "var(--color-burgundy)",
+                padding: "4px 12px",
+                fontSize: "11px",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                cursor: "pointer",
+                borderRadius: "2px",
+              }}
+            >
+              Retry Link
+            </button>
+          </div>
+        )}
+
         {/* Product Cards Grid */}
-        {filteredProducts.length === 0 ? (
+        {catalogLoading && products.length === 0 ? (
+          <div className="product-grid-main">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={`skel-${i}`} className="product-card-standard waak-skeleton-card">
+                <div className="waak-skeleton-box" />
+                <div className="waak-skeleton-line" style={{ width: "80%" }} />
+                <div className="waak-skeleton-line waak-skeleton-line-short" />
+              </div>
+            ))}
+          </div>
+        ) : filteredProducts.length === 0 ? (
           <div style={{ textAlign: "center", padding: "80px 24px", backgroundColor: "var(--color-cream-light)", borderRadius: "var(--radius-lg)" }}>
             <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", color: "var(--color-burgundy)", marginBottom: "8px" }}>
               No matching pieces found

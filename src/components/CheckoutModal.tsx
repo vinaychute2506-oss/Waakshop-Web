@@ -17,10 +17,25 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [postalCode, setPostalCode] = useState('');
+  const [pinError, setPinError] = useState('');
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [confirmedOrder, setConfirmedOrder] = useState<any>(null);
+
+  const handlePinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Strip non-digit characters and enforce max 6 digits
+    const digitsOnly = e.target.value.replace(/\D/g, '').slice(0, 6);
+    setPostalCode(digitsOnly);
+
+    if (digitsOnly.length === 0) {
+      setPinError('');
+    } else if (digitsOnly.length < 6) {
+      setPinError('PIN code must be exactly 6 numeric digits');
+    } else {
+      setPinError('');
+    }
+  };
 
   // Load user profile if signed in
   useEffect(() => {
@@ -61,6 +76,13 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
 
     if (!email.trim() || !address1.trim() || !city.trim() || !state.trim() || !postalCode.trim()) {
       setError('Please complete all required delivery details marked with an asterisk (*).');
+      return;
+    }
+
+    const cleanedPin = postalCode.trim();
+    if (!/^\d{6}$/.test(cleanedPin)) {
+      setPinError('PIN code must be exactly 6 numeric digits (e.g. 110001).');
+      setError('Please provide a valid 6-digit Indian PIN code for insured delivery.');
       return;
     }
 
@@ -449,24 +471,55 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                 />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
+                <label
+                  htmlFor="checkout-postal-code"
+                  style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}
+                >
                   PIN *
                 </label>
                 <input
+                  id="checkout-postal-code"
+                  name="postalCode"
                   type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]{6}"
+                  maxLength={6}
                   required
                   value={postalCode}
-                  onChange={(e) => setPostalCode(e.target.value)}
-                  placeholder="110003"
+                  onChange={handlePinChange}
+                  placeholder="110001"
+                  aria-invalid={Boolean(pinError)}
+                  aria-describedby={pinError ? "checkout-postal-code-error" : undefined}
                   style={{
                     width: '100%',
                     padding: '10px 12px',
-                    border: '1px solid var(--color-border-gold, #d8cbbe)',
+                    border: pinError
+                      ? '1px solid #d32f2f'
+                      : postalCode.length === 6
+                      ? '1px solid var(--color-gold, #C5A265)'
+                      : '1px solid var(--color-border-gold, #d8cbbe)',
                     borderRadius: '4px',
                     backgroundColor: '#fff',
                     fontSize: '13px',
+                    outline: 'none',
+                    transition: 'border-color 0.2s ease',
                   }}
                 />
+                {pinError && (
+                  <span
+                    id="checkout-postal-code-error"
+                    role="alert"
+                    style={{
+                      display: 'block',
+                      fontSize: '10px',
+                      color: '#d32f2f',
+                      marginTop: '4px',
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {pinError}
+                  </span>
+                )}
               </div>
             </div>
 
