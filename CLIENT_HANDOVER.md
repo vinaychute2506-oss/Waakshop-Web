@@ -1,23 +1,29 @@
-# WAAK Occasionwear — V3.1 Client Presentation & Handover Guide
+# WAAK Occasionwear — V3.2.1 Client Presentation & Handover Guide
 
-**Release Tag:** `waak-v3.1-client-preview`  
-**Git Baseline Commit:** `6f91f3d`  
+**Release Tag:** `waak-v3.1-client-preview` (Baseline) / `feature/v3-2-cinematic-hero` (V3.2.1 Enhanced)  
 **Dev Server:** `http://localhost:5173/`  
+**Walkthrough Video (WebP):** [`public/assets/waak-client-walkthrough.webp`](public/assets/waak-client-walkthrough.webp)  
+**Walkthrough Video (GIF):** [`public/assets/waak-client-walkthrough.gif`](public/assets/waak-client-walkthrough.gif)  
 **Date:** November 2026  
 
 ---
 
 ## 1. Executive Summary
 
-The WAAK Indian Occasionwear digital storefront has successfully completed its **V3.1 Frontend Client-Review Milestone**. 
+The WAAK Indian Occasionwear digital storefront has successfully completed its **V3.2.1 Visual Polish & Client Walkthrough Milestone**. 
 
-All visual art direction, editorial motion design, responsive layouts (360px through 1440px), and tactile shopping interactions are frozen and verified. The codebase compiles with **zero TypeScript errors**, passes clean sub-second production builds, and passes **36/36 automated integration checks**.
+All visual art direction, royal velvet curtain reveal, campaign photography, optical navbar centering, uniform product card proportions, responsive layouts (360px through 1440px), and tactile shopping interactions are verified. The codebase compiles with **zero TypeScript errors**, passes clean production builds, and passes **146/146 automated tests across all test suites**.
+
+A comprehensive automated 60fps walkthrough recording has been generated and bundled into both high-efficiency Animated WebP and universal Animated GIF formats for instant client review.
 
 ---
 
 ## 2. Client Walkthrough & Demonstration Script
 
-Use this step-by-step walkthrough during the client presentation:
+### Step 0: Velvet Curtain Grand Opening (`/`)
+- **Visuals:** Full-viewport deep burgundy velvet drapery with authentic accordion fabric folds and the gold WAAK emblem.
+- **Motion:** Asymmetrical gathering curve (`cubic-bezier(0.76, 0, 0.18, 1)`) parting smoothly to reveal the illuminated campaign hero behind it.
+- **Accessibility:** Skip button available; respects `prefers-reduced-motion`.
 
 ### Step 1: Editorial Hero Experience (`/`)
 - **Visuals:** Observe the deep burgundy (`#5A121A`) and terracotta (`#6E3529`) gradient with antique-gold (`#C5A265`) typography accents.
