@@ -4,10 +4,13 @@ import { useApp } from "../context/AppContext"
 export type PolicyRoute =
   | "/privacy-policy"
   | "/terms-of-service"
+  | "/terms-and-conditions"
   | "/shipping-policy"
+  | "/shipping-and-delivery"
   | "/returns-and-exchanges"
   | "/care-and-preservation"
   | "/contact"
+  | "/contact-us"
 
 interface PolicyViewProps {
   route: string
@@ -125,6 +128,7 @@ export default function PolicyView({ route }: PolicyViewProps) {
         )
 
       case "/terms-of-service":
+      case "/terms-and-conditions":
         return (
           <article>
             <div style={{ marginBottom: "24px" }}>
@@ -193,6 +197,7 @@ export default function PolicyView({ route }: PolicyViewProps) {
         )
 
       case "/shipping-policy":
+      case "/shipping-and-delivery":
         return (
           <article>
             <div style={{ marginBottom: "24px" }}>
@@ -391,6 +396,7 @@ export default function PolicyView({ route }: PolicyViewProps) {
         )
 
       case "/contact":
+      case "/contact-us":
         return (
           <article>
             <div style={{ marginBottom: "24px" }}>

@@ -42,16 +42,26 @@ const AppContext = createContext<AppContextType | undefined>(undefined)
 const VALID_POLICY_ROUTES = [
   "/privacy-policy",
   "/terms-of-service",
+  "/terms-and-conditions",
   "/shipping-policy",
+  "/shipping-and-delivery",
   "/returns-and-exchanges",
   "/care-and-preservation",
   "/contact",
+  "/contact-us",
 ]
 
 function resolveRoute(path: string): string {
-  if (path.includes("account")) return "/account"
-  if (path.includes("product")) return "/product"
-  const matchedPolicy = VALID_POLICY_ROUTES.find((r) => path.includes(r.replace("/", "")))
+  const cleanPath = path.toLowerCase()
+  if (cleanPath.includes("account")) return "/account"
+  if (cleanPath.includes("product")) return "/product"
+  if (cleanPath.includes("terms-and-conditions") || cleanPath.includes("terms-of-service") || cleanPath === "/terms") return "/terms-of-service"
+  if (cleanPath.includes("shipping-and-delivery") || cleanPath.includes("shipping-policy") || cleanPath === "/shipping") return "/shipping-policy"
+  if (cleanPath.includes("returns-and-exchanges") || cleanPath === "/returns") return "/returns-and-exchanges"
+  if (cleanPath.includes("care-and-preservation") || cleanPath === "/care") return "/care-and-preservation"
+  if (cleanPath.includes("contact")) return "/contact"
+  if (cleanPath.includes("privacy")) return "/privacy-policy"
+  const matchedPolicy = VALID_POLICY_ROUTES.find((r) => cleanPath.includes(r.replace("/", "")))
   if (matchedPolicy) return matchedPolicy
   return "/"
 }
@@ -200,8 +210,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
       window.history.pushState({}, "", url)
       setCurrentRoute("/product")
     } else {
+      const target = resolveRoute(route)
       window.history.pushState({}, "", route)
-      setCurrentRoute(route)
+      setCurrentRoute(target !== "/" ? target : route)
     }
     window.scrollTo({ top: 0, behavior: "smooth" })
   }

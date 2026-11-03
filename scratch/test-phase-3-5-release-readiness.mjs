@@ -47,38 +47,88 @@ async function runAudit() {
       `Concurrent requests all handled safely without 500 error (Statuses: ${statuses.join(', ')})`
     );
 
+    const firstSubData = await responses[0].json();
+    check(
+      typeof firstSubData.unsubscribeToken === 'string' && firstSubData.unsubscribeToken.length === 64,
+      'Subscription returns unguessable 64-char HMAC-SHA256 unsubscribeToken'
+    );
+    const validToken = firstSubData.unsubscribeToken;
+
     // 1.2 Verify in PostgreSQL table that exactly ONE row was created
     const dbRecord = await pool.query('SELECT * FROM newsletter_subscribers WHERE email = $1', [concurrentEmail.toLowerCase()]);
     check(dbRecord.rows.length === 1, 'Database enforces UNIQUE constraint under concurrency; exactly 1 record created');
     check(dbRecord.rows[0].status === 'subscribed', 'Subscription status is active');
 
-    // 1.3 Test Unsubscribe Endpoint
+    // 1.3 Test Forged / Tampered Unsubscribe Token Rejection (Security Defense)
+    const forgedRes = await fetch(`${API_BASE}/store/newsletter/unsubscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: concurrentEmail, token: 'malicious_forged_token_attack_1234567890' }),
+    });
+    check(forgedRes.status === 403, 'Forged/tampered unsubscribe token strictly rejected with HTTP 403 Forbidden');
+
+    // 1.4 Test Legitimate Token-Based Unsubscription
     const unsubRes = await fetch(`${API_BASE}/store/newsletter/unsubscribe`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: concurrentEmail }),
+      body: JSON.stringify({ email: concurrentEmail, token: validToken }),
     });
-    check(unsubRes.status === 200, 'Unsubscribe endpoint responds HTTP 200');
+    check(unsubRes.status === 200, 'Legitimate token-based unsubscription succeeds with HTTP 200');
     const unsubData = await unsubRes.json();
     check(unsubData.success === true, 'Unsubscribe response reports success: true');
 
     const dbAfterUnsub = await pool.query('SELECT status FROM newsletter_subscribers WHERE email = $1', [concurrentEmail.toLowerCase()]);
     check(dbAfterUnsub.rows[0].status === 'unsubscribed', 'Database records status updated to "unsubscribed"');
 
-    // 1.4 Test Unauthenticated Data Leakage Prevention
+    // 1.5 Test Non-Existent Subscriber Enumeration Defense
+    const unknownRes = await fetch(`${API_BASE}/store/newsletter/unsubscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: `unknown_patron_${Date.now()}@waak.co.in` }),
+    });
+    check(unknownRes.status === 200, 'Unsubscribing unknown email returns uniform HTTP 200 (prevents enumeration)');
+    const unknownData = await unknownRes.json();
+    check(unknownData.updated === undefined, 'Endpoint masks DB row count / existence from response body');
+
+    // 1.6 Test Unauthenticated Data Leakage Prevention
     const leakRes = await fetch(`${API_BASE}/store/newsletter`);
     check(leakRes.status === 404, 'Public GET /store/newsletter is non-existent (HTTP 404) — subscriber list cannot leak');
 
     // -------------------------------------------------------------
-    // Section 2: Policy & Commercial Claim Draft Status Verification
+    // Section 2: Policy & Commercial Claim Draft Status & URL Compatibility
     // -------------------------------------------------------------
     console.log('\n--- Section 2: Policy & Commercial Claim Draft Audit ---');
 
     const policyViewSrc = await fs.readFile('src/components/PolicyView.tsx', 'utf-8');
     const pdpSrc = await fs.readFile('src/ProductDetail.tsx', 'utf-8');
     const footerSrc = await fs.readFile('src/components/Footer.tsx', 'utf-8');
+    const appContextSrc = await fs.readFile('src/context/AppContext.tsx', 'utf-8');
+    const appSrc = await fs.readFile('src/App.tsx', 'utf-8');
 
-    // 2.1 Verify PolicyView prominent warning
+    // 2.1 Verify Policy URL Compatibility & Aliasing
+    check(
+      policyViewSrc.includes('case "/terms-of-service":') && policyViewSrc.includes('case "/terms-and-conditions":'),
+      'PolicyView seamlessly supports both /terms-of-service and /terms-and-conditions'
+    );
+    check(
+      policyViewSrc.includes('case "/shipping-policy":') && policyViewSrc.includes('case "/shipping-and-delivery":'),
+      'PolicyView seamlessly supports both /shipping-policy and /shipping-and-delivery'
+    );
+    check(
+      policyViewSrc.includes('case "/contact":') && policyViewSrc.includes('case "/contact-us":'),
+      'PolicyView seamlessly supports both /contact and /contact-us'
+    );
+    check(
+      appContextSrc.includes('cleanPath.includes("terms-and-conditions")') &&
+      appContextSrc.includes('cleanPath.includes("shipping-and-delivery")'),
+      'AppContext resolveRoute normalizes historical and report URL aliases'
+    );
+    check(
+      appSrc.includes('/terms-and-conditions') && appSrc.includes('/shipping-and-delivery'),
+      'App.tsx route matcher includes both canonical and alias policy routes'
+    );
+
+    // 2.2 Verify PolicyView prominent warning
     check(
       policyViewSrc.includes('Unapproved Draft Policy (Pending Corporate Confirmation)'),
       'PolicyView renders explicit "Unapproved Draft Policy" warning banner'
@@ -88,13 +138,13 @@ async function runAudit() {
       'PolicyView explicitly declares exchange timeframes, transit guarantees, and corporate details are unconfirmed'
     );
 
-    // 2.2 Verify Care Guide includes draft disclaimer
+    // 2.3 Verify Care Guide includes draft disclaimer
     check(
       policyViewSrc.includes('renderNotice("Garment Care & Fabric Preservation Guidelines")'),
       'Care & Preservation guide explicitly includes draft review notice'
     );
 
-    // 2.3 Verify PDP claims are explicitly qualified as drafts
+    // 2.4 Verify PDP claims are explicitly qualified as drafts
     check(
       pdpSrc.includes('draft exchange terms (subject to final business confirmation)'),
       'PDP FAQ item 5 qualifies return & exchange claims as draft terms pending confirmation'
@@ -104,7 +154,7 @@ async function runAudit() {
       'PDP Shipping accordion explicitly flags courier transit windows & insurance as draft standards'
     );
 
-    // 2.4 Verify Footer consent disclosure
+    // 2.5 Verify Footer consent disclosure
     check(
       footerSrc.includes('By submitting, you consent to receive seasonal atelier invitations'),
       'Footer displays explicit consent disclosure below newsletter input'

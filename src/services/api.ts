@@ -230,10 +230,10 @@ export const api = {
         body: JSON.stringify({ email, source }),
       });
     },
-    async unsubscribe(email: string) {
-      return request<{ success: boolean; message: string; updated: boolean }>('/store/newsletter/unsubscribe', {
+    async unsubscribe(email: string, token?: string) {
+      return request<{ success: boolean; message: string }>('/store/newsletter/unsubscribe', {
         method: 'POST',
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, token }),
       });
     },
   },

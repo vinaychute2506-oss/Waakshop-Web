@@ -100,10 +100,13 @@ function MainContent() {
         {[
           "/privacy-policy",
           "/terms-of-service",
+          "/terms-and-conditions",
           "/shipping-policy",
+          "/shipping-and-delivery",
           "/returns-and-exchanges",
           "/care-and-preservation",
           "/contact",
+          "/contact-us",
         ].includes(currentRoute) && <PolicyView route={currentRoute} />}
       </main>
 

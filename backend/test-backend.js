@@ -1,10 +1,20 @@
 // WAAK E-Commerce Security, Payment Integrity & Concurrency Verification Suite
 import crypto from 'crypto';
+import pg from 'pg';
 
 async function runTests() {
   const BASE_URL = 'http://localhost:9000';
   let passed = 0;
   let failed = 0;
+
+  // Ensure test inventory is restored for idempotent, repeatable test execution
+  try {
+    const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL || 'postgres://waak_admin:waak_secret_2026@localhost:5432/waak_commerce' });
+    await pool.query('UPDATE product_variants SET stock_quantity = 10 WHERE product_id = $1 AND size = $2', ['waak-01', '40']);
+    await pool.end();
+  } catch (err) {
+    // Non-fatal if DB not reachable directly
+  }
 
   function assert(condition, message) {
     if (condition) {
