@@ -60,32 +60,32 @@ Crucially, **the application is NOT cleared for direct public commercial launch 
      - Courier insurance and express dispatch clearly qualified as draft operational standards subject to courier partner confirmation.
      - 7-day exchange policy explicitly identified in FAQ item 5 as a draft commercial term subject to final business sign-off.
 
-3. **Technical Newsletter Unsubscription Implemented**:
-   - `backend/src/routes/newsletter.ts`: Added `POST /store/newsletter/unsubscribe` endpoint.
-   - Updates subscriber record status to `'unsubscribed'` and records `unsubscribed_at = NOW()`.
-   - Idempotent and leak-safe: returns 200 OK whether the email was previously active, already unsubscribed, or unknown.
-   - `src/services/api.ts`: Added client SDK binding `api.newsletter.unsubscribe(email)`.
-
-4. **Explicit Consent & DPDP Notice**:
+3. **Cryptographic Newsletter Unsubscription & DPDP Consent**:
+   - `backend/src/routes/newsletter.ts`: Implemented `generateUnsubscribeToken(email)` using HMAC-SHA256 bound to server secret. Returned on subscription and verified in constant time (`crypto.timingSafeEqual`) on `POST /store/newsletter/unsubscribe`.
+   - Rejects forged/tampered unsubscription tokens with `HTTP 403 Forbidden` to prevent malicious unauthorized unsubscription.
+   - Eliminates subscriber enumeration by returning uniform success responses regardless of whether the submitted email exists.
    - `src/components/Footer.tsx`: Added explicit subscriber consent notification beneath newsletter submission input:
      *"By submitting, you consent to receive seasonal atelier invitations. Unsubscribe anytime via our Privacy Policy."*
+
+4. **Policy URL Compatibility & Aliasing**:
+   - Both historical and report policy URLs (`/terms-of-service` & `/terms-and-conditions`, `/shipping-policy` & `/shipping-and-delivery`, `/contact` & `/contact-us`) are normalized and rendered seamlessly across `AppContext.tsx`, `App.tsx`, and `PolicyView.tsx`.
 
 ---
 
 ## 5. Summary of Automated Verification Results
 
-Across all layers of the WAAK application, **316 automated test assertions executed and 316 passed (0 failures)**:
+Across all layers of the WAAK application, **325 automated test assertions executed and 325 passed (0 failures)**:
 
 | Suite Name | Target Scope | Assertion Count | Result |
 | :--- | :--- | :---: | :---: |
-| `backend/test-backend.js` | Core backend APIs, auth, cart, Razorpay mock | 40 | **PASS (40/40)** |
+| `backend/test-backend.js` | Core backend APIs, auth, cart, Razorpay mock, admin | 40 | **PASS (40/40)** |
 | `scratch/test-phase-3-0-e2e.mjs` | Catalog sync, Indian sizing, checkout E2E | 34 | **PASS (34/34)** |
 | `scratch/test-phase-3-1-e2e.mjs` | Dynamic catalog, 6-digit Indian PIN audit | 49 | **PASS (49/49)** |
 | `scratch/test-phase-3-3-pdp.mjs` | PDP UX, size matrix, drawer cart, checkout | 54 | **PASS (54/54)** |
 | `scratch/test-phase-3-4-policy-newsletter.mjs` | Policy routes, draft banners, newsletter DB | 70 | **PASS (70/70)** |
-| `scratch/test-phase-3-5-release-readiness.mjs` | Concurrency, unsubscribe, consent, test mode | 20 | **PASS (20/20)** |
+| `scratch/test-phase-3-5-release-readiness.mjs` | Concurrency, HMAC token unsubscribe, enumeration defense, URL aliases | 29 | **PASS (29/29)** |
 | `backend/test-staging.js` | Multi-container Docker Compose staging acceptance | 49 | **PASS (49/49)** |
-| **Total Non-Overlapping Assertions** | **Complete Full-Stack Verification** | **316** | **100% PASS** |
+| **Total Non-Overlapping Assertions** | **Complete Full-Stack Verification** | **325** | **100% PASS** |
 
 ---
 
