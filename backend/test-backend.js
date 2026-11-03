@@ -126,7 +126,10 @@ async function runTests() {
     // 7b. Invalid Size Rejection Check
     const badSizeRes = await fetch(`${BASE_URL}/store/carts/${cartId}/line-items`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${customerToken}`,
+      },
       body: JSON.stringify({ product_id: 'waak-01', size: '56', quantity: 1 }),
     });
     assert(badSizeRes.status === 400, 'Invalid size (56) rejected with HTTP 400 Bad Request');
@@ -134,7 +137,10 @@ async function runTests() {
     // 7c. Invalid Quantity Rejection Check
     const badQtyRes = await fetch(`${BASE_URL}/store/carts/${cartId}/line-items`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${customerToken}`,
+      },
       body: JSON.stringify({ product_id: 'waak-01', size: '40', quantity: 99 }),
     });
     assert(badQtyRes.status === 400, 'Excessive quantity (99) rejected with HTTP 400 Bad Request');
@@ -142,7 +148,10 @@ async function runTests() {
     // 8. Add Line Item with Size 40
     const addItemRes = await fetch(`${BASE_URL}/store/carts/${cartId}/line-items`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${customerToken}`,
+      },
       body: JSON.stringify({
         product_id: 'waak-01',
         size: '40',
@@ -199,6 +208,17 @@ async function runTests() {
       body: JSON.stringify({ quantity: 99 }),
     });
     assert(hackLineRes.status === 403, 'Cross-customer line item modification blocked (HTTP 403 Forbidden)');
+
+    // Customer B attempts to inject line item into Customer A's cart
+    const hackAddRes = await fetch(`${BASE_URL}/store/carts/${cartId}/line-items`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${customerBToken}`,
+      },
+      body: JSON.stringify({ product_id: 'waak-01', size: '40', quantity: 1 }),
+    });
+    assert(hackAddRes.status === 403, 'Cross-customer line item insertion blocked (HTTP 403 Forbidden)');
 
     // 11. Checkout & Razorpay Order Creation
     const checkoutRes = await fetch(`${BASE_URL}/store/carts/${cartId}/checkout`, {
@@ -282,6 +302,14 @@ async function runTests() {
       },
     });
 
+    // Test missing webhook signature
+    const missingSigRes = await fetch(`${BASE_URL}/store/payment/razorpay/webhook`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: webhookPayload,
+    });
+    assert(missingSigRes.status === 400, 'Missing webhook signature header rejected with HTTP 400');
+
     // Test bad webhook signature
     const badWebhookRes = await fetch(`${BASE_URL}/store/payment/razorpay/webhook`, {
       method: 'POST',
@@ -304,6 +332,29 @@ async function runTests() {
       body: webhookPayload,
     });
     assert(goodWebhookRes.status === 200, 'Authentic webhook signature verified with HTTP 200');
+
+    // Test payment.failed webhook event
+    const failedPayload = JSON.stringify({
+      event: 'payment.failed',
+      payload: {
+        payment: {
+          entity: {
+            id: 'pay_failed_test_123',
+            order_id: 'rzp_order_simulated_failed',
+          },
+        },
+      },
+    });
+    const failedSignature = crypto.createHmac('sha256', webhookSecret).update(failedPayload).digest('hex');
+    const failedWebhookRes = await fetch(`${BASE_URL}/store/payment/razorpay/webhook`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-razorpay-signature': failedSignature,
+      },
+      body: failedPayload,
+    });
+    assert(failedWebhookRes.status === 200, 'Webhook gracefully handles payment.failed event with HTTP 200');
 
     // Confirm inventory remains untouched after webhook replay
     const stockAfterWebhookRes = await fetch(`${BASE_URL}/store/products/waak-01`);

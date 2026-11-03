@@ -4,8 +4,10 @@ import jwt from 'jsonwebtoken';
 import { pool } from '../db';
 import { adminAuth } from '../middleware/auth';
 
+import { config } from '../config';
+
 const router = Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'waak_luxury_jwt_secret_key_2026_super_secure';
+const JWT_SECRET = config.jwtSecret;
 
 import { loginRateLimiter } from '../middleware/rateLimiter';
 
@@ -19,9 +21,9 @@ router.post('/auth/token', loginRateLimiter, async (req: Request, res: Response)
     }
 
     // Production credential hardening guard
-    if (process.env.NODE_ENV === 'production' && password === 'waakAdmin2026!') {
+    if (config.admin.defaultPasswordBlocked && password === 'waakAdmin2026!') {
       res.status(403).json({
-        error: 'Default development credentials prohibited in production mode. Set ADMIN_PASSWORD in environment.',
+        error: 'Default development credentials prohibited in production/staging mode. Set ADMIN_PASSWORD in environment.',
       });
       return;
     }

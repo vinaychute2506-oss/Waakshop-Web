@@ -1,0 +1,100 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: waak-staging-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-waak_staging_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-waak_staging_secure_2026}
+      POSTGRES_DB: ${POSTGRES_DB:-waak_staging_commerce}
+    # Security: Database is internal only, not exposed on host network
+    expose:
+      - "5432"
+    volumes:
+      - waak_staging_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-waak_staging_admin} -d ${POSTGRES_DB:-waak_staging_commerce}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - waak-staging-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: waak-staging-redis
+    restart: unless-stopped
+    # Security: Redis is internal only, not exposed on host network
+    expose:
+      - "6379"
+    volumes:
+      - waak_staging_redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - waak-staging-net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: waak-staging-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: staging
+      PORT: 9000
+      DATABASE_URL: postgres://${POSTGRES_USER:-waak_staging_admin}:${POSTGRES_PASSWORD:-waak_staging_secure_2026}@postgres:5432/${POSTGRES_DB:-waak_staging_commerce}
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-waak_staging_jwt_secret_must_be_32_chars_long!}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:8080}
+      RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID:-rzp_test_waak2026demo}
+      RAZORPAY_KEY_SECRET: ${RAZORPAY_KEY_SECRET:-waakSecretRazorpayKey2026}
+      RAZORPAY_WEBHOOK_SECRET: ${RAZORPAY_WEBHOOK_SECRET:-waak_staging_webhook_secret_2026}
+      ALLOW_MOCK_PAYMENTS: ${ALLOW_MOCK_PAYMENTS:-false}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-atelier@waak.in}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-waakStagingAdmin2026!}
+    ports:
+      - "9000:9000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:9000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - waak-staging-net
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: waak-staging-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:80/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - waak-staging-net
+
+networks:
+  waak-staging-net:
+    driver: bridge
+
+volumes:
+  waak_staging_pgdata:
+  waak_staging_redisdata:

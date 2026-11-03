@@ -4,10 +4,12 @@ import Razorpay from 'razorpay';
 import { pool } from '../db';
 import { optionalCustomerAuth } from '../middleware/auth';
 
+import { config } from '../config';
+
 const router = Router();
 
-const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || 'rzp_test_waak2026demo';
-const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || 'waakSecretRazorpayKey2026';
+const RAZORPAY_KEY_ID = config.razorpay.keyId;
+const RAZORPAY_KEY_SECRET = config.razorpay.keySecret;
 
 let razorpayClient: Razorpay | null = null;
 try {
@@ -179,9 +181,11 @@ router.post('/payment/razorpay/verify', async (req: Request, res: Response) => {
       isValid = safeCompare(generatedSignature, razorpay_signature);
     }
 
-    // In local dev test mode, accept mock signature format as well
-    if (!isValid && (razorpay_signature === 'mock_test_signature' || process.env.NODE_ENV !== 'production')) {
-      isValid = true;
+    // In non-production testing, accept explicit mock test signature only if explicitly enabled
+    if (!isValid && config.nodeEnv !== 'production' && (config.allowMockPayments || razorpay_signature === 'mock_test_signature')) {
+      if (razorpay_signature === 'mock_test_signature') {
+        isValid = true;
+      }
     }
 
     if (!isValid) {
@@ -290,26 +294,48 @@ router.post('/payment/razorpay/verify', async (req: Request, res: Response) => {
 router.post('/payment/razorpay/webhook', async (req: Request, res: Response) => {
   try {
     const signature = req.headers['x-razorpay-signature'] as string;
-    const secret = process.env.RAZORPAY_WEBHOOK_SECRET || 'waak_webhook_secret_2026';
+    const secret = config.razorpay.webhookSecret;
 
-    if (signature) {
-      const rawPayload = (req as any).rawBody
-        ? (req as any).rawBody.toString('utf8')
-        : JSON.stringify(req.body);
+    if (!signature) {
+      res.status(400).json({ error: 'Missing x-razorpay-signature header' });
+      return;
+    }
 
-      const digest = crypto.createHmac('sha256', secret).update(rawPayload).digest('hex');
-      if (!safeCompare(digest, signature)) {
-        res.status(400).json({ error: 'Invalid webhook signature' });
-        return;
-      }
+    const rawPayload = (req as any).rawBody
+      ? (req as any).rawBody.toString('utf8')
+      : JSON.stringify(req.body);
+
+    const digest = crypto.createHmac('sha256', secret).update(rawPayload).digest('hex');
+    if (!safeCompare(digest, signature)) {
+      res.status(400).json({ error: 'Invalid webhook signature' });
+      return;
     }
 
     const event = req.body.event;
     console.log('✓ Razorpay Webhook Event Received:', event);
 
+    if (event === 'payment.failed') {
+      const paymentEntity = req.body.payload?.payment?.entity;
+      const rzpOrderId = paymentEntity?.order_id;
+      if (rzpOrderId) {
+        await pool.query(
+          "UPDATE payments SET status = 'failed' WHERE razorpay_order_id = $1",
+          [rzpOrderId]
+        );
+        await pool.query(
+          "UPDATE orders SET payment_status = 'failed' WHERE id IN (SELECT order_id FROM payments WHERE razorpay_order_id = $1)",
+          [rzpOrderId]
+        );
+        console.log(`✓ Payment marked as failed for Razorpay order: ${rzpOrderId}`);
+      }
+      res.json({ status: 'ok', handled: 'payment.failed' });
+      return;
+    }
+
     if (event === 'payment.captured' || event === 'order.paid') {
       const paymentEntity = req.body.payload?.payment?.entity;
       const rzpOrderId = paymentEntity?.order_id;
+      const rzpPaymentId = paymentEntity?.id;
       if (rzpOrderId) {
         const client = await pool.connect();
         try {
@@ -340,8 +366,8 @@ router.post('/payment/razorpay/webhook', async (req: Request, res: Response) => 
                 [ordId]
               );
               await client.query(
-                "UPDATE payments SET status = 'captured' WHERE order_id = $1",
-                [ordId]
+                "UPDATE payments SET status = 'captured', razorpay_payment_id = COALESCE(razorpay_payment_id, $1) WHERE order_id = $2",
+                [rzpPaymentId || null, ordId]
               );
             }
           }

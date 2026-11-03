@@ -106,10 +106,20 @@ router.get('/:id', optionalCustomerAuth, async (req: Request, res: Response) => 
 });
 
 // POST /store/carts/:id/line-items
-router.post('/:id/line-items', async (req: Request, res: Response) => {
+router.post('/:id/line-items', optionalCustomerAuth, async (req: Request, res: Response) => {
   try {
     const cartId = String(req.params.id);
     const { product_id, size, quantity = 1 } = req.body;
+
+    const cartOwnerRes = await pool.query('SELECT customer_id FROM carts WHERE id = $1', [cartId]);
+    if (cartOwnerRes.rows.length === 0) {
+      res.status(404).json({ error: 'Cart not found' });
+      return;
+    }
+    if (cartOwnerRes.rows[0].customer_id && (!req.customer || req.customer.id !== cartOwnerRes.rows[0].customer_id)) {
+      res.status(403).json({ error: 'Access denied: You do not have permission to modify another client\'s cart' });
+      return;
+    }
 
     if (!product_id || !size) {
       res.status(400).json({ error: 'product_id and size are required' });

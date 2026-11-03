@@ -1,3 +1,9 @@
 node_modules
 dist
 *.log
+
+# Environment & Secret files
+.env
+.env.*
+*.env
+!.env.example

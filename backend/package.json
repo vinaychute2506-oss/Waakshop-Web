@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "tsc && node -e \"const fs=require('fs'); fs.mkdirSync('dist/db/migrations', {recursive: true}); fs.cpSync('src/db/migrations', 'dist/db/migrations', {recursive: true}); if(fs.existsSync('src/db/schema.sql')) fs.copyFileSync('src/db/schema.sql', 'dist/db/schema.sql');\"",
+    "migrate": "tsx src/db/migrate.ts",
     "start": "node dist/index.js",
     "seed": "tsx src/db/seed.ts"
   },

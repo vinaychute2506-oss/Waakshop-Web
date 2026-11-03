@@ -5,8 +5,10 @@ import { pool } from '../db';
 import { customerAuth } from '../middleware/auth';
 import { loginRateLimiter, registerRateLimiter } from '../middleware/rateLimiter';
 
+import { config } from '../config';
+
 const router = Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'waak_luxury_jwt_secret_key_2026_super_secure';
+const JWT_SECRET = config.jwtSecret;
 
 // POST /auth/customer/register
 router.post('/customer/register', registerRateLimiter, async (req: Request, res: Response) => {
