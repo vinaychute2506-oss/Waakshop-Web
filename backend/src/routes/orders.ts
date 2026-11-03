@@ -1,11 +1,11 @@
 import { Router, Request, Response } from 'express';
 import { pool } from '../db';
-import { customerAuth } from '../middleware/auth';
+import { customerAuth, optionalCustomerAuth } from '../middleware/auth';
 
 const router = Router();
 
 // GET /store/orders/:id
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:id', optionalCustomerAuth, async (req: Request, res: Response) => {
   try {
     const orderRes = await pool.query('SELECT * FROM orders WHERE id = $1 OR display_id = $1', [req.params.id]);
     if (orderRes.rows.length === 0) {
@@ -14,6 +14,12 @@ router.get('/:id', async (req: Request, res: Response) => {
     }
 
     const order = orderRes.rows[0];
+
+    // Enforce authorization: if order belongs to a registered customer, verify requester matches
+    if (order.customer_id && (!req.customer || req.customer.id !== order.customer_id)) {
+      res.status(403).json({ error: 'Access denied: You do not have permission to view this bespoke order' });
+      return;
+    }
     const itemsRes = await pool.query('SELECT * FROM order_items WHERE order_id = $1', [order.id]);
     const paymentsRes = await pool.query('SELECT id, provider_id, status, amount, created_at FROM payments WHERE order_id = $1', [order.id]);
 

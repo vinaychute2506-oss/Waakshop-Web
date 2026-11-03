@@ -1,5 +1,6 @@
 // WAAK E-Commerce Integration Verification Suite
-// Tests complete customer journey, payments, inventory, and admin management
+// Tests complete customer journey, cross-customer isolation, payments, inventory, and admin management
+import crypto from 'crypto';
 
 async function runTests() {
   const BASE_URL = 'http://localhost:9000';
@@ -17,7 +18,7 @@ async function runTests() {
   }
 
   console.log('==========================================================');
-  console.log('   WAAK COMMERCE API — END-TO-END VERIFICATION SUITE       ');
+  console.log('   WAAK COMMERCE API — RIGOROUS VERIFICATION SUITE         ');
   console.log('==========================================================\n');
 
   try {
@@ -44,7 +45,7 @@ async function runTests() {
     const customerToken = regData.token;
     const customerId = regData.customer.id;
 
-    // 3. Customer Login
+    // 3. Customer Login - Valid Credentials
     const loginRes = await fetch(`${BASE_URL}/auth/customer/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -56,7 +57,18 @@ async function runTests() {
     const loginData = await loginRes.json();
     assert(loginRes.status === 200 && loginData.token, 'Customer login verifies credentials and issues valid session');
 
-    // 4. Saved Address
+    // 4. Customer Login - Invalid Password Rejection
+    const badLoginRes = await fetch(`${BASE_URL}/auth/customer/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: testEmail,
+        password: 'wrongPassword!',
+      }),
+    });
+    assert(badLoginRes.status === 401, 'Incorrect credentials correctly rejected with HTTP 401');
+
+    // 5. Saved Address
     const addrRes = await fetch(`${BASE_URL}/store/customers/me/addresses`, {
       method: 'POST',
       headers: {
@@ -79,7 +91,7 @@ async function runTests() {
     const addrData = await addrRes.json();
     assert(addrRes.status === 201 && addrData.address.city === 'Mumbai', 'Customer saved shipping address stored in PostgreSQL');
 
-    // 5. Products Catalog & Variant Inventory
+    // 6. Products Catalog & Variant Inventory
     const prodRes = await fetch(`${BASE_URL}/store/products`);
     const prodData = await prodRes.json();
     assert(prodRes.status === 200 && prodData.products.length >= 4, 'Catalog returns 4 signature occasionwear products');
@@ -89,7 +101,7 @@ async function runTests() {
     const initialStock = size40Variant.stock_quantity;
     assert(initialStock > 0, `Size 40 variant has live stock inventory (${initialStock} available)`);
 
-    // 6. Cart Lifecycle
+    // 7. Cart Lifecycle
     const cartRes = await fetch(`${BASE_URL}/store/carts`, {
       method: 'POST',
       headers: {
@@ -102,7 +114,17 @@ async function runTests() {
     assert(cartRes.status === 201 && cartData.cart.id, 'Cart created and persisted in database');
     const cartId = cartData.cart.id;
 
-    // 7. Add Line Item with Size 40
+    // Attach customer to cart
+    await fetch(`${BASE_URL}/store/carts/${cartId}/customer`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${customerToken}`,
+      },
+      body: JSON.stringify({ customer_id: customerId }),
+    });
+
+    // 8. Add Line Item with Size 40
     const addItemRes = await fetch(`${BASE_URL}/store/carts/${cartId}/line-items`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -117,7 +139,7 @@ async function runTests() {
     const lineItem = addItemData.cart.items[0];
     assert(lineItem.unit_price === 49500 && lineItem.total === 49500, 'Accurate line item pricing in INR (₹49,500)');
 
-    // 8. Update Quantity to 2
+    // 9. Update Quantity to 2
     const updateQtyRes = await fetch(`${BASE_URL}/store/carts/${cartId}/line-items/${lineItem.id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -127,7 +149,29 @@ async function runTests() {
     assert(updateQtyRes.status === 200 && updateQtyData.cart.items[0].quantity === 2, 'Quantity stepped to 2 items');
     assert(updateQtyData.cart.subtotal === 99000, 'Subtotal correctly recalculated to ₹99,000');
 
-    // 9. Checkout & Razorpay Order Creation
+    // 10. Cross-Customer Cart Security Check
+    // Create Customer B
+    const custBEmail = `other_client_${Date.now()}@waak.in`;
+    const regBRes = await fetch(`${BASE_URL}/auth/customer/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: custBEmail,
+        password: 'securePassword2026!',
+        first_name: 'Vikram',
+        last_name: 'Oberoi',
+      }),
+    });
+    const regBData = await regBRes.json();
+    const customerBToken = regBData.token;
+
+    // Customer B attempts to access Customer A's cart
+    const hackCartRes = await fetch(`${BASE_URL}/store/carts/${cartId}`, {
+      headers: { 'Authorization': `Bearer ${customerBToken}` },
+    });
+    assert(hackCartRes.status === 403, 'Cross-customer cart access blocked (HTTP 403 Forbidden)');
+
+    // 11. Checkout & Razorpay Order Creation
     const checkoutRes = await fetch(`${BASE_URL}/store/carts/${cartId}/checkout`, {
       method: 'POST',
       headers: {
@@ -145,7 +189,14 @@ async function runTests() {
     const orderId = checkoutData.order_id;
     const rzpOrderId = checkoutData.razorpay_order_id;
 
-    // 10. Razorpay Payment Signature Verification & Inventory Decrement
+    // 12. Cross-Customer Order Security Check
+    // Customer B attempts to access Customer A's order
+    const hackOrderRes = await fetch(`${BASE_URL}/store/orders/${orderId}`, {
+      headers: { 'Authorization': `Bearer ${customerBToken}` },
+    });
+    assert(hackOrderRes.status === 403, 'Cross-customer order access blocked (HTTP 403 Forbidden)');
+
+    // 13. Razorpay Payment Signature Verification & Inventory Decrement
     const rzpPaymentId = `pay_rzp_mock_${Date.now()}`;
     const verifyRes = await fetch(`${BASE_URL}/store/payment/razorpay/verify`, {
       method: 'POST',
@@ -167,14 +218,52 @@ async function runTests() {
     const updatedSize40 = stockCheckData.product.variants.find((v) => v.size === '40');
     assert(updatedSize40.stock_quantity === initialStock - 2, `Inventory decremented atomically by 2 (${initialStock} -> ${updatedSize40.stock_quantity})`);
 
-    // 11. Customer Order History
+    // 14. Razorpay Webhook Verification
+    const webhookSecret = 'waak_webhook_secret_2026';
+    const webhookPayload = JSON.stringify({
+      event: 'payment.captured',
+      payload: {
+        payment: {
+          entity: {
+            id: rzpPaymentId,
+            order_id: rzpOrderId,
+            amount: 9900000,
+          },
+        },
+      },
+    });
+
+    // Test bad webhook signature
+    const badWebhookRes = await fetch(`${BASE_URL}/store/payment/razorpay/webhook`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-razorpay-signature': 'invalid_signature_hash',
+      },
+      body: webhookPayload,
+    });
+    assert(badWebhookRes.status === 400, 'Tampered webhook signature rejected with HTTP 400');
+
+    // Test valid webhook signature
+    const validSignature = crypto.createHmac('sha256', webhookSecret).update(webhookPayload).digest('hex');
+    const goodWebhookRes = await fetch(`${BASE_URL}/store/payment/razorpay/webhook`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-razorpay-signature': validSignature,
+      },
+      body: webhookPayload,
+    });
+    assert(goodWebhookRes.status === 200, 'Authentic webhook signature verified with HTTP 200');
+
+    // 15. Customer Order History
     const ordersHistoryRes = await fetch(`${BASE_URL}/store/orders/customer/history`, {
       headers: { 'Authorization': `Bearer ${customerToken}` },
     });
     const ordersHistoryData = await ordersHistoryRes.json();
     assert(ordersHistoryRes.status === 200 && ordersHistoryData.orders.length >= 1, 'Order reflected in customer Atelier history');
 
-    // 12. Wishlist Persistence
+    // 16. Wishlist Persistence
     const wishAddRes = await fetch(`${BASE_URL}/store/wishlist`, {
       method: 'POST',
       headers: {
@@ -191,7 +280,7 @@ async function runTests() {
     const wishGetData = await wishGetRes.json();
     assert(wishGetData.wishlist.some((w) => w.id === 'waak-04'), 'Wishlist persistent across sessions in PostgreSQL');
 
-    // 13. Admin Authentication & Operations
+    // 17. Admin Authentication & Operations
     const adminLoginRes = await fetch(`${BASE_URL}/admin/auth/token`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -204,14 +293,14 @@ async function runTests() {
     assert(adminLoginRes.status === 200 && adminLoginData.token, 'Admin portal authentication successful');
     const adminToken = adminLoginData.token;
 
-    // 14. Admin Stats & Orders
+    // 18. Admin Stats & Orders
     const adminStatsRes = await fetch(`${BASE_URL}/admin/stats`, {
       headers: { 'Authorization': `Bearer ${adminToken}` },
     });
     const adminStatsData = await adminStatsRes.json();
     assert(adminStatsData.total_revenue >= 99000, `Admin stats captures total revenue (₹${adminStatsData.total_revenue.toLocaleString('en-IN')})`);
 
-    // 15. Admin Update Fulfillment Status
+    // 19. Admin Update Fulfillment Status
     const updateFulfillRes = await fetch(`${BASE_URL}/admin/orders/${orderId}/status`, {
       method: 'PUT',
       headers: {
@@ -226,7 +315,7 @@ async function runTests() {
     const updateFulfillData = await updateFulfillRes.json();
     assert(updateFulfillData.order.fulfillment_status === 'processing', 'Admin updated order fulfillment status to "processing"');
 
-    // 16. Admin Web Dashboard Check
+    // 20. Admin Web Dashboard Check
     const adminHtmlRes = await fetch(`${BASE_URL}/admin`);
     assert(adminHtmlRes.status === 200, 'Admin visual management console served on http://localhost:9000/admin');
 

@@ -83,7 +83,7 @@ router.post('/', optionalCustomerAuth, async (req: Request, res: Response) => {
 });
 
 // GET /store/carts/:id
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:id', optionalCustomerAuth, async (req: Request, res: Response) => {
   try {
     const cartId = String(req.params.id);
     const cart = await getPopulatedCart(cartId);
@@ -91,6 +91,13 @@ router.get('/:id', async (req: Request, res: Response) => {
       res.status(404).json({ error: 'Cart not found' });
       return;
     }
+
+    // Enforce authorization: if cart is bound to a customer, verify requester matches
+    if (cart.customer_id && (!req.customer || req.customer.id !== cart.customer_id)) {
+      res.status(403).json({ error: 'Access denied: You do not have permission to access another client\'s cart' });
+      return;
+    }
+
     res.json({ cart });
   } catch (error: any) {
     console.error('Cart fetch error:', error);
