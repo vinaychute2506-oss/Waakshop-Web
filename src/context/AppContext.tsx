@@ -18,6 +18,9 @@ interface AppContextType {
   setIsCartOpen: (open: boolean) => void
   isWishlistOpen: boolean
   setIsWishlistOpen: (open: boolean) => void
+  isCheckoutOpen: boolean
+  setIsCheckoutOpen: (open: boolean) => void
+  clearCart: () => void
   navigateTo: (route: string, productId?: string) => void
   addToCart: (product: Product, size: string, quantity?: number) => void
   updateCartQuantity: (productId: string, size: string, quantity: number) => void
@@ -64,6 +67,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
   const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false)
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState<boolean>(false)
 
   // Sync to localStorage
   useEffect(() => {
@@ -145,6 +149,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setCart((prev) => prev.filter((item) => !(item.product.id === productId && item.size === size)))
   }
 
+  const clearCart = () => {
+    setCart([])
+  }
+
   const toggleWishlist = (productId: string) => {
     setWishlist((prev) =>
       prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
@@ -168,6 +176,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setIsCartOpen,
         isWishlistOpen,
         setIsWishlistOpen,
+        isCheckoutOpen,
+        setIsCheckoutOpen,
+        clearCart,
         navigateTo,
         addToCart,
         updateCartQuantity,

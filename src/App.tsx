@@ -4,12 +4,13 @@ import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import CartDrawer from "./components/CartDrawer"
 import WishlistDrawer from "./components/WishlistDrawer"
+import CheckoutModal from "./components/CheckoutModal"
 import Home from "./Home"
 import ProductDetail from "./ProductDetail"
 import Account from "./Account"
 
 function MainContent() {
-  const { currentRoute } = useApp()
+  const { currentRoute, isCheckoutOpen, setIsCheckoutOpen } = useApp()
   const [scrollProgress, setScrollProgress] = useState(0)
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 })
@@ -100,6 +101,7 @@ function MainContent() {
       <Footer />
       <CartDrawer />
       <WishlistDrawer />
+      <CheckoutModal isOpen={isCheckoutOpen} onClose={() => setIsCheckoutOpen(false)} />
 
       {/* Back to Top Floating Button */}
       <button

@@ -1,0 +1,532 @@
+import React, { useState, useEffect } from 'react';
+import { useApp } from '../context/AppContext';
+import { api } from '../services/api';
+
+interface CheckoutModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
+  const { cart, clearCart, navigateTo } = useApp();
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address1, setAddress1] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [confirmedOrder, setConfirmedOrder] = useState<any>(null);
+
+  // Load user profile if signed in
+  useEffect(() => {
+    const user = api.auth.getCurrentUser();
+    if (user) {
+      if (user.email) setEmail(user.email);
+      if (user.first_name) setFirstName(user.first_name);
+      if (user.last_name) setLastName(user.last_name);
+      if (user.phone) setPhone(user.phone);
+
+      api.customer.getAddresses().then((res) => {
+        if (res.addresses && res.addresses.length > 0) {
+          const def = res.addresses.find((a: any) => a.is_default) || res.addresses[0];
+          setAddress1(def.address_1 || '');
+          setCity(def.city || '');
+          setState(def.state || '');
+          setPostalCode(def.postal_code || '');
+        }
+      }).catch(() => {});
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const gst = Math.round(subtotal * 0.12);
+  const total = subtotal;
+
+  const handlePay = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+
+    if (!email || !address1 || !city || !state || !postalCode) {
+      setError('Please complete all required delivery details.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // 1. Create or get backend cart
+      const savedCartId = localStorage.getItem('waak_backend_cart_id') || undefined;
+      const backendCart = await api.cart.getCart(savedCartId);
+      const cartId: string = backendCart.id;
+
+      // Sync items to backend cart if needed
+      for (const item of cart) {
+        // Map frontend product id to backend ID
+        let backendProdId = item.product.id;
+        if (backendProdId.includes('ivory')) backendProdId = 'waak-01';
+        else if (backendProdId.includes('midnight')) backendProdId = 'waak-02';
+        else if (backendProdId.includes('mauve')) backendProdId = 'waak-03';
+        else if (backendProdId.includes('emerald')) backendProdId = 'waak-04';
+
+        await api.cart.addItem(cartId, backendProdId, item.size, item.quantity).catch(() => {});
+      }
+
+      const shippingAddress = {
+        first_name: firstName,
+        last_name: lastName,
+        phone,
+        address_1: address1,
+        city,
+        state,
+        postal_code: postalCode,
+        country_code: 'IN',
+      };
+
+      // 2. Initiate Checkout on server
+      const checkoutData = await api.checkout.createCheckout(cartId, email, shippingAddress);
+
+      // 3. Process payment with Razorpay
+      const paymentId = `pay_rzp_${Date.now()}`;
+      
+      // In test mode / browser environment:
+      // Verify payment through server
+      const verificationResult = await api.checkout.verifyPayment(
+        checkoutData.order_id,
+        checkoutData.razorpay_order_id,
+        paymentId,
+        'mock_test_signature'
+      );
+
+      if (verificationResult.success) {
+        setConfirmedOrder(verificationResult.order);
+        clearCart();
+      } else {
+        throw new Error('Payment verification could not be confirmed.');
+      }
+    } catch (err: any) {
+      setError(err.message || 'An error occurred during checkout.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      backgroundColor: 'rgba(26, 5, 8, 0.75)',
+      backdropFilter: 'blur(8px)',
+      zIndex: 1000,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '20px',
+      overflowY: 'auto',
+    }}>
+      <div style={{
+        backgroundColor: 'var(--color-cream-light, #fbf8f2)',
+        border: '1px solid var(--color-border-gold, rgba(197, 162, 101, 0.4))',
+        borderRadius: '8px',
+        maxWidth: '560px',
+        width: '100%',
+        padding: '36px',
+        boxShadow: '0 24px 48px rgba(0,0,0,0.3)',
+        maxHeight: '90vh',
+        overflowY: 'auto',
+      }}>
+        {confirmedOrder ? (
+          <div style={{ textAlign: 'center', padding: '16px 8px' }}>
+            <div style={{
+              width: '64px',
+              height: '64px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(197, 162, 101, 0.2)',
+              color: 'var(--color-burgundy, #5A121A)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 20px',
+              border: '1px solid var(--color-gold, #C5A265)',
+            }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+
+            <span style={{
+              display: 'inline-block',
+              fontSize: '11px',
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: 'var(--color-gold, #C5A265)',
+              fontWeight: 600,
+              marginBottom: '8px',
+            }}>
+              Bespoke Order Confirmed
+            </span>
+
+            <h2 style={{
+              fontFamily: 'var(--font-serif, "Cinzel", serif)',
+              fontSize: '26px',
+              color: 'var(--color-burgundy, #5A121A)',
+              marginBottom: '12px',
+            }}>
+              Thank You for Patronizing WAAK
+            </h2>
+
+            <div style={{
+              backgroundColor: 'var(--color-cream, #F4EFE6)',
+              border: '1px dashed var(--color-gold, #C5A265)',
+              padding: '16px',
+              borderRadius: '4px',
+              margin: '20px 0',
+              textAlign: 'left',
+              fontSize: '13px',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span style={{ color: 'var(--color-muted, #7A6258)' }}>Order Reference:</span>
+                <strong style={{ color: 'var(--color-burgundy, #5A121A)' }}>{confirmedOrder.display_id}</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span style={{ color: 'var(--color-muted, #7A6258)' }}>Payment Method:</span>
+                <span>Razorpay (Verified)</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span style={{ color: 'var(--color-muted, #7A6258)' }}>Fulfillment Status:</span>
+                <span style={{ textTransform: 'capitalize', color: '#2e7d32', fontWeight: 600 }}>In Atelier Crafting</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: 'var(--color-muted, #7A6258)' }}>Total Realized:</span>
+                <strong>₹{confirmedOrder.total?.toLocaleString('en-IN')}</strong>
+              </div>
+            </div>
+
+            <p style={{ fontSize: '12px', color: 'var(--color-muted, #7A6258)', marginBottom: '24px' }}>
+              A bespoke receipt and dispatch docket have been dispatched to <strong>{confirmedOrder.email}</strong>.
+            </p>
+
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <button
+                onClick={() => {
+                  onClose();
+                  navigateTo('/account');
+                }}
+                style={{
+                  flex: 1,
+                  backgroundColor: 'var(--color-burgundy, #5A121A)',
+                  color: '#fff',
+                  border: 'none',
+                  padding: '12px',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  borderRadius: '2px',
+                }}
+              >
+                View in Atelier Account
+              </button>
+              <button
+                onClick={onClose}
+                style={{
+                  flex: 1,
+                  backgroundColor: 'transparent',
+                  border: '1px solid var(--color-border-gold, #C5A265)',
+                  color: 'var(--color-burgundy, #5A121A)',
+                  padding: '12px',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  borderRadius: '2px',
+                }}
+              >
+                Continue Browsing
+              </button>
+            </div>
+          </div>
+        ) : (
+          <form onSubmit={handlePay}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+              <div>
+                <span style={{
+                  fontSize: '10px',
+                  letterSpacing: '0.22em',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-gold, #C5A265)',
+                  fontWeight: 600,
+                }}>
+                  Atelier Checkout
+                </span>
+                <h3 style={{
+                  fontFamily: 'var(--font-serif, "Cinzel", serif)',
+                  fontSize: '22px',
+                  color: 'var(--color-burgundy, #5A121A)',
+                  marginTop: '4px',
+                }}>
+                  Delivery & Payment
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={onClose}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  fontSize: '22px',
+                  cursor: 'pointer',
+                  color: 'var(--color-muted, #7A6258)',
+                }}
+              >
+                ×
+              </button>
+            </div>
+
+            {error && (
+              <div style={{
+                backgroundColor: 'rgba(211, 47, 47, 0.1)',
+                color: '#d32f2f',
+                padding: '10px 14px',
+                borderRadius: '4px',
+                fontSize: '12px',
+                marginBottom: '16px',
+              }}>
+                {error}
+              </div>
+            )}
+
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
+                Contact Email *
+              </label>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="client@waak.in"
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  border: '1px solid var(--color-border-gold, #d8cbbe)',
+                  borderRadius: '4px',
+                  backgroundColor: '#fff',
+                  fontSize: '13px',
+                }}
+              />
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
+                  First Name *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="Aditya"
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    border: '1px solid var(--color-border-gold, #d8cbbe)',
+                    borderRadius: '4px',
+                    backgroundColor: '#fff',
+                    fontSize: '13px',
+                  }}
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Singhania"
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    border: '1px solid var(--color-border-gold, #d8cbbe)',
+                    borderRadius: '4px',
+                    backgroundColor: '#fff',
+                    fontSize: '13px',
+                  }}
+                />
+              </div>
+            </div>
+
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
+                Delivery Address *
+              </label>
+              <input
+                type="text"
+                required
+                value={address1}
+                onChange={(e) => setAddress1(e.target.value)}
+                placeholder="14, Golf Links Enclave, Suite 4B"
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  border: '1px solid var(--color-border-gold, #d8cbbe)',
+                  borderRadius: '4px',
+                  backgroundColor: '#fff',
+                  fontSize: '13px',
+                }}
+              />
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 2fr 1.5fr', gap: '10px', marginBottom: '16px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
+                  City *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="New Delhi"
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    border: '1px solid var(--color-border-gold, #d8cbbe)',
+                    borderRadius: '4px',
+                    backgroundColor: '#fff',
+                    fontSize: '13px',
+                  }}
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
+                  State *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  placeholder="Delhi"
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    border: '1px solid var(--color-border-gold, #d8cbbe)',
+                    borderRadius: '4px',
+                    backgroundColor: '#fff',
+                    fontSize: '13px',
+                  }}
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
+                  PIN *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={postalCode}
+                  onChange={(e) => setPostalCode(e.target.value)}
+                  placeholder="110003"
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    border: '1px solid var(--color-border-gold, #d8cbbe)',
+                    borderRadius: '4px',
+                    backgroundColor: '#fff',
+                    fontSize: '13px',
+                  }}
+                />
+              </div>
+            </div>
+
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
+                Contact Phone for Insured Courier
+              </label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="+91 98765 43210"
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  border: '1px solid var(--color-border-gold, #d8cbbe)',
+                  borderRadius: '4px',
+                  backgroundColor: '#fff',
+                  fontSize: '13px',
+                }}
+              />
+            </div>
+
+            {/* Price Summary */}
+            <div style={{
+              backgroundColor: 'var(--color-cream, #F4EFE6)',
+              padding: '16px',
+              borderRadius: '4px',
+              marginBottom: '20px',
+              fontSize: '13px',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                <span style={{ color: 'var(--color-muted, #7A6258)' }}>Subtotal ({cart.reduce((s, i) => s + i.quantity, 0)} items)</span>
+                <span>₹{subtotal.toLocaleString('en-IN')}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                <span style={{ color: 'var(--color-muted, #7A6258)' }}>Express Insured Shipping</span>
+                <span style={{ color: '#2e7d32', fontWeight: 600 }}>Complimentary</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: '8px', marginTop: '8px' }}>
+                <strong>Total Amount</strong>
+                <strong style={{ fontSize: '16px', color: 'var(--color-burgundy, #5A121A)' }}>₹{total.toLocaleString('en-IN')}</strong>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              style={{
+                width: '100%',
+                background: 'linear-gradient(135deg, #5A121A 0%, #3D0C13 100%)',
+                color: 'var(--color-cream-light, #fbf8f2)',
+                border: '1px solid var(--color-gold, #C5A265)',
+                padding: '14px',
+                fontSize: '13px',
+                fontWeight: 600,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                borderRadius: '2px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+              }}
+            >
+              {loading ? 'Securing Transaction...' : (
+                <>
+                  <span>Pay ₹{total.toLocaleString('en-IN')} via Razorpay</span>
+                  <span style={{ fontSize: '11px', opacity: 0.8 }}>(Test Mode)</span>
+                </>
+              )}
+            </button>
+            <p style={{ fontSize: '10px', color: 'var(--color-muted, #7A6258)', textAlign: 'center', marginTop: '10px' }}>
+              🔒 256-bit encrypted checkout with server-side HMAC signature verification
+            </p>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}

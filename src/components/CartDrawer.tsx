@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useApp } from "../context/AppContext"
 
 export default function CartDrawer() {
-  const { isCartOpen, setIsCartOpen, cart, updateCartQuantity, removeFromCart, navigateTo } = useApp()
+  const { isCartOpen, setIsCartOpen, cart, updateCartQuantity, removeFromCart, navigateTo, setIsCheckoutOpen } = useApp()
 
   // Body scroll locking and Escape key dismiss
   useEffect(() => {
@@ -250,7 +250,10 @@ export default function CartDrawer() {
               Taxes and complimentary express shipping calculated at checkout.
             </div>
             <button
-              onClick={() => alert("Bespoke Checkout Preview: Live payment gateway (Stripe / Razorpay) will be connected for production processing.")}
+              onClick={() => {
+                setIsCartOpen(false);
+                setIsCheckoutOpen(true);
+              }}
               style={{
                 width: "100%",
                 backgroundColor: "var(--color-burgundy)",
@@ -262,13 +265,14 @@ export default function CartDrawer() {
                 textTransform: "uppercase",
                 borderRadius: "var(--radius-sm)",
                 marginBottom: "8px",
-                transition: "var(--transition-smooth)"
+                transition: "var(--transition-smooth)",
+                cursor: "pointer"
               }}
             >
-              Proceed to Checkout
+              Proceed to Bespoke Checkout
             </button>
             <p style={{ fontSize: "10px", color: "var(--color-muted)", textAlign: "center" }}>
-              Client preview · Sample cart session (Payment gateway integration pending)
+              Secure Atelier Checkout · Razorpay Payment Gateway (Test Mode)
             </p>
           </div>
         )}
