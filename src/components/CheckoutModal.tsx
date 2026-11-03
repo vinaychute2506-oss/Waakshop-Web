@@ -51,52 +51,70 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
 
   const handlePay = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setError('');
 
-    if (!email || !address1 || !city || !state || !postalCode) {
-      setError('Please complete all required delivery details.');
+    if (cart.length === 0) {
+      setError('Your bespoke shopping bag is currently empty.');
       return;
+    }
+
+    if (!email.trim() || !address1.trim() || !city.trim() || !state.trim() || !postalCode.trim()) {
+      setError('Please complete all required delivery details marked with an asterisk (*).');
+      return;
+    }
+
+    // Pre-flight validation: Ensure every piece in the bag is orderable and sized
+    for (const item of cart) {
+      const backendProdId = item.product.backendId || item.product.id;
+      if (!item.product.isAvailableInBackend || !backendProdId) {
+        setError(
+          `"${item.product.name}" is an archival bespoke design available by private atelier appointment only. Please remove it from your shopping bag to complete online checkout.`
+        );
+        return;
+      }
+      if (!item.size) {
+        setError(`Please select an available chest size for "${item.product.name}" before proceeding.`);
+        return;
+      }
     }
 
     setLoading(true);
 
     try {
-      // 1. Create or get backend cart
-      const savedCartId = localStorage.getItem('waak_backend_cart_id') || undefined;
-      const backendCart = await api.cart.getCart(savedCartId);
+      // 1. Create a fresh dedicated backend cart for this checkout session
+      const backendCart = await api.cart.createCart();
       const cartId: string = backendCart.id;
+      localStorage.setItem('waak_backend_cart_id', cartId);
 
-      // Sync items to backend cart if needed
+      // 2. Synchronize all cart items into the backend cart with explicit error handling
       for (const item of cart) {
-        // Map frontend product id to backend ID
-        let backendProdId = item.product.id;
-        if (backendProdId.includes('ivory')) backendProdId = 'waak-01';
-        else if (backendProdId.includes('midnight')) backendProdId = 'waak-02';
-        else if (backendProdId.includes('mauve')) backendProdId = 'waak-03';
-        else if (backendProdId.includes('emerald')) backendProdId = 'waak-04';
-
-        await api.cart.addItem(cartId, backendProdId, item.size, item.quantity).catch(() => {});
+        const backendProdId = item.product.backendId || item.product.id;
+        try {
+          await api.cart.addItem(cartId, backendProdId, item.size, item.quantity);
+        } catch (itemErr: any) {
+          throw new Error(
+            `Unable to reserve "${item.product.name}" (Size ${item.size}): ${itemErr.message || 'Atelier stock unavailable'}`
+          );
+        }
       }
 
       const shippingAddress = {
-        first_name: firstName,
-        last_name: lastName,
-        phone,
-        address_1: address1,
-        city,
-        state,
-        postal_code: postalCode,
+        first_name: firstName.trim(),
+        last_name: lastName.trim(),
+        phone: phone.trim(),
+        address_1: address1.trim(),
+        city: city.trim(),
+        state: state.trim(),
+        postal_code: postalCode.trim(),
         country_code: 'IN',
       };
 
-      // 2. Initiate Checkout on server
-      const checkoutData = await api.checkout.createCheckout(cartId, email, shippingAddress);
+      // 3. Initiate Checkout on server
+      const checkoutData = await api.checkout.createCheckout(cartId, email.trim(), shippingAddress);
 
-      // 3. Process payment with Razorpay
+      // 4. Verify payment with server using Razorpay Test Mode credentials
       const paymentId = `pay_rzp_${Date.now()}`;
-      
-      // In test mode / browser environment:
-      // Verify payment through server
       const verificationResult = await api.checkout.verifyPayment(
         checkoutData.order_id,
         checkoutData.razorpay_order_id,
@@ -108,10 +126,11 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
         setConfirmedOrder(verificationResult.order);
         clearCart();
       } else {
-        throw new Error('Payment verification could not be confirmed.');
+        throw new Error('Payment verification could not be confirmed by the atelier server.');
       }
     } catch (err: any) {
-      setError(err.message || 'An error occurred during checkout.');
+      console.error('Checkout error:', err);
+      setError(err.message || 'An unexpected error occurred during bespoke checkout.');
     } finally {
       setLoading(false);
     }

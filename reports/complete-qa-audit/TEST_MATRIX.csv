@@ -1,0 +1,69 @@
+Test ID,Category,Feature Area,Test Scenario,Environment,Status,Severity,Actual Result,Notes
+INFRA-01,Infrastructure,Backend API,Local Express API /health endpoint returns 200 OK,Local Dev,PASS,None,HTTP 200 with DB connected in 92ms,Verified local node runtime
+INFRA-02,Infrastructure,Backend API,Staging container API /health responds 200 with test mode,Staging Container,PASS,None,HTTP 200 env=staging isTestPaymentMode=true in 7ms,Verified container runtime
+INFRA-03,Infrastructure,Frontend,Local Vite dev server serves HTML on port 5173,Local Dev,PASS,None,HTTP 200 in 5ms serving index.html,Verified dev server
+INFRA-04,Infrastructure,Frontend,Staging Nginx container serves HTML on port 8088,Staging Container,PASS,None,HTTP 200 in 8ms Server: nginx/1.31.8,Verified production container
+ROUTE-01,Routing,SPA Navigation,Direct navigation to Homepage (/),Staging Container,PASS,None,HTTP 200 SPA fallback renders root container,Verified Nginx routing
+ROUTE-02,Routing,SPA Navigation,Direct navigation to Product Detail (/product),Staging Container,PASS,None,HTTP 200 SPA fallback renders root container,Verified Nginx routing
+ROUTE-03,Routing,SPA Navigation,Direct navigation to Customer Account (/account),Staging Container,PASS,None,HTTP 200 SPA fallback renders root container,Verified Nginx routing
+ROUTE-04,Routing,SPA Navigation,Direct navigation to Category Subroute (/collections/sherwanis),Staging Container,PASS,None,HTTP 200 SPA fallback renders root container,Verified Nginx routing
+ROUTE-05,Routing,SPA Navigation,Direct navigation to Unknown Client Route (/nonexistent-404-route),Staging Container,PASS,None,HTTP 200 SPA fallback renders root container,Verified Nginx routing
+ROUTE-06,Routing,Admin Portal,Admin Operations Visual Console (/admin),Staging Container,PASS,None,HTTP 200 serves visual management dashboard,Verified admin route
+CAT-01,Catalog,Product Retrieval,Store API lists 4 active occasionwear products,Staging Container,PASS,None,Retrieved 4 items with images prices descriptions,Postgres catalog
+CAT-02,Catalog,Product Detail,Retrieve single product by ID (/store/products/waak-01),Staging Container,PASS,None,Retrieved Royal Ivory Embroidered Sherwani,Postgres catalog
+CAT-03,Catalog,Variant Sizing,Backend schema validates Indian chest sizes (38 40 42 44),Staging Container,PASS,None,Enforces sizes: 38 40 42 44,Postgres catalog
+BUG-01,Catalog,Sizing Selector,ProductDetail.tsx uses Western letter sizes S-XXL vs Indian chest sizes,Code Inspection,FAIL,High,Frontend sends size M causing HTTP 400 Bad Request,Critical checkout blocker
+BUG-02,Catalog,Product Data,Frontend mock data IDs (slugs) mismatch PostgreSQL relational IDs (waak-01),Code Inspection,FAIL,High,Requires brittle string matching during checkout,Data sync blocker
+BUG-03,Cart,Error Handling,Silent error swallowing in CheckoutModal on line-item failure,Code Inspection,FAIL,Medium,catch block swallows 400 leaving backend cart empty,UX defect
+BUG-04,Storefront,Media Assets,Remote Unsplash image dependencies without local fallback,Code Inspection,FAIL,Low,Assets fail if client is offline or rate-limited,Resilience defect
+AUTH-01,Authentication,Customer Register,Customer registration with valid email and password,Staging Container,PASS,None,HTTP 201 Created with JWT tokens,Verified bcrypt hashing
+AUTH-02,Authentication,Customer Register,Duplicate customer registration rejection,Staging Container,PASS,Low,HTTP 409 Conflict with duplicate email message,Unique constraint working
+AUTH-03,Authentication,Customer Register,Short password (< 6 characters) rejection,Staging Container,PASS,Medium,HTTP 400 Bad Request password length validation,Validation schema working
+AUTH-04,Authentication,Customer Login,Customer login with correct credentials,Staging Container,PASS,None,HTTP 200 returns valid access and refresh tokens,Session created
+AUTH-05,Authentication,Customer Login,Customer login with invalid password,Staging Container,PASS,Medium,HTTP 401 Unauthorized invalid credentials,Auth gate working
+AUTH-06,Authentication,Token Refresh,Refresh token rotation (/store/auth/refresh),Staging Container,PASS,None,HTTP 200 returns refreshed access token,JWT lifecycle working
+AUTH-07,Authentication,Customer Logout,Customer logout revokes refresh token,Staging Container,PASS,None,HTTP 200 deletes refresh token from database,Session revocation working
+AUTH-08,Authentication,Password Reset,Password reset request token generation and validation,Staging Container,PASS,None,HTTP 200 creates crypto reset token with 1h expiry,Security token working
+ADDR-01,Customer Profile,Shipping Address,Add shipping address to customer profile,Staging Container,PASS,None,HTTP 201 Created with address ID and customer link,Postgres persistence
+ADDR-02,Customer Profile,Shipping Address,List customer saved addresses,Staging Container,PASS,None,HTTP 200 returns array of customer addresses,Postgres persistence
+ADDR-03,Customer Profile,Shipping Address,Delete shipping address,Staging Container,PASS,None,HTTP 200 deletes address record,Postgres persistence
+SEC-ADDR-01,Security,IDOR Protection,Cross-customer address deletion blocked,Staging Container,PASS,High,Customer B cannot delete Customer A address (HTTP 404/403),Tenancy isolation working
+CART-01,Cart Operations,Cart Creation,Create empty shopping cart,Staging Container,PASS,None,HTTP 201 returns unique cart ID and zero total,Postgres persistence
+CART-02,Cart Operations,Line Items,Add line-item with valid size 40 to cart,Staging Container,PASS,None,HTTP 201 item added and subtotal recalculated,Postgres persistence
+CART-03,Cart Operations,Line Items,Update line-item quantity in cart,Staging Container,PASS,None,HTTP 200 updates quantity and recalculates totals,Postgres persistence
+CART-04,Cart Operations,Line Items,Remove line-item from cart,Staging Container,PASS,None,HTTP 200 removes item and recalculates subtotal,Postgres persistence
+CART-05,Cart Operations,Cart Merge,Merge anonymous guest cart into authenticated customer cart,Staging Container,PASS,None,HTTP 200 combines line-items seamlessly,Postgres persistence
+SEC-CART-01,Security,IDOR Protection,Cross-customer cart viewing isolation,Staging Container,PASS,Critical,HTTP 403 Forbidden when requesting other customer cart,Tenancy isolation working
+CHK-01,Checkout,Order Initiation,Initiate checkout from cart and generate Razorpay Order ID,Staging Container,PASS,None,HTTP 201 returns internal order ID and rzp_order_id,Razorpay test mode
+CHK-02,Checkout,Pricing Integrity,Server recalculates totals from database prices,Staging Container,PASS,Critical,Tampered client prices ignored server amounts enforced,Financial integrity working
+CHK-03,Checkout,Inventory Validation,Checkout fails if requested quantity exceeds stock,Staging Container,PASS,High,HTTP 400 Insufficient stock for requested variant,Inventory lock working
+PAY-01,Payments,Signature Verification,Cryptographic payment verification with valid HMAC-SHA256,Staging Container,PASS,None,HTTP 200 order status marked paid inventory decremented,Payment pipeline working
+PAY-02,Payments,Idempotency Guard,Replay payment verification does not double decrement inventory,Staging Container,PASS,High,HTTP 200 returns idempotent: true without double decrement,Financial integrity working
+PAY-03,Payments,Tampered Signature,Payment verification with forged signature rejected,Staging Container,PASS,Critical,HTTP 400 Invalid payment signature,Crypto verification working
+PAY-04,Payments,Webhook Ingestion,Razorpay payment.captured webhook with valid secret,Staging Container,PASS,None,HTTP 200 marks order paid and logs event,Webhook security working
+PAY-05,Payments,Unsigned Webhook,Webhook request without valid signature rejected,Staging Container,PASS,High,HTTP 400 Invalid or missing webhook signature,Webhook security working
+WSH-01,Wishlist,Add Item,Add product to customer wishlist,Staging Container,PASS,None,HTTP 201 item added to customer wishlist table,Postgres persistence
+WSH-02,Wishlist,List Items,List customer wishlist items across sessions,Staging Container,PASS,None,HTTP 200 returns saved wishlist products,Postgres persistence
+WSH-03,Wishlist,Remove Item,Remove product from customer wishlist,Staging Container,PASS,None,HTTP 200 removes item from wishlist table,Postgres persistence
+ADM-01,Admin Operations,Authentication,Admin authentication with atelier credentials,Staging Container,PASS,None,HTTP 200 returns admin JWT with role admin,Role management working
+ADM-02,Admin Operations,Analytics Dashboard,Retrieve atelier commerce revenue and order metrics,Staging Container,PASS,None,HTTP 200 returns total revenue orders customer counts,Analytics query working
+ADM-03,Admin Operations,Order Management,List all orders across customers for fulfillment,Staging Container,PASS,None,HTTP 200 returns order array with customer details,Admin query working
+ADM-04,Admin Operations,Fulfillment Update,Update order fulfillment status (processing fulfilled),Staging Container,PASS,None,HTTP 200 updates order status in PostgreSQL,Admin update working
+ADM-05,Admin Operations,Visual Console,Admin visual HTML dashboard served on /admin,Staging Container,PASS,None,HTTP 200 serves responsive management interface,Visual console working
+SEC-ADMIN-01,Security,Role Guard,Customer token accessing admin endpoint blocked,Staging Container,PASS,Critical,HTTP 403 Forbidden customer cannot access admin routes,Role boundary working
+SEC-SQLI-01,Security,Injection Defense,SQL injection resistance on catalog filter parameters,Staging Container,PASS,Critical,Parameterized queries prevent SQL injection payloads,SQLi security working
+SEC-RL-01,Security,Rate Limiting,Brute force login rate limiting triggers HTTP 429,Staging Container,PASS,Medium,HTTP 429 Too Many Requests on 11th consecutive attempt,Rate limiter working
+PERF-01,Performance,API Latency,Catalog API response latency under 100ms,Staging Container,PASS,Low,Average latency 3ms across 5 requests,Sub-10ms response
+PERF-02,Performance,Bundle Size,Frontend compiled bundle size (< 500KB JS < 100KB CSS),Local Dev,PASS,Low,JS: 311KB CSS: 32.4KB built in 959ms,Bundle optimization optimal
+UI-01,UI/UX,Curtain Reveal,Burgundy curtain opening animation smooth with centered logo,Browser/DOM,PASS,None,Smooth 1.2s cubic-bezier reveal session persisted,V3.2.1 baseline preserved
+UI-02,UI/UX,Navigation Header,WAAK typographic wordmark mathematically centered,Browser/DOM,PASS,None,Balanced left and right links across wide viewports,V3.2.1 baseline preserved
+UI-03,UI/UX,Category Nav,80px circular avatars with gold borders and hover scale,Browser/DOM,PASS,None,5 category circles with hover transitions,V3.2.1 baseline preserved
+UI-04,UI/UX,Product Cards,3:4.3 aspect ratio with image zoom and single SALE badge,Browser/DOM,PASS,None,Consistent height and baseline aligned pricing,V3.2.1 baseline preserved
+UI-05,UI/UX,Cart Drawer,Slide-out cart drawer with quantity adjustments and subtotal,Browser/DOM,PASS,None,Interactive drawer with immediate subtotal updates,V3.2.1 baseline preserved
+UI-06,UI/UX,Checkout Modal,Checkout modal with address inputs and Razorpay launcher,Browser/DOM,PASS,None,Tabbed modal with address collection,V3.2.1 baseline preserved
+GAP-01,Compliance,Footer Links,Footer legal links (Privacy Terms Care) are unlinked spans,Code Inspection,NOT IMPLEMENTED,Medium,Static spans without target pages or modals,Requires legal pages
+GAP-02,Feature,Newsletter,Newsletter subscription form displays preview toast,Code Inspection,NOT IMPLEMENTED,Low,No backend newsletter subscription endpoint,Requires newsletter API
+GAP-03,Operations,Notifications,Admin order status change triggers customer notification,Backend Inspection,NOT IMPLEMENTED,Low,DB status updates without automated email dispatch,Requires email queue
+EXT-01,External,Public DNS,Public domain DNS resolution (staging.waak.in),Staging Host,NOT TESTED,Info,Pending staging host public DNS provisioning,Requires DNS delegation
+EXT-02,External,TLS Certificate,Public TLS/SSL certificate issuance (Let's Encrypt),Staging Host,NOT TESTED,Info,Pending staging host reverse proxy setup,Requires live HTTPS
+EXT-03,External,Payment Gateway,Razorpay Live Merchant Payments,Production,NOT IMPLEMENTED,Info,Strictly prohibited during audit test mode active,Requires live merchant KYC

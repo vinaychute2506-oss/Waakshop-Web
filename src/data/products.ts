@@ -1,6 +1,17 @@
+export interface ProductVariant {
+  id: string
+  size: string
+  stock_quantity: number
+  price: number
+  sku?: string
+}
+
 export interface Product {
   id: string
+  slug: string
+  backendId?: string
   name: string
+  subtitle?: string
   price: number
   originalPrice?: number
   category: "Kurta Sets" | "Indian Wear" | "Suits & Blazers" | "Indo Western & Jodhpuri" | "Waistcoats"
@@ -14,6 +25,9 @@ export interface Product {
   description: string
   fabric: string
   shipping: string
+  availableSizes: string[]
+  variants?: ProductVariant[]
+  isAvailableInBackend: boolean
 }
 
 export const CATEGORIES = [
@@ -38,77 +52,97 @@ export const OCCASIONS = [
 
 export const PRICE_RANGES = [
   { label: "All prices", min: 0, max: Infinity },
-  { label: "Under ₹5,000", min: 0, max: 5000 },
-  { label: "₹5,000–₹10,000", min: 5000, max: 10000 },
-  { label: "₹10,000–₹20,000", min: 10000, max: 20000 },
-  { label: "₹20,000–₹30,000", min: 20000, max: 30000 },
-  { label: "Above ₹30,000", min: 30000, max: Infinity },
+  { label: "Under ₹25,000", min: 0, max: 25000 },
+  { label: "₹25,000–₹40,000", min: 25000, max: 40000 },
+  { label: "₹40,000–₹60,000", min: 40000, max: 60000 },
+  { label: "Above ₹60,000", min: 60000, max: Infinity },
 ] as const
 
 export const PRODUCTS: Product[] = [
   {
-    id: "ivory-embroidered-sherwani",
-    name: "IVORY EMBROIDERED SHERWANI",
-    price: 24500,
-    originalPrice: 28000,
+    id: "waak-01",
+    slug: "ivory-embroidered-sherwani",
+    backendId: "waak-01",
+    name: "THE IVORY ZARDOZI SHERWANI",
+    subtitle: "Handcrafted Heritage Couture with Fine Zardozi Wirework",
+    price: 49500,
+    originalPrice: 56000,
     category: "Indian Wear",
     subcategory: "Sherwanis",
     occasion: "Wedding",
     isNewArrival: true,
     isBestSeller: true,
+    isSale: false,
     image: "/assets/products/ivory-sherwani.jpg",
     gallery: [
       "/assets/products/ivory-sherwani.jpg",
       "https://framerusercontent.com/images/pp3GZI1GsZMhdrNjwaCDmI8enmQ.jpg?scale-down-to=1024&width=1200&height=1800",
       "https://framerusercontent.com/images/bPaPYk8Lc16P8C7iNgdwFWSYU.jpg?scale-down-to=1024&width=800&height=1067"
     ],
-    description: "Designed for the groom who commands authority. This ivory sherwani set features intricate tonal threadwork across the collar, front placket, and hem, finished with a hand-draped matching silk stole.",
-    fabric: "Raw silk blend, cotton silk lining, dry clean only.",
-    shipping: "Complimentary express shipping across India. Ships within 3-5 business days."
+    description: "A masterpiece of royal Indian occasionwear, spun from pure Banarasi silk and embellished with meticulous antique gold zardozi wirework along the mandarin collar and cuffs. Tailored to an architectural silhouette for the quintessential modern groom.",
+    fabric: "Raw Banarasi silk blend, cotton-silk inner lining, dry clean only.",
+    shipping: "Complimentary express insured shipping across India. Ships within 3-5 business days.",
+    availableSizes: ["38", "40", "42", "44"],
+    isAvailableInBackend: true,
   },
   {
-    id: "midnight-embellished-sherwani",
-    name: "MIDNIGHT EMBELLISHED SHERWANI",
-    price: 22800,
-    originalPrice: 26500,
+    id: "waak-02",
+    slug: "midnight-embellished-sherwani",
+    backendId: "waak-02",
+    name: "MIDNIGHT VELVET SHERWANI",
+    subtitle: "Regal Dark Navy Micro-Velvet with Tone-on-Tone Threadwork",
+    price: 54500,
+    originalPrice: 62000,
     category: "Indo Western & Jodhpuri",
     subcategory: "Indo Western",
     occasion: "Reception",
     isNewArrival: true,
     isBestSeller: true,
+    isSale: false,
     image: "/assets/products/midnight-sherwani.jpg",
     gallery: [
       "/assets/products/midnight-sherwani.jpg",
       "https://framerusercontent.com/images/bPaPYk8Lc16P8C7iNgdwFWSYU.jpg?scale-down-to=1024&width=800&height=1067"
     ],
-    description: "A regal midnight blue Indo-Western jacket with geometric tonal sequin embroidery, paired with a matching deep navy inner kurta and tailored trousers.",
-    fabric: "Matka silk & brocade, dry clean only.",
-    shipping: "Complimentary insured delivery. Custom tailoring available."
+    description: "Exquisitely sculpted in deep midnight-blue micro-velvet, featuring discreet tone-on-tone resham threadwork that catches the light with subtle sophistication. Paired with churidar trousers for high-evening receptions.",
+    fabric: "Matka silk & micro-velvet, dry clean only.",
+    shipping: "Complimentary insured delivery. Custom tailoring and bespoke fittings available.",
+    availableSizes: ["38", "40", "42", "44"],
+    isAvailableInBackend: true,
   },
   {
-    id: "mauve-bandhgala-set",
-    name: "MAUVE BANDHGALA SET",
-    price: 18900,
-    originalPrice: 21500,
+    id: "waak-03",
+    slug: "mauve-bandhgala-set",
+    backendId: "waak-03",
+    name: "MAUVE RAW SILK BANDHGALA",
+    subtitle: "Contemporary Jodhpuri Tailoring in Dusty Rose Raw Silk",
+    price: 38500,
+    originalPrice: 44000,
     category: "Indo Western & Jodhpuri",
     subcategory: "Bandhgala",
     occasion: "Cocktail",
     isNewArrival: true,
     isBestSeller: false,
+    isSale: false,
     image: "/assets/products/mauve-bandhgala.jpg",
     gallery: [
       "/assets/products/mauve-bandhgala.jpg",
       "https://framerusercontent.com/images/sEjecmCMpBNZkKUzeeEc98FYXIc.jpg?scale-down-to=1024&width=800&height=1422"
     ],
-    description: "Modern understated luxury in dusty mauve. Crafted in structured silk-wool blend with custom tone-on-tone buttons and sharp silhouette.",
-    fabric: "Wool-silk blend with viscose lining.",
-    shipping: "Ships in 3-5 business days in custom garment bag."
+    description: "Understated luxury defined. Cut from crisp Bhagalpur raw silk in a muted dusty mauve tone, accented with custom antique-brass buttons crafted in Varanasi. An elevated statement for Sangeet evenings and cocktail galas.",
+    fabric: "Bhagalpur raw silk-wool blend with breathable viscose lining.",
+    shipping: "Ships in 3-5 business days in custom garment bag.",
+    availableSizes: ["38", "40", "42", "44"],
+    isAvailableInBackend: true,
   },
   {
-    id: "emerald-kurta-set",
-    name: "EMERALD KURTA SET",
-    price: 16800,
-    originalPrice: 19500,
+    id: "waak-04",
+    slug: "emerald-kurta-set",
+    backendId: "waak-04",
+    name: "EMERALD TUSSAR SILK KURTA",
+    subtitle: "Artisanal Festive Kurta Set with Chanderi Dupatta",
+    price: 24500,
+    originalPrice: 29000,
     category: "Kurta Sets",
     subcategory: "Kurta Sets",
     occasion: "Festive",
@@ -120,12 +154,15 @@ export const PRODUCTS: Product[] = [
       "/assets/products/emerald-kurta.jpg",
       "https://framerusercontent.com/images/sEjecmCMpBNZkKUzeeEc98FYXIc.jpg?scale-down-to=1024&width=800&height=1422"
     ],
-    description: "Deep emerald silk kurta layered with a rich geometric brocade waistcoat, finished with mother-of-pearl buttons and tailored ivory churidar.",
+    description: "Deep jewel-toned emerald green Tussar silk kurta set highlighted with fine needlework details along the placket. Includes tailored ivory churidar and a matching Chanderi silk stole.",
     fabric: "Pure Banarasi woven silk and chanderi.",
-    shipping: "Complimentary delivery and free size exchange."
+    shipping: "Complimentary delivery and free size exchange.",
+    availableSizes: ["38", "40", "42", "44"],
+    isAvailableInBackend: true,
   },
   {
     id: "black-tailored-suit",
+    slug: "black-tailored-suit",
     name: "BLACK TAILORED SUIT",
     price: 18900,
     category: "Suits & Blazers",
@@ -138,10 +175,13 @@ export const PRODUCTS: Product[] = [
     ],
     description: "Masterfully tailored Italian wool blend two-piece suit with satin peak lapels and structured modern drop.",
     fabric: "Super 120s wool blend with satin lapels.",
-    shipping: "Ships in 4 business days."
+    shipping: "Ships in 4 business days.",
+    availableSizes: ["38", "40", "42", "44"],
+    isAvailableInBackend: false,
   },
   {
     id: "navy-waistcoat",
+    slug: "navy-waistcoat",
     name: "NAVY EMBROIDERED WAISTCOAT",
     price: 4900,
     category: "Waistcoats",
@@ -154,10 +194,13 @@ export const PRODUCTS: Product[] = [
     ],
     description: "Contemporary Nehru jacket in rich navy linen-silk featuring subtle floral hand-embroidery on the chest pocket.",
     fabric: "Linen silk with breathable cotton lining.",
-    shipping: "Ships in 24 hours."
+    shipping: "Ships in 24 hours.",
+    availableSizes: ["38", "40", "42", "44"],
+    isAvailableInBackend: false,
   },
   {
     id: "cream-occasion-kurta",
+    slug: "cream-occasion-kurta",
     name: "CREAM OCCASIONWEAR SET",
     price: 14500,
     category: "Kurta Sets",
@@ -170,10 +213,13 @@ export const PRODUCTS: Product[] = [
     ],
     description: "Pure chanderi silk kurta in soft cream with mirror-work accents and comfortable straight-cut pyjama trousers.",
     fabric: "Pure Chanderi silk, cotton voile inner.",
-    shipping: "Complimentary delivery."
+    shipping: "Complimentary delivery.",
+    availableSizes: ["38", "40", "42", "44"],
+    isAvailableInBackend: false,
   },
   {
     id: "regal-velvet-sherwani",
+    slug: "regal-velvet-sherwani",
     name: "EMBROIDERED CEREMONIAL SHERWANI",
     price: 32500,
     category: "Indian Wear",
@@ -186,10 +232,13 @@ export const PRODUCTS: Product[] = [
     ],
     description: "Deep wine micro-velvet sherwani embellished with antique zardozi and dabka embroidery, tailored for high heritage weddings.",
     fabric: "Micro-velvet with metallic thread hand embroidery.",
-    shipping: "Custom tailored and insured shipment."
+    shipping: "Custom tailored and insured shipment.",
+    availableSizes: ["38", "40", "42", "44"],
+    isAvailableInBackend: false,
   },
   {
     id: "black-waistcoat",
+    slug: "black-waistcoat",
     name: "BLACK CLASSIC WAISTCOAT",
     price: 6500,
     category: "Waistcoats",
@@ -202,6 +251,13 @@ export const PRODUCTS: Product[] = [
     ],
     description: "Jet black textured bandhgala waistcoat with brushed metallic buttons and clean minimalist silhouette.",
     fabric: "Textured poly-viscose with satin inner back.",
-    shipping: "Ships in 2-3 business days."
+    shipping: "Ships in 2-3 business days.",
+    availableSizes: ["38", "40", "42", "44"],
+    isAvailableInBackend: false,
   }
 ]
+
+export function findProduct(idOrSlug: string): Product | undefined {
+  if (!idOrSlug) return PRODUCTS[0]
+  return PRODUCTS.find((p) => p.id === idOrSlug || p.slug === idOrSlug || p.backendId === idOrSlug)
+}

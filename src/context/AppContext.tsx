@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react"
-import { Product, PRODUCTS } from "../data/products"
+import { Product, PRODUCTS, findProduct } from "../data/products"
 
 export interface CartItem {
   product: Product
@@ -43,7 +43,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const [selectedProductId, setSelectedProductId] = useState<string | null>(() => {
     const params = new URLSearchParams(window.location.search)
-    return params.get("id") || "ivory-embroidered-sherwani"
+    return params.get("id") || "waak-01"
   })
 
   const [activeCategory, setActiveCategory] = useState<string>("All")
@@ -59,9 +59,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [wishlist, setWishlist] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem("waak_wishlist")
-      return saved ? JSON.parse(saved) : ["ivory-embroidered-sherwani"]
+      return saved ? JSON.parse(saved) : ["waak-01"]
     } catch {
-      return ["ivory-embroidered-sherwani"]
+      return ["waak-01"]
     }
   })
 
@@ -117,11 +117,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
   const addToCart = (product: Product, size: string, qty: number = 1) => {
+    if (!size) {
+      console.warn("Cannot add item to bag: Valid size selection required.")
+      return
+    }
     setCart((prev) => {
-      const existing = prev.find((item) => item.product.id === product.id && item.size === size)
+      const matchItem = (item: CartItem) =>
+        (item.product.id === product.id || item.product.slug === product.slug) && item.size === size
+
+      const existing = prev.find(matchItem)
       if (existing) {
         return prev.map((item) =>
-          item.product.id === product.id && item.size === size
+          matchItem(item)
             ? { ...item, quantity: item.quantity + qty }
             : item
         )
@@ -138,7 +145,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     setCart((prev) =>
       prev.map((item) =>
-        item.product.id === productId && item.size === size
+        (item.product.id === productId || item.product.slug === productId) && item.size === size
           ? { ...item, quantity }
           : item
       )
@@ -146,7 +153,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
   const removeFromCart = (productId: string, size: string) => {
-    setCart((prev) => prev.filter((item) => !(item.product.id === productId && item.size === size)))
+    setCart((prev) =>
+      prev.filter((item) => !((item.product.id === productId || item.product.slug === productId) && item.size === size))
+    )
   }
 
   const clearCart = () => {
@@ -161,7 +170,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0)
   const wishlistCount = wishlist.length
-  const selectedProduct = PRODUCTS.find((p) => p.id === selectedProductId) || PRODUCTS[0]
+  const selectedProduct = findProduct(selectedProductId || "waak-01") || PRODUCTS[0]
 
   return (
     <AppContext.Provider

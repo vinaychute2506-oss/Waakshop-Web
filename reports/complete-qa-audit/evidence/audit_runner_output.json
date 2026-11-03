@@ -1,0 +1,322 @@
+[
+  {
+    "testId": "INFRA-01",
+    "category": "Infrastructure",
+    "scenario": "Local API /health endpoint responds 200 OK",
+    "env": "local",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "Status 200 in 92ms  DB connected",
+    "notes": ""
+  },
+  {
+    "testId": "INFRA-02",
+    "category": "Infrastructure",
+    "scenario": "Staging container /health responds 200 with test payment mode",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "Status 200  env=staging  isTestPaymentMode=true in 7ms",
+    "notes": ""
+  },
+  {
+    "testId": "INFRA-03",
+    "category": "Infrastructure",
+    "scenario": "Local Vite dev server serves HTML on port 5173",
+    "env": "local",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "HTTP 200 in 5ms",
+    "notes": ""
+  },
+  {
+    "testId": "INFRA-04",
+    "category": "Infrastructure",
+    "scenario": "Staging Nginx container serves HTML on port 8088",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "HTTP 200 in 8ms  Server: nginx/1.31.8",
+    "notes": ""
+  },
+  {
+    "testId": "ROUTE-_",
+    "category": "Frontend Routes",
+    "scenario": "Direct navigation to Homepage (/)",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "HTTP 200 SPA fallback renders root container in 2ms",
+    "notes": ""
+  },
+  {
+    "testId": "ROUTE-_product",
+    "category": "Frontend Routes",
+    "scenario": "Direct navigation to Product Detail (/product)",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "HTTP 200 SPA fallback renders root container in 3ms",
+    "notes": ""
+  },
+  {
+    "testId": "ROUTE-_account",
+    "category": "Frontend Routes",
+    "scenario": "Direct navigation to Customer Account (/account)",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "HTTP 200 SPA fallback renders root container in 2ms",
+    "notes": ""
+  },
+  {
+    "testId": "ROUTE-_collections_sherwanis",
+    "category": "Frontend Routes",
+    "scenario": "Direct navigation to SPA Client Subroute (/collections/sherwanis)",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "HTTP 200 SPA fallback renders root container in 2ms",
+    "notes": ""
+  },
+  {
+    "testId": "ROUTE-_nonexistent_404_route",
+    "category": "Frontend Routes",
+    "scenario": "Direct navigation to Unknown Client Route (/nonexistent-404-route)",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "HTTP 200 SPA fallback renders root container in 3ms",
+    "notes": ""
+  },
+  {
+    "testId": "ROUTE-admin-portal",
+    "category": "Frontend Routes",
+    "scenario": "Admin Operations Visual Console (/admin)",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "HTTP 200 in 3ms",
+    "notes": ""
+  },
+  {
+    "testId": "CAT-01",
+    "category": "Catalog",
+    "scenario": "API returns 4 occasionwear products",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "Retrieved 4 products in 8ms",
+    "notes": ""
+  },
+  {
+    "testId": "CAT-02",
+    "category": "Catalog",
+    "scenario": "Backend variant sizing model uses Indian occasionwear chest sizes",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "Backend sizes: 38  40  42  44",
+    "notes": ""
+  },
+  {
+    "testId": "BUG-01",
+    "category": "Catalog & Sizing Discrepancy",
+    "scenario": "ProductDetail.tsx uses Western letter sizes (S, M, L, XL, XXL) while backend strictly requires (38, 40, 42, 44)",
+    "env": "code-inspection",
+    "status": "FAIL",
+    "severity": "High",
+    "evidence": "Confirmed in src/ProductDetail.tsx:16. Selecting default size M triggers HTTP 400 Bad Request at checkout line-item creation.",
+    "notes": "Blocks customer checkout if product added via ProductDetail page without manual override."
+  },
+  {
+    "testId": "AUTH-01",
+    "category": "Authentication",
+    "scenario": "Customer registration with valid credentials",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "Status 201",
+    "notes": ""
+  },
+  {
+    "testId": "AUTH-02",
+    "category": "Authentication",
+    "scenario": "Duplicate account registration rejection",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "Low",
+    "evidence": "Status 409 (409 Conflict)",
+    "notes": ""
+  },
+  {
+    "testId": "AUTH-03",
+    "category": "Authentication",
+    "scenario": "Short password (< 6 chars) rejection",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "Medium",
+    "evidence": "Status 400",
+    "notes": ""
+  },
+  {
+    "testId": "ADDR-01",
+    "category": "Customer Account",
+    "scenario": "Add shipping address to customer profile",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "Address created with ID: addr_1793703687128_eexq",
+    "notes": ""
+  },
+  {
+    "testId": "SEC-ADDR-01",
+    "category": "Security",
+    "scenario": "Cross-customer address deletion isolation",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "High",
+    "evidence": "Customer B cannot delete Customer A address",
+    "notes": ""
+  },
+  {
+    "testId": "CART-01",
+    "category": "Shopping Cart",
+    "scenario": "Cart creation and customer association",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "Cart ID: cart_1793703687142_vuiqz",
+    "notes": ""
+  },
+  {
+    "testId": "CART-02",
+    "category": "Shopping Cart",
+    "scenario": "Add item with size 40 to cart",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "Subtotal: 99000",
+    "notes": ""
+  },
+  {
+    "testId": "SEC-CART-01",
+    "category": "Security",
+    "scenario": "Cross-customer cart viewing isolation",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "Critical",
+    "evidence": "Status: 403 Forbidden",
+    "notes": ""
+  },
+  {
+    "testId": "CHK-01",
+    "category": "Checkout",
+    "scenario": "Initiate checkout and generate Razorpay Order ID",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "Order: order_1793703687163_gtl3w  RZP: rzp_order_1793703687164",
+    "notes": ""
+  },
+  {
+    "testId": "PAY-01",
+    "category": "Payments",
+    "scenario": "Cryptographic payment verification and order status captured",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "None",
+    "evidence": "Order status: paid",
+    "notes": ""
+  },
+  {
+    "testId": "PAY-02",
+    "category": "Payments",
+    "scenario": "Payment verification idempotency guard (no double decrement)",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "High",
+    "evidence": "Idempotent flag: true",
+    "notes": ""
+  },
+  {
+    "testId": "SEC-ADMIN-01",
+    "category": "Security",
+    "scenario": "Customer token accessing admin endpoint blocked",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "Critical",
+    "evidence": "Status: 403 Forbidden",
+    "notes": ""
+  },
+  {
+    "testId": "SEC-SQLI-01",
+    "category": "Security",
+    "scenario": "SQL injection resistance on product filter parameters",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "Critical",
+    "evidence": "Parameterized query prevented injection; returned 0 matching categories",
+    "notes": ""
+  },
+  {
+    "testId": "SEC-RL-01",
+    "category": "Security",
+    "scenario": "Brute force login rate limiting (HTTP 429)",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "Medium",
+    "evidence": "Rate limit triggered HTTP 429: true",
+    "notes": ""
+  },
+  {
+    "testId": "PERF-01",
+    "category": "Performance",
+    "scenario": "Catalog API latency (< 100ms)",
+    "env": "staging",
+    "status": "PASS",
+    "severity": "Low",
+    "evidence": "Average latency: 3ms across 5 requests",
+    "notes": ""
+  },
+  {
+    "testId": "PERF-02",
+    "category": "Performance",
+    "scenario": "Frontend compiled bundle size (< 500KB JS, < 100KB CSS)",
+    "env": "local",
+    "status": "PASS",
+    "severity": "Low",
+    "evidence": "JS: 311KB  CSS: 32KB",
+    "notes": ""
+  },
+  {
+    "testId": "EXT-01",
+    "category": "External Environment",
+    "scenario": "Public domain DNS resolution (staging.waak.in)",
+    "env": "staging-host",
+    "status": "NOT TESTED",
+    "severity": "Info",
+    "evidence": "Pending staging host public DNS provisioning",
+    "notes": ""
+  },
+  {
+    "testId": "EXT-02",
+    "category": "External Environment",
+    "scenario": "Public TLS/SSL certificate issuance (Let's Encrypt)",
+    "env": "staging-host",
+    "status": "NOT TESTED",
+    "severity": "Info",
+    "evidence": "Pending staging host HTTPS reverse proxy",
+    "notes": ""
+  },
+  {
+    "testId": "EXT-03",
+    "category": "External Environment",
+    "scenario": "Razorpay Live Merchant Payments",
+    "env": "production",
+    "status": "NOT IMPLEMENTED",
+    "severity": "Info",
+    "evidence": "Strictly prohibited in Phase 2.3; sandbox mode active",
+    "notes": ""
+  }
+]
