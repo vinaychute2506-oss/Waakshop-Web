@@ -738,7 +738,10 @@ export default function ProductDetail() {
                 <div className="pdp-accordion-body">
                   <p>{product.shipping}</p>
                   <p style={{ marginTop: '8px' }}>
-                    <strong>Bespoke Fitting Guarantee:</strong> Every piece includes complimentary master-tailor consultation and size alteration if needed upon arrival.
+                    <strong>Bespoke Fitting Guidance:</strong> Every piece includes master-tailor consultation and custom alteration support upon arrival.
+                  </p>
+                  <p style={{ marginTop: '6px', fontSize: '11px', color: 'var(--color-charcoal-muted)' }}>
+                    <em>* Note: Courier transit windows and insurance representations represent draft operational standards subject to carrier partner confirmation.</em>
                   </p>
                 </div>
               )}
@@ -783,7 +786,7 @@ export default function ProductDetail() {
             {
               id: "faq-exchange",
               question: "What is the return and exchange policy?",
-              answer: "We provide a 7-day complimentary bespoke exchange and alteration service on unworn garments with atelier seals intact. Archival or made-to-measure bespoke commissions are customized specifically for the patron."
+              answer: "Under our draft exchange terms (subject to final business confirmation), we offer a 7-day bespoke exchange and alteration window for unworn standard sizes with atelier seals intact. Custom-tailored or altered ensembles are crafted exclusively for the patron. Please consult our draft Returns & Exchanges Policy for details."
             }
           ].map((faq) => {
             const isOpen = openFaq === faq.id

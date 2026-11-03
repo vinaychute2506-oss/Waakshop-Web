@@ -28,8 +28,8 @@ export default function PolicyView({ route }: PolicyViewProps) {
   const renderNotice = (topic: string) => (
     <div
       style={{
-        backgroundColor: "rgba(197, 162, 101, 0.08)",
-        border: "1px solid rgba(197, 162, 101, 0.35)",
+        backgroundColor: "rgba(197, 162, 101, 0.12)",
+        border: "1.5px solid var(--color-gold)",
         borderRadius: "var(--radius-sm)",
         padding: "16px 20px",
         marginBottom: "32px",
@@ -38,13 +38,13 @@ export default function PolicyView({ route }: PolicyViewProps) {
         gap: "12px",
       }}
     >
-      <span style={{ color: "var(--color-gold)", fontSize: "16px", marginTop: "2px" }}>◈</span>
+      <span style={{ color: "var(--color-burgundy)", fontSize: "16px", marginTop: "2px" }}>⚠</span>
       <div style={{ fontSize: "12px", lineHeight: "1.7", color: "var(--color-burgundy)" }}>
-        <strong style={{ letterSpacing: "0.05em", textTransform: "uppercase" }}>
-          Legal & Business Review Status:
+        <strong style={{ letterSpacing: "0.06em", textTransform: "uppercase" }}>
+          Legal & Business Review Status: Unapproved Draft Policy (Pending Corporate Confirmation) —
         </strong>{" "}
-        This document represents the {topic} draft prepared for technical compliance and client review.
-        Commercial terms, partner logistics service-level agreements, and statutory corporate details are subject to formal confirmation prior to commercial activation.
+        This document represents an unapproved internal draft of the {topic} prepared for technical compliance and client review.
+        Commercial terms (including return/exchange timeframes, express dispatch guarantees, transit insurance) and statutory corporate details remain unconfirmed and are not legally binding until formal executive sign-off prior to commercial activation.
       </div>
     </div>
   )
@@ -360,6 +360,8 @@ export default function PolicyView({ route }: PolicyViewProps) {
                 Curated by WAAK Master Artisans & Weavers
               </p>
             </div>
+
+            {renderNotice("Garment Care & Fabric Preservation Guidelines")}
 
             <section style={{ marginBottom: "28px" }}>
               <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "20px", color: "var(--color-burgundy)", marginBottom: "12px" }}>

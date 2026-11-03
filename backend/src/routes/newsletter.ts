@@ -66,4 +66,40 @@ router.post('/', newsletterRateLimiter, async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * POST /store/newsletter/unsubscribe
+ * Unsubscribes a patron from private curation
+ */
+router.post('/unsubscribe', newsletterRateLimiter, async (req: Request, res: Response) => {
+  try {
+    const rawEmail = req.body?.email;
+    if (!rawEmail || typeof rawEmail !== 'string') {
+      res.status(400).json({ error: 'A valid email address is required.' });
+      return;
+    }
+
+    const email = rawEmail.trim().toLowerCase();
+    if (!email || !EMAIL_REGEX.test(email)) {
+      res.status(400).json({ error: 'Please provide a valid email format.' });
+      return;
+    }
+
+    const result = await pool.query(
+      `UPDATE newsletter_subscribers
+       SET status = 'unsubscribed', updated_at = NOW()
+       WHERE email = $1`,
+      [email]
+    );
+
+    res.json({
+      success: true,
+      message: 'You have been unsubscribed from WAAK private atelier curation.',
+      updated: (result.rowCount ?? 0) > 0,
+    });
+  } catch (error: any) {
+    console.error('Newsletter unsubscribe error:', error.message || 'Database error');
+    res.status(500).json({ error: 'An error occurred while updating your subscription.' });
+  }
+});
+
 export default router;

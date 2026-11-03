@@ -356,6 +356,10 @@ export default function Footer() {
                   <span>{feedback.message}</span>
                 </div>
               )}
+
+              <p style={{ fontSize: "10.5px", color: "rgba(244, 239, 230, 0.55)", marginTop: "6px", lineHeight: "1.4" }}>
+                By submitting, you consent to receive seasonal atelier invitations. Unsubscribe anytime via our <button type="button" onClick={() => navigateTo("/privacy-policy")} style={{ background: "none", border: "none", color: "var(--color-gold-light)", textDecoration: "underline", padding: 0, fontSize: "inherit", cursor: "pointer" }}>Privacy Policy</button>.
+              </p>
             </form>
           </div>
         </div>
