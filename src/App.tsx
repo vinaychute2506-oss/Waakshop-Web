@@ -8,6 +8,7 @@ import CheckoutModal from "./components/CheckoutModal"
 import Home from "./Home"
 import ProductDetail from "./ProductDetail"
 import Account from "./Account"
+import PolicyView from "./components/PolicyView"
 
 function MainContent() {
   const { currentRoute, isCheckoutOpen, setIsCheckoutOpen } = useApp()
@@ -96,6 +97,14 @@ function MainContent() {
         {currentRoute === "/account" && <Account />}
         {currentRoute === "/product" && <ProductDetail />}
         {currentRoute === "/" && <Home />}
+        {[
+          "/privacy-policy",
+          "/terms-of-service",
+          "/shipping-policy",
+          "/returns-and-exchanges",
+          "/care-and-preservation",
+          "/contact",
+        ].includes(currentRoute) && <PolicyView route={currentRoute} />}
       </main>
 
       <Footer />

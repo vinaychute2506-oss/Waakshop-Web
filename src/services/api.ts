@@ -221,4 +221,14 @@ export const api = {
       });
     },
   },
+
+  // Newsletter
+  newsletter: {
+    async subscribe(email: string, source: string = 'footer') {
+      return request<{ success: boolean; message: string; duplicate?: boolean }>('/store/newsletter', {
+        method: 'POST',
+        body: JSON.stringify({ email, source }),
+      });
+    },
+  },
 };

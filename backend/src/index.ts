@@ -10,6 +10,7 @@ import cartRoutes from './routes/carts';
 import checkoutRoutes from './routes/checkout';
 import orderRoutes from './routes/orders';
 import wishlistRoutes from './routes/wishlist';
+import newsletterRoutes from './routes/newsletter';
 import adminRoutes from './routes/admin';
 import { adminDashboardHtml } from './admin/adminHtml';
 
@@ -89,6 +90,7 @@ app.use('/store/carts', cartRoutes);
 app.use('/store', checkoutRoutes);
 app.use('/store/orders', orderRoutes);
 app.use('/store/wishlist', wishlistRoutes);
+app.use('/store/newsletter', newsletterRoutes);
 app.use('/admin', adminRoutes);
 
 // Global Error Handler (Sanitizes error details in production/staging)

@@ -7,6 +7,7 @@ interface RateLimitRecord {
 
 const loginAttempts = new Map<string, RateLimitRecord>();
 const registerAttempts = new Map<string, RateLimitRecord>();
+const newsletterAttempts = new Map<string, RateLimitRecord>();
 
 function cleanExpiredRecords(map: Map<string, RateLimitRecord>) {
   const now = Date.now();
@@ -21,6 +22,7 @@ function cleanExpiredRecords(map: Map<string, RateLimitRecord>) {
 setInterval(() => {
   cleanExpiredRecords(loginAttempts);
   cleanExpiredRecords(registerAttempts);
+  cleanExpiredRecords(newsletterAttempts);
 }, 5 * 60 * 1000);
 
 export function loginRateLimiter(req: Request, res: Response, next: NextFunction): void {
@@ -76,3 +78,29 @@ export function registerRateLimiter(req: Request, res: Response, next: NextFunct
   record.count += 1;
   next();
 }
+
+export function newsletterRateLimiter(req: Request, res: Response, next: NextFunction): void {
+  const ip = req.ip || req.socket.remoteAddress || 'unknown';
+  const now = Date.now();
+  const windowMs = 10 * 60 * 1000; // 10 minutes
+  const maxAttempts = 30;
+
+  const record = newsletterAttempts.get(ip);
+
+  if (!record || now > record.resetTime) {
+    newsletterAttempts.set(ip, { count: 1, resetTime: now + windowMs });
+    next();
+    return;
+  }
+
+  if (record.count >= maxAttempts) {
+    res.status(429).json({
+      error: 'Too many newsletter subscription requests from this network. Please try again later.',
+    });
+    return;
+  }
+
+  record.count += 1;
+  next();
+}
+

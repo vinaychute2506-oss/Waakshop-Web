@@ -39,12 +39,26 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
+const VALID_POLICY_ROUTES = [
+  "/privacy-policy",
+  "/terms-of-service",
+  "/shipping-policy",
+  "/returns-and-exchanges",
+  "/care-and-preservation",
+  "/contact",
+]
+
+function resolveRoute(path: string): string {
+  if (path.includes("account")) return "/account"
+  if (path.includes("product")) return "/product"
+  const matchedPolicy = VALID_POLICY_ROUTES.find((r) => path.includes(r.replace("/", "")))
+  if (matchedPolicy) return matchedPolicy
+  return "/"
+}
+
 export function AppProvider({ children }: { children: ReactNode }) {
   const [currentRoute, setCurrentRoute] = useState<string>(() => {
-    const path = window.location.pathname
-    if (path.includes("account")) return "/account"
-    if (path.includes("product")) return "/product"
-    return "/"
+    return resolveRoute(window.location.pathname)
   })
 
   const [selectedProductId, setSelectedProductId] = useState<string | null>(() => {
@@ -168,13 +182,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname
-      if (path.includes("account")) setCurrentRoute("/account")
-      else if (path.includes("product")) {
-        setCurrentRoute("/product")
+      const resolved = resolveRoute(path)
+      setCurrentRoute(resolved)
+      if (resolved === "/product") {
         const params = new URLSearchParams(window.location.search)
         if (params.get("id")) setSelectedProductId(params.get("id"))
-      } else {
-        setCurrentRoute("/")
       }
     }
     window.addEventListener("popstate", handlePopState)
