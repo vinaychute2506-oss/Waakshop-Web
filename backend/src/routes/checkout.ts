@@ -216,14 +216,32 @@ router.post('/payment/razorpay/verify', async (req: Request, res: Response) => {
       return;
     }
 
-    // 2. Decrement Stock Inventory
+    // 2. Decrement Stock Inventory with Row Locks & Sufficiency Check
     const itemsRes = await client.query('SELECT * FROM order_items WHERE order_id = $1', [order_id]);
     for (const item of itemsRes.rows) {
       if (item.variant_id) {
+        const variantLock = await client.query(
+          'SELECT stock_quantity, title, size FROM product_variants WHERE id = $1 FOR UPDATE',
+          [item.variant_id]
+        );
+
+        if (variantLock.rows.length === 0) {
+          await client.query('ROLLBACK');
+          res.status(404).json({ error: `Variant ${item.variant_id} no longer exists in Atelier catalog.` });
+          return;
+        }
+
+        const currentStock = variantLock.rows[0].stock_quantity;
+        if (currentStock < item.quantity) {
+          await client.query('ROLLBACK');
+          res.status(409).json({
+            error: `Insufficient stock for ${item.title} (Size ${item.size}). Available: ${currentStock}, Required: ${item.quantity}`,
+          });
+          return;
+        }
+
         await client.query(
-          `UPDATE product_variants
-           SET stock_quantity = GREATEST(0, stock_quantity - $1)
-           WHERE id = $2`,
+          'UPDATE product_variants SET stock_quantity = stock_quantity - $1 WHERE id = $2',
           [item.quantity, item.variant_id]
         );
       }
@@ -305,10 +323,16 @@ router.post('/payment/razorpay/webhook', async (req: Request, res: Response) => 
               const itemsRes = await client.query('SELECT * FROM order_items WHERE order_id = $1', [ordId]);
               for (const item of itemsRes.rows) {
                 if (item.variant_id) {
-                  await client.query(
-                    'UPDATE product_variants SET stock_quantity = GREATEST(0, stock_quantity - $1) WHERE id = $2',
-                    [item.quantity, item.variant_id]
+                  const variantLock = await client.query(
+                    'SELECT stock_quantity FROM product_variants WHERE id = $1 FOR UPDATE',
+                    [item.variant_id]
                   );
+                  if (variantLock.rows.length > 0 && variantLock.rows[0].stock_quantity >= item.quantity) {
+                    await client.query(
+                      'UPDATE product_variants SET stock_quantity = stock_quantity - $1 WHERE id = $2',
+                      [item.quantity, item.variant_id]
+                    );
+                  }
                 }
               }
               await client.query(

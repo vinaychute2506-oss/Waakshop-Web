@@ -123,6 +123,22 @@ async function runTests() {
       body: JSON.stringify({ customer_id: customerId }),
     });
 
+    // 7b. Invalid Size Rejection Check
+    const badSizeRes = await fetch(`${BASE_URL}/store/carts/${cartId}/line-items`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ product_id: 'waak-01', size: '56', quantity: 1 }),
+    });
+    assert(badSizeRes.status === 400, 'Invalid size (56) rejected with HTTP 400 Bad Request');
+
+    // 7c. Invalid Quantity Rejection Check
+    const badQtyRes = await fetch(`${BASE_URL}/store/carts/${cartId}/line-items`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ product_id: 'waak-01', size: '40', quantity: 99 }),
+    });
+    assert(badQtyRes.status === 400, 'Excessive quantity (99) rejected with HTTP 400 Bad Request');
+
     // 8. Add Line Item with Size 40
     const addItemRes = await fetch(`${BASE_URL}/store/carts/${cartId}/line-items`, {
       method: 'POST',

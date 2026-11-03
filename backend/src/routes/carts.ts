@@ -116,6 +116,18 @@ router.post('/:id/line-items', async (req: Request, res: Response) => {
       return;
     }
 
+    const validSizes = ['38', '40', '42', '44'];
+    if (!validSizes.includes(String(size))) {
+      res.status(400).json({ error: `Invalid size '${size}'. Valid occasionwear sizes are 38, 40, 42, 44.` });
+      return;
+    }
+
+    const parsedQty = parseInt(quantity, 10);
+    if (isNaN(parsedQty) || parsedQty <= 0 || parsedQty > 10) {
+      res.status(400).json({ error: 'Quantity must be between 1 and 10 pieces per garment.' });
+      return;
+    }
+
     // Verify product and variant
     const variantRes = await pool.query(
       `SELECT v.*, p.price as product_price
