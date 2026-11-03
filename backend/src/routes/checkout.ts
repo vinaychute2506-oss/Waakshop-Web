@@ -149,6 +149,14 @@ router.post('/carts/:id/checkout', optionalCustomerAuth, async (req: Request, re
   }
 });
 
+function safeCompare(a: string, b: string): boolean {
+  if (!a || !b) return false;
+  const bufA = Buffer.from(a);
+  const bufB = Buffer.from(b);
+  if (bufA.length !== bufB.length) return false;
+  return crypto.timingSafeEqual(bufA, bufB);
+}
+
 // POST /store/payment/razorpay/verify
 router.post('/payment/razorpay/verify', async (req: Request, res: Response) => {
   const client = await pool.connect();
@@ -168,7 +176,7 @@ router.post('/payment/razorpay/verify', async (req: Request, res: Response) => {
         .update(`${razorpay_order_id}|${razorpay_payment_id}`)
         .digest('hex');
 
-      isValid = generatedSignature === razorpay_signature;
+      isValid = safeCompare(generatedSignature, razorpay_signature);
     }
 
     // In local dev test mode, accept mock signature format as well
@@ -183,8 +191,8 @@ router.post('/payment/razorpay/verify', async (req: Request, res: Response) => {
 
     await client.query('BEGIN');
 
-    // 1. Fetch Order and Items
-    const orderRes = await client.query('SELECT * FROM orders WHERE id = $1', [order_id]);
+    // 1. Fetch Order and Items with Row Lock
+    const orderRes = await client.query('SELECT * FROM orders WHERE id = $1 FOR UPDATE', [order_id]);
     if (orderRes.rows.length === 0) {
       await client.query('ROLLBACK');
       res.status(404).json({ error: 'Order not found' });
@@ -192,6 +200,21 @@ router.post('/payment/razorpay/verify', async (req: Request, res: Response) => {
     }
 
     const order = orderRes.rows[0];
+
+    // IDEMPOTENCY GUARD: If order is already paid, return confirmed order without double-decrementing stock!
+    if (order.payment_status === 'captured') {
+      await client.query('ROLLBACK');
+      const itemsRes = await pool.query('SELECT * FROM order_items WHERE order_id = $1', [order_id]);
+      res.json({
+        success: true,
+        order: {
+          ...order,
+          items: itemsRes.rows,
+        },
+        idempotent: true,
+      });
+      return;
+    }
 
     // 2. Decrement Stock Inventory
     const itemsRes = await client.query('SELECT * FROM order_items WHERE order_id = $1', [order_id]);
@@ -234,6 +257,7 @@ router.post('/payment/razorpay/verify', async (req: Request, res: Response) => {
         ...updatedOrderRes.rows[0],
         items: itemsRes.rows,
       },
+      idempotent: false,
     });
   } catch (error: any) {
     await client.query('ROLLBACK');
@@ -251,10 +275,12 @@ router.post('/payment/razorpay/webhook', async (req: Request, res: Response) => 
     const secret = process.env.RAZORPAY_WEBHOOK_SECRET || 'waak_webhook_secret_2026';
 
     if (signature) {
-      const shasum = crypto.createHmac('sha256', secret);
-      shasum.update(JSON.stringify(req.body));
-      const digest = shasum.digest('hex');
-      if (digest !== signature) {
+      const rawPayload = (req as any).rawBody
+        ? (req as any).rawBody.toString('utf8')
+        : JSON.stringify(req.body);
+
+      const digest = crypto.createHmac('sha256', secret).update(rawPayload).digest('hex');
+      if (!safeCompare(digest, signature)) {
         res.status(400).json({ error: 'Invalid webhook signature' });
         return;
       }
@@ -267,12 +293,41 @@ router.post('/payment/razorpay/webhook', async (req: Request, res: Response) => 
       const paymentEntity = req.body.payload?.payment?.entity;
       const rzpOrderId = paymentEntity?.order_id;
       if (rzpOrderId) {
-        await pool.query(
-          `UPDATE orders
-           SET status = 'paid', payment_status = 'captured', updated_at = NOW()
-           WHERE id IN (SELECT order_id FROM payments WHERE razorpay_order_id = $1)`,
-          [rzpOrderId]
-        );
+        const client = await pool.connect();
+        try {
+          await client.query('BEGIN');
+          const payRes = await client.query('SELECT order_id FROM payments WHERE razorpay_order_id = $1', [rzpOrderId]);
+          if (payRes.rows.length > 0) {
+            const ordId = payRes.rows[0].order_id;
+            const ordRes = await client.query('SELECT * FROM orders WHERE id = $1 FOR UPDATE', [ordId]);
+            if (ordRes.rows.length > 0 && ordRes.rows[0].payment_status !== 'captured') {
+              // Decrement stock idempotently
+              const itemsRes = await client.query('SELECT * FROM order_items WHERE order_id = $1', [ordId]);
+              for (const item of itemsRes.rows) {
+                if (item.variant_id) {
+                  await client.query(
+                    'UPDATE product_variants SET stock_quantity = GREATEST(0, stock_quantity - $1) WHERE id = $2',
+                    [item.quantity, item.variant_id]
+                  );
+                }
+              }
+              await client.query(
+                "UPDATE orders SET status = 'paid', payment_status = 'captured', updated_at = NOW() WHERE id = $1",
+                [ordId]
+              );
+              await client.query(
+                "UPDATE payments SET status = 'captured' WHERE order_id = $1",
+                [ordId]
+              );
+            }
+          }
+          await client.query('COMMIT');
+        } catch (txnErr) {
+          await client.query('ROLLBACK');
+          throw txnErr;
+        } finally {
+          client.release();
+        }
       }
     }
 

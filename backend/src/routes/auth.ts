@@ -3,12 +3,13 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { pool } from '../db';
 import { customerAuth } from '../middleware/auth';
+import { loginRateLimiter, registerRateLimiter } from '../middleware/rateLimiter';
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'waak_luxury_jwt_secret_key_2026_super_secure';
 
 // POST /auth/customer/register
-router.post('/customer/register', async (req: Request, res: Response) => {
+router.post('/customer/register', registerRateLimiter, async (req: Request, res: Response) => {
   try {
     const { email, password, first_name = '', last_name = '', phone = '' } = req.body;
 
@@ -59,7 +60,7 @@ router.post('/customer/register', async (req: Request, res: Response) => {
 });
 
 // POST /auth/customer/login
-router.post('/customer/login', async (req: Request, res: Response) => {
+router.post('/customer/login', loginRateLimiter, async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 

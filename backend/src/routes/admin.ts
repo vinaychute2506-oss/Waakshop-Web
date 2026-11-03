@@ -7,12 +7,22 @@ import { adminAuth } from '../middleware/auth';
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'waak_luxury_jwt_secret_key_2026_super_secure';
 
+import { loginRateLimiter } from '../middleware/rateLimiter';
+
 // POST /admin/auth/token
-router.post('/auth/token', async (req: Request, res: Response) => {
+router.post('/auth/token', loginRateLimiter, async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
       res.status(400).json({ error: 'Email and password required' });
+      return;
+    }
+
+    // Production credential hardening guard
+    if (process.env.NODE_ENV === 'production' && password === 'waakAdmin2026!') {
+      res.status(403).json({
+        error: 'Default development credentials prohibited in production mode. Set ADMIN_PASSWORD in environment.',
+      });
       return;
     }
 

@@ -174,12 +174,22 @@ router.post('/:id/line-items', async (req: Request, res: Response) => {
 });
 
 // POST /store/carts/:id/line-items/:line_id
-router.post('/:id/line-items/:line_id', async (req: Request, res: Response) => {
+router.post('/:id/line-items/:line_id', optionalCustomerAuth, async (req: Request, res: Response) => {
   try {
     const cartId = String(req.params.id);
     const lineId = String(req.params.line_id);
     const { quantity } = req.body;
     const newQty = parseInt(quantity, 10);
+
+    const cartOwnerRes = await pool.query('SELECT customer_id FROM carts WHERE id = $1', [cartId]);
+    if (cartOwnerRes.rows.length === 0) {
+      res.status(404).json({ error: 'Cart not found' });
+      return;
+    }
+    if (cartOwnerRes.rows[0].customer_id && (!req.customer || req.customer.id !== cartOwnerRes.rows[0].customer_id)) {
+      res.status(403).json({ error: 'Access denied: You do not have permission to modify another client\'s cart' });
+      return;
+    }
 
     if (isNaN(newQty) || newQty <= 0) {
       await pool.query('DELETE FROM cart_items WHERE id = $1 AND cart_id = $2', [lineId, cartId]);
@@ -220,10 +230,21 @@ router.post('/:id/line-items/:line_id', async (req: Request, res: Response) => {
 });
 
 // DELETE /store/carts/:id/line-items/:line_id
-router.delete('/:id/line-items/:line_id', async (req: Request, res: Response) => {
+router.delete('/:id/line-items/:line_id', optionalCustomerAuth, async (req: Request, res: Response) => {
   try {
     const cartId = String(req.params.id);
     const lineId = String(req.params.line_id);
+
+    const cartOwnerRes = await pool.query('SELECT customer_id FROM carts WHERE id = $1', [cartId]);
+    if (cartOwnerRes.rows.length === 0) {
+      res.status(404).json({ error: 'Cart not found' });
+      return;
+    }
+    if (cartOwnerRes.rows[0].customer_id && (!req.customer || req.customer.id !== cartOwnerRes.rows[0].customer_id)) {
+      res.status(403).json({ error: 'Access denied: You do not have permission to modify another client\'s cart' });
+      return;
+    }
+
     await pool.query('DELETE FROM cart_items WHERE id = $1 AND cart_id = $2', [lineId, cartId]);
     await pool.query('UPDATE carts SET updated_at = NOW() WHERE id = $1', [cartId]);
 
