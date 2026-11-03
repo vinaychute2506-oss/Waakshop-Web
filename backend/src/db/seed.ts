@@ -108,7 +108,8 @@ export async function seedDatabase(): Promise<void> {
     console.log('✓ Products & Variants seeded successfully');
 
     // 2. Seed Admin User
-    const adminPasswordHash = await bcrypt.hash('waakAdmin2026!', 10);
+    const adminPassword = process.env.ADMIN_PASSWORD || 'waakAdmin2026!';
+    const adminPasswordHash = await bcrypt.hash(adminPassword, 10);
     await client.query(
       `INSERT INTO admin_users (id, email, password_hash, first_name, last_name, role)
        VALUES ('admin_waak_01', 'atelier@waak.in', $1, 'WAAK', 'Atelier Director', 'admin')

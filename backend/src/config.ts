@@ -8,6 +8,7 @@ export interface AppConfig {
   nodeEnv: 'development' | 'staging' | 'production' | 'test';
   port: number;
   databaseUrl: string;
+  databaseSsl: boolean;
   redisUrl?: string;
   jwtSecret: string;
   corsOrigins: string[];
@@ -107,6 +108,7 @@ function validateAndLoadConfig(): AppConfig {
     nodeEnv,
     port,
     databaseUrl,
+    databaseSsl: process.env.DATABASE_SSL === 'true' || databaseUrl.includes('sslmode=require'),
     redisUrl,
     jwtSecret,
     corsOrigins: parseCorsOrigins(process.env.CORS_ORIGIN),

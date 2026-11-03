@@ -7,7 +7,7 @@ export const pool = new Pool({
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
-  ssl: config.nodeEnv === 'production' || config.nodeEnv === 'staging' ? { rejectUnauthorized: false } : undefined,
+  ssl: config.databaseSsl ? { rejectUnauthorized: false } : undefined,
 });
 
 export async function initDatabase(): Promise<void> {

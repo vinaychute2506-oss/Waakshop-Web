@@ -49,15 +49,15 @@ services:
       DATABASE_URL: postgres://${POSTGRES_USER:-waak_staging_admin}:${POSTGRES_PASSWORD:-waak_staging_secure_2026}@postgres:5432/${POSTGRES_DB:-waak_staging_commerce}
       REDIS_URL: redis://redis:6379
       JWT_SECRET: ${JWT_SECRET:-waak_staging_jwt_secret_must_be_32_chars_long!}
-      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:8080}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:8088,http://127.0.0.1:8088,https://staging.waak.in}
       RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID:-rzp_test_waak2026demo}
       RAZORPAY_KEY_SECRET: ${RAZORPAY_KEY_SECRET:-waakSecretRazorpayKey2026}
       RAZORPAY_WEBHOOK_SECRET: ${RAZORPAY_WEBHOOK_SECRET:-waak_staging_webhook_secret_2026}
-      ALLOW_MOCK_PAYMENTS: ${ALLOW_MOCK_PAYMENTS:-false}
+      ALLOW_MOCK_PAYMENTS: ${ALLOW_MOCK_PAYMENTS:-true}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-atelier@waak.in}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-waakStagingAdmin2026!}
     ports:
-      - "9000:9000"
+      - "${STAGING_BACKEND_PORT:-9001}:9000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -79,7 +79,7 @@ services:
     container_name: waak-staging-frontend
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "${STAGING_FRONTEND_PORT:-8088}:80"
     depends_on:
       backend:
         condition: service_healthy
