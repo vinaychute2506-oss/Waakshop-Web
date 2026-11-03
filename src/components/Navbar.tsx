@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useApp } from "../context/AppContext"
+import "./Navbar.css"
 
 export default function Navbar() {
   const { navigateTo, currentRoute, cartCount, wishlistCount, setIsCartOpen, setIsWishlistOpen, setActiveCategory } = useApp()
@@ -43,53 +44,20 @@ export default function Navbar() {
   return (
     <>
       {/* Top Announcement Bar */}
-      <div style={{
-        backgroundColor: "var(--color-burgundy-deep)",
-        color: "var(--color-gold-light)",
-        fontSize: "11px",
-        fontWeight: 500,
-        letterSpacing: "0.15em",
-        textAlign: "center",
-        padding: "8px 16px",
-        textTransform: "uppercase",
-        borderBottom: "1px solid rgba(197, 162, 101, 0.2)"
-      }}>
-        Complimentary Express Shipping Across India · Rooted in Heritage
+      <div className="navbar-announcement">
+        Complimentary Alteration Consultation at the Atelier | Pan-India Delivery | Crafted in India
       </div>
 
       {/* Main Header */}
-      <header style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 100,
-        backgroundColor: isScrolled ? "rgba(244, 239, 230, 0.98)" : "rgba(244, 239, 230, 0.92)",
-        backdropFilter: "blur(14px)",
-        borderBottom: isScrolled ? "1px solid rgba(110, 53, 41, 0.18)" : "1px solid var(--color-border-light)",
-        boxShadow: isScrolled ? "0 4px 20px rgba(35, 8, 10, 0.08)" : "none",
-        transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)"
-      }}>
-        <div style={{
-          maxWidth: "1440px",
-          margin: "0 auto",
-          padding: isScrolled ? "12px 24px" : "18px 24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          transition: "padding 0.3s ease"
-        }}>
+      <header className={`navbar-header ${isScrolled ? "scrolled" : ""}`}>
+        <div className="navbar-container">
           {/* Left: Mobile hamburger & desktop main nav */}
-          <div style={{ display: "flex", alignItems: "center", gap: "24px", flex: 1 }}>
+          <div className="navbar-left">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle Navigation Menu"
               aria-expanded={mobileMenuOpen}
-              style={{
-                display: "none",
-                color: "var(--color-burgundy)",
-                padding: "8px",
-                cursor: "pointer"
-              }}
-              className="mobile-hamburger"
+              className="navbar-mobile-toggle"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
                 {mobileMenuOpen ? (
@@ -100,90 +68,70 @@ export default function Navbar() {
               </svg>
             </button>
 
-            <nav className="desktop-nav" style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+            <nav className="navbar-desktop-nav" aria-label="Main Navigation">
               <button
                 onClick={() => handleCategoryNav("Kurta Sets")}
-                className="nav-link editorial-underline"
+                className="navbar-link"
               >
                 Kurta Sets
               </button>
               <button
                 onClick={() => handleCategoryNav("Indian Wear")}
-                className="nav-link editorial-underline"
+                className="navbar-link"
               >
                 Indian Wear
               </button>
               <button
                 onClick={() => handleCategoryNav("Indo Western & Jodhpuri")}
-                className="nav-link editorial-underline"
+                className="navbar-link"
               >
                 Indo Western
               </button>
               <button
                 onClick={() => handleCategoryNav("Suits & Blazers")}
-                className="nav-link editorial-underline"
+                className="navbar-link"
               >
                 Suits & Blazers
               </button>
               <button
                 onClick={() => handleCategoryNav("Waistcoats")}
-                className="nav-link editorial-underline"
+                className="navbar-link"
               >
                 Waistcoats
               </button>
             </nav>
           </div>
 
-          {/* Center: WAAK Brand Logo */}
+          {/* Center: WAAK Brand Logo (Mathematically Centered) */}
           <div
-            style={{ textAlign: "center", cursor: "pointer", userSelect: "none" }}
+            className="navbar-center"
             onClick={() => {
               if (currentRoute !== "/") navigateTo("/")
               window.scrollTo({ top: 0, behavior: "smooth" })
             }}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                if (currentRoute !== "/") navigateTo("/")
+                window.scrollTo({ top: 0, behavior: "smooth" })
+              }
+            }}
+            aria-label="WAAK Occasionwear - Home"
           >
-            <div style={{
-              fontFamily: "var(--font-display)",
-              fontSize: isScrolled ? "26px" : "30px",
-              fontWeight: 700,
-              letterSpacing: "0.24em",
-              color: "var(--color-burgundy)",
-              lineHeight: 1,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "8px",
-              transition: "font-size 0.3s ease"
-            }}>
-              WAAK
-            </div>
-            <div style={{
-              fontSize: "8.5px",
-              letterSpacing: "0.32em",
-              color: "var(--color-gold-dark)",
-              textTransform: "uppercase",
-              marginTop: "3px",
-              fontWeight: 600
-            }}>
-              Occasionwear
-            </div>
+            <div className="navbar-logo">WAAK</div>
+            <div className="navbar-subtitle">Occasionwear</div>
           </div>
 
           {/* Right: Actions (Account, Wishlist, Cart) */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "20px", flex: 1 }}>
+          <div className="navbar-right">
             {/* Account */}
             <div style={{ position: "relative" }}>
               <button
                 onClick={() => setAccountMenuOpen(!accountMenuOpen)}
-                aria-label="Account Menu"
+                aria-label="Account Profile"
                 aria-expanded={accountMenuOpen}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  color: "var(--color-charcoal)",
-                  padding: "6px",
-                  transition: "var(--transition-smooth)"
-                }}
+                className="navbar-icon-btn"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -261,39 +209,14 @@ export default function Navbar() {
             {/* Wishlist */}
             <button
               onClick={() => setIsWishlistOpen(true)}
-              aria-label="Wishlist"
-              style={{
-                position: "relative",
-                display: "flex",
-                alignItems: "center",
-                color: "var(--color-charcoal)",
-                padding: "6px",
-                transition: "var(--transition-smooth)"
-              }}
+              aria-label={`Wishlist (${wishlistCount} items)`}
+              className="navbar-icon-btn"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlistCount > 0 ? "var(--color-burgundy)" : "none"} stroke={wishlistCount > 0 ? "var(--color-burgundy)" : "currentColor"} strokeWidth="1.75">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
               {wishlistCount > 0 && (
-                <span
-                  key={`wish-${wishlistCount}`}
-                  style={{
-                    position: "absolute",
-                    top: "-2px",
-                    right: "-4px",
-                    backgroundColor: "var(--color-burgundy)",
-                    color: "#fff",
-                    fontSize: "9px",
-                    fontWeight: 700,
-                    width: "16px",
-                    height: "16px",
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    animation: "badgeBounce 0.3s cubic-bezier(0.16, 1, 0.3, 1)"
-                  }}
-                >
+                <span key={`wish-${wishlistCount}`} className="navbar-badge" aria-hidden="true">
                   {wishlistCount}
                 </span>
               )}
@@ -302,15 +225,8 @@ export default function Navbar() {
             {/* Cart */}
             <button
               onClick={() => setIsCartOpen(true)}
-              aria-label="Shopping Cart"
-              style={{
-                position: "relative",
-                display: "flex",
-                alignItems: "center",
-                color: "var(--color-charcoal)",
-                padding: "6px",
-                transition: "var(--transition-smooth)"
-              }}
+              aria-label={`Shopping Bag (${cartCount} items)`}
+              className="navbar-icon-btn"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
@@ -318,25 +234,7 @@ export default function Navbar() {
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
               {cartCount > 0 && (
-                <span
-                  key={`cart-${cartCount}`}
-                  style={{
-                    position: "absolute",
-                    top: "-2px",
-                    right: "-4px",
-                    backgroundColor: "var(--color-gold-dark)",
-                    color: "#fff",
-                    fontSize: "9px",
-                    fontWeight: 700,
-                    width: "16px",
-                    height: "16px",
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    animation: "badgeBounce 0.3s cubic-bezier(0.16, 1, 0.3, 1)"
-                  }}
-                >
+                <span key={`cart-${cartCount}`} className="navbar-badge" aria-hidden="true">
                   {cartCount}
                 </span>
               )}
