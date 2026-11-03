@@ -79,17 +79,19 @@ export default function Footer() {
         >
           {/* Brand Ethos */}
           <div>
-            <div
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "28px",
-                fontWeight: 700,
-                letterSpacing: "0.2em",
-                color: "var(--color-gold-light)",
-                marginBottom: "12px",
-              }}
-            >
-              WAAK
+            <div style={{ marginBottom: "14px" }}>
+              <img
+                src="/assets/waak-logo.png"
+                alt="WAAK Occasionwear"
+                style={{
+                  height: "38px",
+                  width: "auto",
+                  maxWidth: "140px",
+                  objectFit: "contain",
+                  display: "block",
+                  filter: "brightness(1.15) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4))",
+                }}
+              />
             </div>
             <p
               style={{

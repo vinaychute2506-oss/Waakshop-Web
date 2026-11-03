@@ -119,7 +119,11 @@ export default function Navbar() {
             }}
             aria-label="WAAK Occasionwear - Home"
           >
-            <div className="navbar-logo">WAAK</div>
+            <img
+              src="/assets/waak-logo.png"
+              alt="WAAK"
+              className="navbar-brand-logo-img"
+            />
             <div className="navbar-subtitle">Occasionwear</div>
           </div>
 

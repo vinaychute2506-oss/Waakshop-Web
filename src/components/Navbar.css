@@ -128,6 +128,24 @@
   padding: 0 12px;
 }
 
+.navbar-brand-logo-img {
+  height: 38px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+  transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease;
+  filter: drop-shadow(0 1px 2px rgba(90, 18, 26, 0.12));
+}
+
+.navbar-center:hover .navbar-brand-logo-img {
+  transform: scale(1.03);
+}
+
+.navbar-header.scrolled .navbar-brand-logo-img {
+  height: 32px;
+}
+
 .navbar-logo {
   font-family: var(--font-display);
   font-size: 28px;
@@ -145,14 +163,13 @@
 
 .navbar-subtitle {
   font-family: var(--font-sans);
-  font-size: 8.5px;
-  letter-spacing: 0.32em;
+  font-size: 8px;
+  letter-spacing: 0.3em;
   color: var(--color-gold-dark);
   text-transform: uppercase;
-  margin-top: 4px;
+  margin-top: 3px;
   font-weight: 600;
   line-height: 1;
-  margin-right: -0.32em; /* Optical center compensation */
 }
 
 /* Right Column: Utility Icons */
