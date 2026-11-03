@@ -1,11 +1,20 @@
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useEffect } from "react"
 import { useApp } from "./context/AppContext"
 import { PRODUCTS, CATEGORIES, OCCASIONS, PRICE_RANGES, Product } from "./data/products"
 import { useScrollReveal } from "./hooks/useScrollReveal"
+import CurtainReveal from "./components/CurtainReveal"
 import "./Home.css"
 
 export default function Home() {
   const { navigateTo, activeCategory, setActiveCategory, wishlist, toggleWishlist } = useApp()
+
+  // Track if hero elements should be revealed
+  const [heroRevealed, setHeroRevealed] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    }
+    return false
+  })
 
   // Local filter states
   const [selectedOccasion, setSelectedOccasion] = useState<string>("All occasions")
@@ -77,28 +86,42 @@ export default function Home() {
 
   return (
     <div className="waak-home">
-      {/* 1. HERO SIGNATURE ANIMATION SECTION */}
-      <section className="waak-hero">
-        <div className="hero-art-layer">
+      {/* 0. CINEMATIC VELVET CURTAIN REVEAL OVERLAY */}
+      <CurtainReveal onComplete={() => setHeroRevealed(true)} />
+
+      {/* 1. HERO CAMPAIGN SECTION */}
+      <section className={`waak-hero ${heroRevealed ? "revealed" : ""}`}>
+        {/* Cinematic Backdrop Image & Heritage Atmosphere */}
+        <div className="hero-backdrop-container">
           <img
-            src="/assets/signature-animation-art.png"
-            alt="Persian Carpet & Botanical Art Motif"
-            className="hero-runner-motif"
+            src="/assets/campaign-hero-palace.jpg"
+            alt="WAAK Royal Ivory Sherwani Campaign on Heritage Palace Terrace"
+            className="hero-campaign-img"
           />
+          {/* Depth & Contrast Gradients */}
+          <div className="hero-gradient-overlay" />
+          <div className="hero-vignette-overlay" />
         </div>
 
+        {/* Editorial Storytelling Content */}
         <div className="hero-content-box">
           <div className="hero-eyebrow-wrap">
-            <span className="hero-eyebrow-line" />
-            <span className="hero-eyebrow">WAAK · COUTURE OCCASIONWEAR</span>
-            <span className="hero-eyebrow-line" />
+            <svg className="hero-ornament-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="12" cy="12" r="2" fill="currentColor" />
+              <path d="M12 2C12 7 9 10 9 12C9 14 12 17 12 22C12 17 15 14 15 12C15 10 12 7 12 2Z" fill="currentColor" />
+              <path d="M2 12C7 12 10 9 12 9C14 9 17 12 22 12C17 12 14 15 12 15C10 15 7 12 2 12Z" fill="currentColor" />
+            </svg>
+            <span className="hero-eyebrow">CONTEMPORARY OCCASIONWEAR ROOTED IN HERITAGE</span>
           </div>
-          <h1 className="hero-title">Ivory, With Authority.</h1>
+
+          <h1 className="hero-title">IVORY, WITH AUTHORITY.</h1>
+
           <p className="hero-subtitle">
-            Contemporary occasionwear rooted in Indian heritage. Architectural silhouettes tailored for the groom and connoisseur of regal grace.
+            Occasionwear for life's most significant celebrations.
           </p>
+
           <div className="hero-actions-group">
-            <button onClick={scrollToCollection} className="hero-cta">
+            <button onClick={scrollToCollection} className="hero-cta" aria-label="Explore The Collection">
               Explore The Collection
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
@@ -110,6 +133,7 @@ export default function Home() {
                 scrollToCollection()
               }}
               className="hero-secondary-btn editorial-underline"
+              aria-label="View the bridal dossier"
             >
               The Bridal Dossier →
             </button>
@@ -122,10 +146,12 @@ export default function Home() {
           onClick={scrollToCollection}
           role="button"
           tabIndex={0}
-          aria-label="Scroll to collection"
+          aria-label="Scroll to discover collection"
         >
           <span className="hero-scroll-cue-text">SCROLL TO DISCOVER</span>
-          <div className="hero-scroll-cue-line" />
+          <svg className="hero-scroll-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
         </div>
       </section>
 
