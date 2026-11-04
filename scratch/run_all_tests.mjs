@@ -10,6 +10,8 @@ const suites = [
   { name: 'Suite 6: Phase 3.5 Release Readiness & Safety', file: 'scratch/test-phase-3-5-release-readiness.mjs', expected: 29 },
   { name: 'Suite 7: Phase 3.4 Policy, Footer & Newsletter (includes rate limit exhaustion)', file: 'scratch/test-phase-3-4-policy-newsletter.mjs', expected: 70 },
   { name: 'Suite 8: Step 3 Customer Trust Presentation', file: 'scratch/test-step-3-trust.mjs', expected: 25 },
+  { name: 'Suite 9: Step 4 Security & Signature Audit', file: 'scratch/test-step-4-security-audit.mjs', expected: 13 },
+  { name: 'Suite 10: Step 5 WhatsApp Inquiry Integration', file: 'scratch/test-step-5-whatsapp.mjs', expected: 26 },
 ];
 
 function runCommand(file) {

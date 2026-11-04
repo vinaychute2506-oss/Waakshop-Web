@@ -1606,6 +1606,16 @@ export default function ProductDetail() {
           border-color: var(--color-burgundy, #5A121A);
         }
 
+        .waak-whatsapp-inquiry-btn:hover {
+          filter: brightness(0.95);
+          transform: translateY(-1px);
+          box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+        }
+        .waak-whatsapp-inquiry-btn:focus-visible {
+          outline: 2px solid var(--color-burgundy, #5A121A) !important;
+          outline-offset: 3px;
+        }
+
         .pdp-added-toast {
           background-color: rgba(197, 162, 101, 0.15);
           border: 1px solid var(--color-gold, #C5A265);

@@ -9,14 +9,86 @@ export interface WhatsAppInquiryProps {
 }
 
 /**
+ * Validates and normalizes an international phone number for WhatsApp (wa.me) destinations.
+ * 
+ * Verification & Security Rules:
+ * 1. Rejects non-string, null, undefined, empty, or whitespace-only inputs.
+ * 2. Rejects any string containing letters or unauthorized symbols (@, $, #, _, etc.).
+ * 3. Permits standard phone formatting: optional leading '+', digits, spaces, hyphens, dots, parentheses.
+ * 4. Normalizes by stripping formatting characters using .replace(/\D/g, '').
+ * 5. Requires strictly 10 to 15 digits (ITU-T E.164 international standard).
+ * 6. Disallows leading '0' (international format must include country dialing code).
+ * 
+ * Returns normalized digits string if valid, or null if invalid/unset.
+ */
+export function validateWhatsAppNumber(raw?: string | null): string | null {
+  if (!raw || typeof raw !== 'string') return null;
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+
+  // Strict format check: optional leading '+', followed only by digits, spaces, hyphens, dots, parentheses
+  const allowedFormatRegex = /^\+?[0-9\s\-().]+$/;
+  if (!allowedFormatRegex.test(trimmed)) {
+    return null;
+  }
+
+  // Extract clean digits
+  const cleanNumber = trimmed.replace(/\D/g, '');
+
+  // E.164 international length rules: minimum 10 digits, maximum 15 digits
+  if (cleanNumber.length < 10 || cleanNumber.length > 15) {
+    return null;
+  }
+
+  // Must not start with 0 (international format cannot have leading trunk 0)
+  if (cleanNumber.startsWith('0')) {
+    return null;
+  }
+
+  return cleanNumber;
+}
+
+/**
+ * Constructs a safe, concise product inquiry message for the WAAK concierge.
+ * 
+ * Data Privacy & Safety Boundaries:
+ * - Includes only non-sensitive product information: product name, product ID, selected size.
+ * - Never accepts or includes customer PII (name, email, phone, shipping address).
+ * - Never serializes order IDs, payment IDs, card details, or authentication tokens.
+ * - Formatted concisely in WAAK's Atelier tone.
+ */
+export function buildInquiryMessage({
+  productName,
+  productId,
+  variantSize,
+}: {
+  productName?: string;
+  productId?: string;
+  variantSize?: string;
+}): string {
+  const cleanName = productName?.trim();
+  const cleanId = productId?.trim();
+  const cleanSize = variantSize?.trim();
+
+  const productDescriptor = cleanName || 'WAAK Occasionwear';
+  const idDescriptor = cleanId ? ` (Product ID: ${cleanId})` : '';
+  const sizeDescriptor = cleanSize ? ` Selected size: ${cleanSize}.` : '';
+
+  return `Hello WAAK Atelier, I would like to enquire about ${productDescriptor}${idDescriptor}.${sizeDescriptor} Please share further details.`;
+}
+
+/**
  * WhatsAppInquiryButton
+ * 
+ * Client Requirement Step 5: Configuration-Gated WhatsApp Inquiry Integration
  * 
  * Safety & Privacy Rules:
  * 1. Reads official business number from environment (VITE_WHATSAPP_NUMBER).
- * 2. If the number is unset or empty, renders NULL (zero DOM footprint).
+ * 2. If the number is unset, empty, malformed, or invalid, renders NULL (zero DOM footprint).
  * 3. Never includes customer PII (names, passwords, addresses, cards, tokens).
- * 4. Generates a standard non-sensitive inquiry template with product name/ID.
+ * 4. Generates a standard non-sensitive inquiry template with product name/ID/size.
  * 5. Uses safe external anchor behavior (target="_blank", rel="noopener noreferrer").
+ * 6. Complies with 44px minimum touch target for mobile usability.
  */
 export default function WhatsAppInquiryButton({
   productName,
@@ -25,20 +97,19 @@ export default function WhatsAppInquiryButton({
   className = '',
   style = {},
 }: WhatsAppInquiryProps) {
-  // Read configured business number; strip any non-digit characters
+  // Read configured business number from environment
   const rawNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '';
-  const cleanNumber = rawNumber.replace(/\D/g, '');
+  const cleanNumber = validateWhatsAppNumber(rawNumber);
 
-  // Guard: If no valid business number is configured, completely hide the button
+  // Guard: If no valid business number is configured, completely hide the button (zero DOM presence)
   if (!cleanNumber) {
     return null;
   }
 
   // Construct safe, non-sensitive inquiry message template
-  const productLabel = productName || 'WAAK Occasionwear';
-  const refLabel = productId ? ` (Ref: ${productId}${variantSize ? `, Size: ${variantSize}` : ''})` : '';
-  const message = `Hello WAAK Atelier, I would like to inquire about ${productLabel}${refLabel}.`;
+  const message = buildInquiryMessage({ productName, productId, variantSize });
   const whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+  const productLabel = productName?.trim() || 'WAAK Occasionwear';
 
   return (
     <a
@@ -64,6 +135,7 @@ export default function WhatsAppInquiryButton({
         boxShadow: '0 4px 14px rgba(37, 211, 102, 0.25)',
         transition: 'all 0.25s ease',
         cursor: 'pointer',
+        outline: 'none',
         ...style,
       }}
       aria-label={`Inquire about ${productLabel} on WhatsApp`}
