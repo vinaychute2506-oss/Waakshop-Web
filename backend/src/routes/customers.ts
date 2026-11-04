@@ -34,6 +34,39 @@ router.get('/me', customerAuth, async (req: Request, res: Response) => {
   }
 });
 
+// GET /store/customers/me/orders (Alias for /store/orders/customer/history)
+router.get('/me/orders', customerAuth, async (req: Request, res: Response) => {
+  try {
+    const ordersRes = await pool.query(
+      `SELECT o.*,
+         COALESCE(
+           json_agg(
+             json_build_object(
+               'id', oi.id,
+               'title', oi.title,
+               'size', oi.size,
+               'thumbnail', oi.thumbnail,
+               'quantity', oi.quantity,
+               'unit_price', oi.unit_price,
+               'total', oi.total
+             )
+           ) FILTER (WHERE oi.id IS NOT NULL), '[]'
+         ) as items
+       FROM orders o
+       LEFT JOIN order_items oi ON oi.order_id = o.id
+       WHERE o.customer_id = $1
+       GROUP BY o.id
+       ORDER BY o.created_at DESC`,
+      [req.customer!.id]
+    );
+
+    res.json({ orders: ordersRes.rows });
+  } catch (error: any) {
+    console.error('Customer orders fetch error:', error);
+    res.status(500).json({ error: 'Failed to retrieve customer orders' });
+  }
+});
+
 // PUT /store/customers/me
 router.put('/me', customerAuth, async (req: Request, res: Response) => {
   try {

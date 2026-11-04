@@ -279,7 +279,7 @@ async function main() {
     });
   });
 
-  await it('Signature Leak Guard (GET /store/customers/me/orders): Customer order history does NOT expose signature', async () => {
+  await it('Signature Leak Guard (GET /store/orders/customer/history): Order history does NOT expose signature', async () => {
     const res = await fetch(`${BASE_URL}/store/orders/customer/history`, {
       headers: { 'Authorization': `Bearer ${tokenA}` }
     });
@@ -288,6 +288,17 @@ async function main() {
     assert.ok(Array.isArray(body.orders), 'Returns orders array');
     const orderStr = JSON.stringify(body);
     assert.ok(!orderStr.includes(authenticSignature), 'Customer history JSON must not contain authenticSignature');
+  });
+
+  await it('Signature Leak Guard (GET /store/customers/me/orders): Profile orders alias does NOT expose signature', async () => {
+    const res = await fetch(`${BASE_URL}/store/customers/me/orders`, {
+      headers: { 'Authorization': `Bearer ${tokenA}` }
+    });
+    assert.strictEqual(res.status, 200);
+    const body = await res.json();
+    assert.ok(Array.isArray(body.orders), 'Returns orders array');
+    const orderStr = JSON.stringify(body);
+    assert.ok(!orderStr.includes(authenticSignature), 'Customer me/orders JSON must not contain authenticSignature');
   });
 
   console.log('\n===============================================================');
