@@ -216,6 +216,89 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
         .checkout-close-btn:hover {
           color: var(--color-burgundy, #5A121A);
         }
+        .checkout-security-card {
+          background-color: var(--color-cream, #F4EFE6);
+          border: 1px solid rgba(197, 162, 101, 0.35);
+          border-radius: var(--radius-sm, 4px);
+          padding: 14px 16px;
+          margin-bottom: 20px;
+        }
+        .checkout-security-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 10px;
+        }
+        .checkout-security-title {
+          font-family: var(--font-sans);
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--color-burgundy, #5A121A);
+        }
+        .checkout-security-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+        }
+        .checkout-security-list li {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+          font-size: 11px;
+          line-height: 1.45;
+          color: var(--color-charcoal, #1E1A17);
+        }
+        .checkout-check-icon {
+          color: #2e7d32;
+          font-weight: 700;
+          font-size: 12px;
+          flex-shrink: 0;
+          margin-top: 1px;
+        }
+        .checkout-submit-btn {
+          width: 100%;
+          background: linear-gradient(135deg, #5A121A 0%, #3D0C13 100%);
+          color: var(--color-cream-light, #fbf8f2);
+          border: 1px solid var(--color-gold, #C5A265);
+          padding: 14px;
+          font-size: 12.5px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          border-radius: 2px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          min-height: 48px;
+          transition: all 0.2s ease;
+          cursor: pointer;
+        }
+        .checkout-submit-btn:disabled {
+          cursor: not-allowed;
+          opacity: 0.65;
+        }
+        .checkout-submit-btn:hover:not(:disabled) {
+          background: #3D0C13;
+          border-color: #fff;
+        }
+        .checkout-test-badge {
+          font-size: 10.5px;
+          opacity: 0.85;
+          letter-spacing: 0.05em;
+        }
+        .checkout-trust-disclaimer {
+          font-size: 10px;
+          color: var(--color-muted, #7A6258);
+          text-align: center;
+          margin-top: 10px;
+          line-height: 1.4;
+        }
         @media (max-width: 480px) {
           .checkout-modal-overlay {
             padding: 10px;
@@ -616,36 +699,47 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               </div>
             </div>
 
+            <div className="checkout-security-card">
+              <div className="checkout-security-header">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold, #C5A265)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span className="checkout-security-title">Payment & Security Reassurance</span>
+              </div>
+              <ul className="checkout-security-list">
+                <li>
+                  <span className="checkout-check-icon">✓</span>
+                  <span><strong>Server-Verified Pricing:</strong> Order totals and cart items are calculated and verified server-side prior to payment initiation.</span>
+                </li>
+                <li>
+                  <span className="checkout-check-icon">✓</span>
+                  <span><strong>HMAC Signature Verification:</strong> Payments are authenticated via cryptographic Razorpay webhook signatures on our secure backend.</span>
+                </li>
+                <li>
+                  <span className="checkout-check-icon">✓</span>
+                  <span><strong>Zero Cardholder Data Retention:</strong> Sensitive card numbers, CVVs, and banking details are processed directly by Razorpay and never stored on WAAK servers.</span>
+                </li>
+                <li>
+                  <span className="checkout-check-icon">ℹ</span>
+                  <span style={{ color: 'var(--color-muted, #7A6258)' }}><strong>Staging Sandbox:</strong> Active in Test Mode (<code style={{ fontSize: '10px' }}>rzp_test_*</code>). No actual monetary charges will occur during this client evaluation.</span>
+                </li>
+              </ul>
+            </div>
+
             <button
               type="submit"
               disabled={loading}
-              style={{
-                width: '100%',
-                background: 'linear-gradient(135deg, #5A121A 0%, #3D0C13 100%)',
-                color: 'var(--color-cream-light, #fbf8f2)',
-                border: '1px solid var(--color-gold, #C5A265)',
-                padding: '14px',
-                fontSize: '13px',
-                fontWeight: 600,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                borderRadius: '2px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-              }}
+              className="checkout-submit-btn"
             >
               {loading ? 'Securing Transaction...' : (
                 <>
                   <span>Pay ₹{total.toLocaleString('en-IN')} via Razorpay</span>
-                  <span style={{ fontSize: '11px', opacity: 0.8 }}>(Test Mode)</span>
+                  <span className="checkout-test-badge">(Staging Sandbox · Test Mode)</span>
                 </>
               )}
             </button>
-            <p style={{ fontSize: '10px', color: 'var(--color-muted, #7A6258)', textAlign: 'center', marginTop: '10px' }}>
-              🔒 256-bit encrypted checkout with server-side HMAC signature verification
+            <p className="checkout-trust-disclaimer">
+              🔒 End-to-end encrypted checkout with server-side HMAC signature verification.
             </p>
           </form>
         )}

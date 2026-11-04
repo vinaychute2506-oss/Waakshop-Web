@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react"
 import { useApp } from "./context/AppContext"
 import { Product } from "./data/products"
 import { api } from "./services/api"
+import WhatsAppInquiryButton from "./components/WhatsAppInquiryButton"
 
 export default function ProductDetail() {
   const { selectedProduct, selectedProductId, findProduct, products, addToCart, wishlist, toggleWishlist, navigateTo } = useApp()
@@ -596,12 +597,69 @@ export default function ProductDetail() {
               <span>{isWishlisted ? "Saved in Atelier Wishlist" : "Save to Wishlist"}</span>
             </button>
 
+            {/* Safe, configuration-gated WhatsApp inquiry button */}
+            <WhatsAppInquiryButton
+              productName={product.name}
+              productId={product.id}
+              variantSize={selectedSize}
+              style={{ width: '100%', marginTop: '6px' }}
+            />
+
             {/* Added confirmation toast */}
             {addedNotice && (
               <div className="pdp-added-toast" role="status">
                 ✓ Added {quantity} × {product.name} (Size {selectedSize}) to your bag.
               </div>
             )}
+          </div>
+
+          {/* Customer Trust & Atelier Policy Assurance */}
+          <div className="pdp-trust-assurance-card" aria-label="Atelier client trust and guarantees">
+            <div className="pdp-trust-item">
+              <span className="pdp-trust-icon" aria-hidden="true">✦</span>
+              <div className="pdp-trust-text">
+                <strong>Live Atelier Crafting:</strong> Inventory availability verified with PostgreSQL database.
+              </div>
+            </div>
+            <div className="pdp-trust-item">
+              <span className="pdp-trust-icon" aria-hidden="true">📦</span>
+              <div className="pdp-trust-text">
+                <strong>Complimentary Express Dispatch:</strong> Insured domestic transit across India.{' '}
+                <button
+                  type="button"
+                  onClick={() => navigateTo("/shipping-policy")}
+                  className="pdp-trust-policy-link"
+                >
+                  Shipping Terms (Draft Policy)
+                </button>
+              </div>
+            </div>
+            <div className="pdp-trust-item">
+              <span className="pdp-trust-icon" aria-hidden="true">✂</span>
+              <div className="pdp-trust-text">
+                <strong>Bespoke Sizing & Alteration:</strong> Complimentary fitting adjustment on all occasionwear.{' '}
+                <button
+                  type="button"
+                  onClick={() => navigateTo("/returns-and-exchanges")}
+                  className="pdp-trust-policy-link"
+                >
+                  Exchange Terms (Draft Policy)
+                </button>
+              </div>
+            </div>
+            <div className="pdp-trust-item">
+              <span className="pdp-trust-icon" aria-hidden="true">◈</span>
+              <div className="pdp-trust-text">
+                <strong>Private Concierge Assistance:</strong> Stylist consultations for ceremonial ensembles.{' '}
+                <button
+                  type="button"
+                  onClick={() => navigateTo("/contact")}
+                  className="pdp-trust-policy-link"
+                >
+                  Atelier Concierge
+                </button>
+              </div>
+            </div>
           </div>
 
           <div className="pdp-divider" />
@@ -1557,6 +1615,48 @@ export default function ProductDetail() {
           border-radius: var(--radius-sm, 4px);
           text-align: center;
           font-weight: 500;
+        }
+
+        /* Customer Trust & Assurance Card */
+        .pdp-trust-assurance-card {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          background-color: var(--color-cream, #F4EFE6);
+          border: 1px solid rgba(197, 162, 101, 0.3);
+          border-radius: var(--radius-sm, 4px);
+          padding: 14px 16px;
+        }
+        .pdp-trust-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          font-size: 11.5px;
+          line-height: 1.5;
+          color: var(--color-charcoal, #1E1A17);
+        }
+        .pdp-trust-icon {
+          color: var(--color-gold, #C5A265);
+          font-size: 12px;
+          margin-top: 1px;
+          flex-shrink: 0;
+        }
+        .pdp-trust-text {
+          flex: 1;
+        }
+        .pdp-trust-policy-link {
+          background: none;
+          border: none;
+          padding: 0;
+          font-size: 11px;
+          color: var(--color-burgundy, #5A121A);
+          text-decoration: underline;
+          cursor: pointer;
+          font-weight: 600;
+          display: inline;
+        }
+        .pdp-trust-policy-link:hover {
+          color: #3d0c13;
         }
 
         /* PIN Checker Card */
