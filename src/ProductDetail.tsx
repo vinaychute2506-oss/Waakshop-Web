@@ -624,26 +624,26 @@ export default function ProductDetail() {
             <div className="pdp-trust-item">
               <span className="pdp-trust-icon" aria-hidden="true">📦</span>
               <div className="pdp-trust-text">
-                <strong>Complimentary Express Dispatch:</strong> Insured domestic transit across India.{' '}
+                <strong>Shipping & Delivery Terms:</strong> Dispatched via tracked domestic courier services.{' '}
                 <button
                   type="button"
                   onClick={() => navigateTo("/shipping-policy")}
                   className="pdp-trust-policy-link"
                 >
-                  Shipping Terms (Draft Policy)
+                  View Shipping Policy (Draft)
                 </button>
               </div>
             </div>
             <div className="pdp-trust-item">
               <span className="pdp-trust-icon" aria-hidden="true">✂</span>
               <div className="pdp-trust-text">
-                <strong>Bespoke Sizing & Alteration:</strong> Complimentary fitting adjustment on all occasionwear.{' '}
+                <strong>Sizing & Exchange Guidance:</strong> Consult our size guide or review exchange terms before ordering.{' '}
                 <button
                   type="button"
                   onClick={() => navigateTo("/returns-and-exchanges")}
                   className="pdp-trust-policy-link"
                 >
-                  Exchange Terms (Draft Policy)
+                  View Exchange Policy (Draft)
                 </button>
               </div>
             </div>

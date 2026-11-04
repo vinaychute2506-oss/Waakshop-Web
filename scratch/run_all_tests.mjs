@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 
 const suites = [
@@ -9,20 +9,21 @@ const suites = [
   { name: 'Suite 5: Phase 3.3 PDP Experience', file: 'scratch/test-phase-3-3-pdp.mjs', expected: 54 },
   { name: 'Suite 6: Phase 3.5 Release Readiness & Safety', file: 'scratch/test-phase-3-5-release-readiness.mjs', expected: 29 },
   { name: 'Suite 7: Phase 3.4 Policy, Footer & Newsletter (includes rate limit exhaustion)', file: 'scratch/test-phase-3-4-policy-newsletter.mjs', expected: 70 },
-  { name: 'Suite 8: Step 3 Customer Trust Presentation', file: 'scratch/test-step-3-trust.mjs', expected: 24 },
+  { name: 'Suite 8: Step 3 Customer Trust Presentation', file: 'scratch/test-step-3-trust.mjs', expected: 25 },
 ];
 
-async function runCommand(file) {
-  return new Promise((resolve) => {
-    const child = spawn(process.execPath, [file], { cwd: process.cwd(), env: process.env });
-    let stdout = '';
-    let stderr = '';
-    child.stdout.on('data', (d) => { stdout += d.toString(); });
-    child.stderr.on('data', (d) => { stderr += d.toString(); });
-    child.on('close', (code) => {
-      resolve({ code, stdout, stderr });
-    });
+function runCommand(file) {
+  const res = spawnSync(process.execPath, [file], {
+    cwd: process.cwd(),
+    env: process.env,
+    encoding: 'utf8',
+    maxBuffer: 20 * 1024 * 1024
   });
+  return {
+    code: res.status ?? (res.error ? 1 : 0),
+    stdout: res.stdout || '',
+    stderr: res.stderr || ''
+  };
 }
 
 async function main() {
@@ -37,7 +38,7 @@ async function main() {
   for (const s of suites) {
     console.log(`Executing ${s.name} (${s.file})...`);
     const start = Date.now();
-    const res = await runCommand(s.file);
+    const res = runCommand(s.file);
     const duration = Date.now() - start;
 
     let suitePassed = 0;

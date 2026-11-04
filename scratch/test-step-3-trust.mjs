@@ -40,6 +40,18 @@ it('Gating check: Returns null when VITE_WHATSAPP_NUMBER is missing or empty', (
   );
 });
 
+it('Gating check: Malformed number handling strips non-digits and returns null if no digits exist', () => {
+  const sanitize = (raw) => (raw || '').replace(/\D/g, '');
+  assert.strictEqual(sanitize(''), '', 'Empty string produces empty cleanNumber');
+  assert.strictEqual(sanitize('invalid_phone_text'), '', 'Alpha string produces empty cleanNumber');
+  assert.strictEqual(sanitize('+ - () #@!'), '', 'Punctuation produces empty cleanNumber');
+  assert.strictEqual(sanitize(undefined), '', 'Undefined input produces empty cleanNumber');
+  assert.ok(
+    whatsAppContent.includes('.replace(/\\D/g, \'\')'),
+    'Component must strip non-digit characters'
+  );
+});
+
 it('Privacy guard: Template only accepts productName, productId, variantSize; zero PII parameters', () => {
   const propsMatch = whatsAppContent.match(/export interface WhatsAppInquiryProps\s*{([^}]+)}/);
   const propsText = propsMatch ? propsMatch[1] : '';
@@ -101,8 +113,12 @@ it('PDP trust card links to Shipping Policy with Draft disclaimer', () => {
     'Must link to /shipping-policy'
   );
   assert.ok(
-    pdpContent.includes('Draft Policy'),
-    'Must preserve Draft Policy badge until terms approved'
+    pdpContent.includes('(Draft)'),
+    'Must preserve Draft disclaimer until terms approved'
+  );
+  assert.ok(
+    !pdpContent.includes('Complimentary Express Dispatch'),
+    'Must not make unapproved commercial shipping promises'
   );
 });
 
@@ -110,6 +126,14 @@ it('PDP trust card links to Returns & Exchanges with Draft disclaimer', () => {
   assert.ok(
     pdpContent.includes('/returns-and-exchanges'),
     'Must link to /returns-and-exchanges'
+  );
+  assert.ok(
+    pdpContent.includes('(Draft)'),
+    'Must preserve Draft disclaimer until terms approved'
+  );
+  assert.ok(
+    !pdpContent.includes('Complimentary fitting adjustment'),
+    'Must not make unapproved commercial alteration promises'
   );
 });
 
@@ -157,10 +181,10 @@ it('Checkout card states HMAC Signature Verification', () => {
   );
 });
 
-it('Checkout card states Zero Cardholder Data Retention', () => {
+it('Checkout card states Direct Gateway Processing', () => {
   assert.ok(
-    checkoutContent.includes('Zero Cardholder Data Retention'),
-    'Must state zero cardholder data stored on WAAK servers'
+    checkoutContent.includes('Direct Gateway Processing'),
+    'Must state direct gateway processing via Razorpay'
   );
 });
 

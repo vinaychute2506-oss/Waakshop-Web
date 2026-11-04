@@ -717,7 +717,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                 </li>
                 <li>
                   <span className="checkout-check-icon">✓</span>
-                  <span><strong>Zero Cardholder Data Retention:</strong> Sensitive card numbers, CVVs, and banking details are processed directly by Razorpay and never stored on WAAK servers.</span>
+                  <span><strong>Direct Gateway Processing:</strong> Payment details (cards, UPI, net banking) are handled directly by Razorpay's secure checkout; WAAK servers never receive or retain cardholder credentials.</span>
                 </li>
                 <li>
                   <span className="checkout-check-icon">ℹ</span>

@@ -20,8 +20,8 @@
 | **5** | Phase 3.3 PDP Experience | `scratch/test-phase-3-3-pdp.mjs` | 54 | 0 | **PASS** | 230 ms |
 | **6** | Phase 3.5 Release Readiness & Safety | `scratch/test-phase-3-5-release-readiness.mjs` | 29 | 0 | **PASS** | 210 ms |
 | **7** | Phase 3.4 Policy, Footer & Newsletter | `scratch/test-phase-3-4-policy-newsletter.mjs` | 70 | 0 | **PASS** | 256 ms |
-| **8** | Step 3 Customer Trust Presentation | `scratch/test-step-3-trust.mjs` | 24 | 0 | **PASS** | 50 ms |
-| **TOTAL** | **8 Test Suites** | — | **349** | **0** | **PASS** | **11,376 ms** |
+| **8** | Step 3 Customer Trust Presentation | `scratch/test-step-3-trust.mjs` | 25 | 0 | **PASS** | 50 ms |
+| **TOTAL** | **8 Test Suites** | — | **350** | **0** | **PASS** | **11,376 ms** |
 
 ---
 
