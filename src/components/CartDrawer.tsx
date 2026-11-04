@@ -194,15 +194,15 @@ export default function CartDrawer() {
                       }}>
                         <button
                           onClick={() => updateCartQuantity(item.product.id, item.size, item.quantity - 1)}
-                          style={{ padding: "2px 8px", fontSize: "14px", color: "var(--color-charcoal)", cursor: "pointer" }}
+                          style={{ minWidth: "36px", minHeight: "36px", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "16px", color: "var(--color-charcoal)", cursor: "pointer", background: "none", border: "none" }}
                           aria-label="Decrease quantity"
                         >
                           −
                         </button>
-                        <span style={{ padding: "0 8px", fontSize: "12px", fontWeight: 600 }}>{item.quantity}</span>
+                        <span style={{ padding: "0 8px", fontSize: "13px", fontWeight: 600 }}>{item.quantity}</span>
                         <button
                           onClick={() => updateCartQuantity(item.product.id, item.size, item.quantity + 1)}
-                          style={{ padding: "2px 8px", fontSize: "14px", color: "var(--color-charcoal)", cursor: "pointer" }}
+                          style={{ minWidth: "36px", minHeight: "36px", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "16px", color: "var(--color-charcoal)", cursor: "pointer", background: "none", border: "none" }}
                           aria-label="Increase quantity"
                         >
                           +
@@ -211,11 +211,17 @@ export default function CartDrawer() {
                       <button
                         onClick={() => removeFromCart(item.product.id, item.size)}
                         style={{
+                          minHeight: "36px",
+                          padding: "6px 8px",
+                          display: "inline-flex",
+                          alignItems: "center",
                           fontSize: "11px",
                           letterSpacing: "0.08em",
                           color: "var(--color-muted)",
                           textDecoration: "underline",
-                          cursor: "pointer"
+                          cursor: "pointer",
+                          background: "none",
+                          border: "none",
                         }}
                       >
                         Remove

@@ -249,8 +249,8 @@ export default function PolicyView({ route }: PolicyViewProps) {
               <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "20px", color: "var(--color-burgundy)", marginBottom: "12px" }}>
                 3. Tailoring & Fulfillment Timelines
               </h2>
-              <div style={{ overflowX: "auto" }}>
-                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", textAlign: "left", marginBottom: "16px" }}>
+              <div className="policy-table-scroll">
+                <table style={{ width: "100%", minWidth: "500px", borderCollapse: "collapse", fontSize: "13px", textAlign: "left", marginBottom: "16px" }}>
                   <thead>
                     <tr style={{ borderBottom: "2px solid var(--color-gold)", color: "var(--color-burgundy)" }}>
                       <th style={{ padding: "10px 12px" }}>Garment Classification</th>
@@ -474,6 +474,40 @@ export default function PolicyView({ route }: PolicyViewProps) {
 
   return (
     <div style={{ backgroundColor: "var(--color-cream-light, #FAF7F2)", minHeight: "80vh", padding: "40px 24px 80px" }}>
+      <style>{`
+        .policy-view-grid {
+          display: grid;
+          grid-template-columns: 260px 1fr;
+          gap: 40px;
+        }
+        .policy-content-card {
+          background-color: #fff;
+          border: 1px solid rgba(197, 162, 101, 0.2);
+          border-radius: var(--radius-sm);
+          padding: 40px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+          overflow-x: hidden;
+        }
+        .policy-table-scroll {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          margin-bottom: 16px;
+        }
+        @media (max-width: 860px) {
+          .policy-view-grid {
+            grid-template-columns: 1fr;
+            gap: 28px;
+          }
+          .policy-content-card {
+            padding: 24px 18px;
+          }
+        }
+        @media (max-width: 480px) {
+          .policy-content-card {
+            padding: 20px 14px;
+          }
+        }
+      `}</style>
       <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
         {/* Breadcrumb Navigation */}
         <nav aria-label="Breadcrumb" style={{ marginBottom: "28px", fontSize: "12px", color: "var(--color-charcoal-muted)" }}>
@@ -491,7 +525,7 @@ export default function PolicyView({ route }: PolicyViewProps) {
         </nav>
 
         {/* Layout Grid: Sidebar Navigation + Main Policy Content */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr)) 3fr", gap: "40px" }}>
+        <div className="policy-view-grid">
           {/* Quick Policy Navigation Sidebar */}
           <aside aria-label="Policy Navigation" style={{ alignSelf: "start" }}>
             <div
@@ -572,15 +606,7 @@ export default function PolicyView({ route }: PolicyViewProps) {
           </aside>
 
           {/* Policy Document Body */}
-          <main
-            style={{
-              backgroundColor: "#fff",
-              border: "1px solid rgba(197, 162, 101, 0.2)",
-              borderRadius: "var(--radius-sm)",
-              padding: "40px",
-              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
-            }}
-          >
+          <main className="policy-content-card">
             {renderContent()}
           </main>
         </div>

@@ -1104,8 +1104,8 @@ export default function ProductDetail() {
         /* Grid */
         .pdp-main-grid {
           display: grid;
-          grid-template-columns: 1.05fr 1fr;
-          gap: 60px;
+          grid-template-columns: 0.95fr 1fr;
+          gap: 48px;
           align-items: start;
           margin-bottom: 90px;
         }
@@ -1118,7 +1118,10 @@ export default function ProductDetail() {
         .pdp-main-image-wrap {
           position: relative;
           width: 100%;
-          aspect-ratio: 3 / 4.1;
+          max-width: 500px;
+          margin: 0 auto;
+          aspect-ratio: 3 / 4;
+          max-height: 580px;
           border-radius: var(--radius-md, 8px);
           overflow: hidden;
           background-color: var(--color-linen, #EADFCF);
@@ -1130,6 +1133,7 @@ export default function ProductDetail() {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: center 15%;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .pdp-main-image-wrap:hover .pdp-main-image {
@@ -1227,11 +1231,15 @@ export default function ProductDetail() {
           overflow-x: auto;
           margin-top: 14px;
           padding-bottom: 6px;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
         }
         .pdp-thumbnail-card {
-          width: 78px;
-          height: 102px;
+          width: 72px;
+          height: 96px;
           flex: 0 0 auto;
+          scroll-snap-align: start;
           border-radius: var(--radius-sm, 4px);
           overflow: hidden;
           border: 1px solid rgba(197, 162, 101, 0.25);
@@ -2119,10 +2127,14 @@ export default function ProductDetail() {
         @media (max-width: 960px) {
           .pdp-main-grid {
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 32px;
           }
           .pdp-gallery-column {
             position: static;
+          }
+          .pdp-main-image-wrap {
+            max-width: 480px;
+            max-height: 500px;
           }
           .pdp-title {
             font-size: 28px;
@@ -2134,19 +2146,56 @@ export default function ProductDetail() {
 
         @media (max-width: 600px) {
           .waak-product-detail-page {
-            padding: 20px 16px 90px;
+            padding: 16px 14px 90px;
+          }
+          .pdp-breadcrumb {
+            margin-bottom: 20px;
+          }
+          .pdp-main-grid {
+            gap: 22px;
+            margin-bottom: 48px;
+          }
+          .pdp-main-image-wrap {
+            max-width: 100%;
+            max-height: 380px;
+            aspect-ratio: 3 / 3.8;
+          }
+          .pdp-thumbnails-strip {
+            gap: 8px;
+            margin-top: 10px;
+          }
+          .pdp-thumbnail-card {
+            width: 58px;
+            height: 76px;
+          }
+          .pdp-title {
+            font-size: 22px;
+            margin-bottom: 6px;
+          }
+          .pdp-price-selling {
+            font-size: 22px;
           }
           .pdp-primary-action-row {
             flex-direction: column;
+            gap: 10px;
           }
           .pdp-quantity-selector {
             justify-content: center;
+            height: 46px;
+          }
+          .pdp-qty-btn {
+            height: 46px;
+            padding: 0 20px;
           }
           .pdp-add-to-bag-btn {
             width: 100%;
+            height: 48px;
+          }
+          .pdp-wishlist-btn {
+            height: 44px;
           }
           .pdp-section-heading {
-            font-size: 26px;
+            font-size: 22px;
           }
         }
 

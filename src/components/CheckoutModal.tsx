@@ -159,29 +159,85 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   };
 
   return (
-    <div style={{
-      position: 'fixed',
-      inset: 0,
-      backgroundColor: 'rgba(26, 5, 8, 0.75)',
-      backdropFilter: 'blur(8px)',
-      zIndex: 1000,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-      overflowY: 'auto',
-    }}>
-      <div style={{
-        backgroundColor: 'var(--color-cream-light, #fbf8f2)',
-        border: '1px solid var(--color-border-gold, rgba(197, 162, 101, 0.4))',
-        borderRadius: '8px',
-        maxWidth: '560px',
-        width: '100%',
-        padding: '36px',
-        boxShadow: '0 24px 48px rgba(0,0,0,0.3)',
-        maxHeight: '90vh',
-        overflowY: 'auto',
-      }}>
+    <div className="checkout-modal-overlay">
+      <style>{`
+        .checkout-modal-overlay {
+          position: fixed;
+          inset: 0;
+          background-color: rgba(26, 5, 8, 0.75);
+          backdrop-filter: blur(8px);
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          overflow-y: auto;
+        }
+        .checkout-modal-card {
+          background-color: var(--color-cream-light, #fbf8f2);
+          border: 1px solid var(--color-border-gold, rgba(197, 162, 101, 0.4));
+          border-radius: 8px;
+          max-width: 560px;
+          width: 100%;
+          padding: 36px;
+          box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+          max-height: 90vh;
+          overflow-y: auto;
+        }
+        .checkout-name-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          margin-bottom: 16px;
+        }
+        .checkout-city-state-pin-grid {
+          display: grid;
+          grid-template-columns: 2fr 2fr 1.5fr;
+          gap: 10px;
+          margin-bottom: 16px;
+        }
+        .checkout-pin-field {
+          grid-column: auto;
+        }
+        .checkout-close-btn {
+          background: none;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+          color: var(--color-muted, #7A6258);
+          min-width: 44px;
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 4px;
+          transition: color 0.2s ease;
+        }
+        .checkout-close-btn:hover {
+          color: var(--color-burgundy, #5A121A);
+        }
+        @media (max-width: 480px) {
+          .checkout-modal-overlay {
+            padding: 10px;
+          }
+          .checkout-modal-card {
+            padding: 24px 18px;
+            max-height: 94vh;
+          }
+          .checkout-name-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+          }
+          .checkout-city-state-pin-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+          }
+          .checkout-pin-field {
+            grid-column: span 2;
+          }
+        }
+      `}</style>
+      <div className="checkout-modal-card">
         {confirmedOrder ? (
           <div style={{ textAlign: 'center', padding: '16px 8px' }}>
             <div style={{
@@ -320,13 +376,8 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               <button
                 type="button"
                 onClick={onClose}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '22px',
-                  cursor: 'pointer',
-                  color: 'var(--color-muted, #7A6258)',
-                }}
+                aria-label="Close checkout modal"
+                className="checkout-close-btn"
               >
                 ×
               </button>
@@ -366,7 +417,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
+            <div className="checkout-name-grid">
               <div>
                 <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
                   First Name *
@@ -429,7 +480,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 2fr 1.5fr', gap: '10px', marginBottom: '16px' }}>
+            <div className="checkout-city-state-pin-grid">
               <div>
                 <label style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}>
                   City *
@@ -470,7 +521,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                   }}
                 />
               </div>
-              <div>
+              <div className="checkout-pin-field">
                 <label
                   htmlFor="checkout-postal-code"
                   style={{ display: 'block', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted, #7A6258)', marginBottom: '6px' }}
