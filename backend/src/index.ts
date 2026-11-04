@@ -52,7 +52,59 @@ app.use(
     },
   })
 );
-app.use(express.urlencoded({ extended: true, limit: '1mb' }));
+// Root API Gateway Landing (Friendly redirection & status)
+app.get('/', (req, res) => {
+  const acceptsHtml = req.headers.accept?.includes('text/html');
+  if (acceptsHtml) {
+    res.setHeader('Content-Type', 'text/html');
+    return res.send(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>WAAK Atelier — Commerce API Gateway</title>
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #120A0B; color: #F4EFE6; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+          .card { background: #1E1214; border: 1px solid rgba(197, 162, 101, 0.35); border-radius: 8px; padding: 36px 32px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); box-sizing: border-box; }
+          h1 { color: #C5A265; font-size: 20px; letter-spacing: 0.12em; margin: 0 0 12px; font-weight: 600; text-transform: uppercase; }
+          p { color: #D8D0C5; font-size: 13px; line-height: 1.6; margin: 0 0 24px; }
+          .badge { display: inline-block; padding: 4px 12px; background: rgba(37, 211, 102, 0.15); border: 1px solid #25D366; color: #25D366; border-radius: 20px; font-size: 11px; font-weight: 600; margin-bottom: 16px; letter-spacing: 0.05em; }
+          .links { display: flex; flex-direction: column; gap: 10px; }
+          a { display: block; padding: 12px 18px; border-radius: 4px; font-weight: 600; font-size: 12px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; transition: all 0.2s ease; }
+          .btn-primary { background: #5A121A; color: #FBF8F3; border: 1px solid #C5A265; }
+          .btn-primary:hover { background: #7A1924; }
+          .btn-secondary { background: transparent; color: #C5A265; border: 1px solid rgba(197, 162, 101, 0.4); }
+          .btn-secondary:hover { background: rgba(197, 162, 101, 0.1); border-color: #C5A265; }
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <div class="badge">● API Gateway Online · Sandbox Mode</div>
+          <h1>WAAK Commerce API</h1>
+          <p>The headless backend service is active. To explore the storefront or manage atelier orders, select a portal below:</p>
+          <div class="links">
+            <a href="http://localhost:5173" class="btn-primary">Open Storefront (Port 5173)</a>
+            <a href="/admin" class="btn-secondary">Open Atelier Admin Portal</a>
+            <a href="/health" class="btn-secondary">View API Diagnostics (/health)</a>
+          </div>
+        </div>
+      </body>
+      </html>
+    `);
+  }
+  return res.json({
+    service: 'WAAK Occasionwear Commerce API',
+    status: 'online',
+    version: '1.0.0',
+    port: PORT,
+    endpoints: {
+      storefront: 'http://localhost:5173',
+      admin: '/admin',
+      health: '/health',
+      catalog: '/store/products',
+    },
+  });
+});
 
 // Health Check Endpoint (Used by Docker, Kubernetes & Load Balancers)
 app.get('/health', async (_req, res) => {

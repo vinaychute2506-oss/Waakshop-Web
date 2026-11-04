@@ -29,11 +29,13 @@ const DEFAULT_DEV_JWT = 'waak_luxury_jwt_secret_key_2026_super_secure';
 const DEFAULT_DEV_DB = 'postgres://waak_admin:waak_secret_2026@localhost:5432/waak_commerce';
 const DEFAULT_DEV_WEBHOOK_SECRET = 'waak_webhook_secret_2026';
 
-function parseCorsOrigins(raw?: string): string[] {
+function parseCorsOrigins(raw?: string, port = 9000): string[] {
+  const localSelf = [`http://localhost:${port}`, `http://127.0.0.1:${port}`];
   if (!raw) {
-    return ['http://localhost:5173', 'http://127.0.0.1:5173'];
+    return ['http://localhost:5173', 'http://127.0.0.1:5173', ...localSelf];
   }
-  return raw.split(',').map((o) => o.trim()).filter(Boolean);
+  const custom = raw.split(',').map((o) => o.trim()).filter(Boolean);
+  return Array.from(new Set([...custom, ...localSelf]));
 }
 
 function validateAndLoadConfig(): AppConfig {
@@ -111,7 +113,7 @@ function validateAndLoadConfig(): AppConfig {
     databaseSsl: process.env.DATABASE_SSL === 'true' || databaseUrl.includes('sslmode=require'),
     redisUrl,
     jwtSecret,
-    corsOrigins: parseCorsOrigins(process.env.CORS_ORIGIN),
+    corsOrigins: parseCorsOrigins(process.env.CORS_ORIGIN, port),
     allowMockPayments,
     razorpay: {
       keyId,
