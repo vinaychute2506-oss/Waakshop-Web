@@ -116,7 +116,7 @@ Rather than implementing a generic, unconstrained chatbot that poses reputationa
 * Estimates assume server-side proxy using a lightweight, state-of-the-art model (e.g. OpenAI GPT-4o-mini at \$0.15/1M input and \$0.60/1M output tokens, or Google Gemini 1.5 Flash at \$0.075/1M input and \$0.30/1M output tokens).
 * Average conversation length: 4 turns (~1,500 prompt tokens, ~500 completion tokens per session).
 * At 2,000 monthly sessions: $\approx 3\text{M input tokens} \times \$0.15 + 1\text{M output tokens} \times \$0.60 = \$0.45 + \$0.60 = \$1.05\text{ USD } (\approx ₹90\text{ INR})$. With 100% margin buffer for re-tries and system prompts: **$\approx ₹180\text{ INR / month}$**.
-* **Stage 1 Deterministic Engine**: **₹0.00 / month** (zero external API calls).
+* **Stage 1 Deterministic Engine**: **₹0.00 / month in third-party AI API fees** (no external AI provider used; standard application compute, catalog tagging, and UI maintenance remain normal operational considerations).
 
 ---
 
@@ -125,28 +125,28 @@ Rather than implementing a generic, unconstrained chatbot that poses reputationa
 We recommend prioritizing **Option A: AI Style Concierge**, executed through a two-stage roadmap:
 
 ```
-+-------------------------------------------------------------+
-| Stage 1: Deterministic Atelier Stylist (Immediate / Zero-Risk)|
-| - Implemented as an interactive UI modal inside React.     |
-| - Filters WAAK catalog based on Occasion, Color, Budget.    |
-| - Uses local rules and catalog queries.                     |
-| - Cost: ₹0 API fees. Privacy: 100% in-browser. Zero LLM risks.|
-+-------------------------------------------------------------+
++-------------------------------------------------------------------------+
+| Stage 1: Deterministic Atelier Stylist (Immediate / Lower-Risk Prototype)|
+| - Implemented as an interactive UI modal inside React.                  |
+| - Filters WAAK catalog based on Occasion, Color, Budget.                 |
+| - Uses local rules and verified catalog attributes.                     |
+| - Cost: ₹0 AI API fees. Privacy: 100% in-browser. Zero external LLM.   |
++-------------------------------------------------------------------------+
                               |
                               v (Client review and written authorization)
-+-------------------------------------------------------------+
-| Stage 2: Optional Server-Mediated LLM Styling Advisor      |
-| - Backend Express proxy handles prompt templates.           |
-| - Enriches style rationale ("Velvet Bandhgala pairs with...")|
-| - Hard spending limits and emergency kill-switch.           |
-| - Strictly bounded to real database product IDs.            |
-+-------------------------------------------------------------+
++-------------------------------------------------------------------------+
+| Stage 2: Optional Server-Mediated LLM Styling Advisor                   |
+| - Backend Express proxy handles prompt templates.                       |
+| - Enriches style rationale ("Velvet Bandhgala pairs with...")           |
+| - Hard spending limits and emergency kill-switch.                       |
+| - Strictly bounded to real database product IDs.                        |
++-------------------------------------------------------------------------+
 ```
 
 #### Why Option A is Optimal for WAAK:
 1. **Strengthens Luxury Positioning**: High-end Indian groom and groomsmen shopping is fundamentally consultative. Clients rarely buy by keyword; they buy by occasion, wedding theme, and dress code.
 2. **Decoupled from Commercial Policy Blockers**: Unlike customer support chatbots, the Style Concierge does not touch return windows, courier costs, or refunds.
-3. **Stage 1 Delivers Immediate Value at Zero Cost**: A deterministic wizard provides 80% of the customer utility with zero recurring API costs and zero risk of hallucination.
+3. **Stage 1 Delivers Immediate Utility without API Fees**: A deterministic wizard provides the core customer utility with zero third-party AI API usage fees and eliminates invented product references, while keeping catalog metadata accuracy, stock currency, and clear UI labeling as operational priorities.
 
 ---
 
