@@ -2,16 +2,17 @@
 
 **Document Reference**: `WAAK-STEP-9-PROGRESS-AND-REQUIREMENTS`  
 **Current Branch**: `feature/whatsapp-bodhx-ai-integration`  
-**Latest Baseline Commit**: `7986b17`  
+**Technical Implementation Baseline**: Commit `7986b17` (`feat(step-8): WhatsApp & BodhX AI integration`)  
+**Report Documentation Commit**: Commit `efbab1e` (Reconciled with Step 9 refinement updates)  
 **Operational Mode**: Controlled Staging Sandbox  
 **Reporting Date**: November 6, 2026  
-**Status**: Step 8 Complete · Step 9 (Content Integration & AI Validation) Scope Defined  
+**Status**: Step 8 Implementation Complete · Step 9 (Content, Configuration & Acceptance) Scope Defined  
 
 ---
 
 ## 1. Executive Summary & Staging Governance
 
-WAAK has successfully completed **Steps 1 through 8**, transitioning from an initial Framer concept into an enterprise-grade, luxury ecommerce application featuring headless React storefront architecture, verified Express backend APIs, localized studio photoshoot photography, a Pirohee-benchmarked Product Detail Page, and gated communication channels (WhatsApp Concierge and BodhX AI).
+WAAK has successfully reached the completion of **Steps 1 through 8**, transitioning from an initial Framer concept into a resilient, headless luxury ecommerce application. The current state features a responsive React storefront, verified Express backend APIs, integrated studio photoshoot photography, a Pirohee-benchmarked Product Detail Page, and configuration-gated communication channels (WhatsApp Concierge and BodhX AI).
 
 ### Operational Safety Guardrails (Strictly Maintained)
 - **Payment Processing**: Locked to **Razorpay TEST Sandbox Mode** (`rzp_test_waak2026demo`). Zero live payments or production merchant credentials are accessible.
@@ -67,20 +68,37 @@ WAAK has successfully completed **Steps 1 through 8**, transitioning from an ini
 - **Honest Feedback Module**: `Customer Feedback` container renders an authentic empty state rather than fabricated testimonials or misleading "Verified Buyer" badges.
 - **Accordion Specifications**: Detailed styling notes, garment preservation rules, and shipping SLAs.
 
-### Milestone 8: Official Contact Ingestion & BodhX AI Integration
-- **Contact Ingestion**: Ingested client-provided contact card: **`+91 98217 07031`** (normalized: `919821707031`).
+### Milestone 8: Proposed Contact Ingestion & BodhX AI Integration
+- **Proposed Business Contact**: Ingested proposed client business contact card (`+91 98217 07031`), while keeping activation configuration-gated until written business authorization is formally supplied by the brand owner.
 - **BodhX Script Loader**: Developed `BodhXWidget.tsx` strictly adhering to the client's documented embed snippet:
   `<script src="https://bodhx.ai/embed/widget.js" data-token="..." data-api="https://api.bodhx.ai/api1" async></script>`
+- **Technical Installation vs AI Readiness**: BodhX widget installation is technically complete with asynchronous loading, but knowledge-base configuration, token regeneration, and conversational testing remain pending.
 - **Security Defense**: Rejected untrusted remote shell installer (`curl | bash`). Gated the widget behind `VITE_BODHX_WIDGET_ENABLED=false` and blocked execution on `/admin`.
 - **Storefront Showcase**: Deployed *"Your Personal WAAK Shopping Assistant"* section on the homepage highlighting 6 verified advisory capabilities.
 
 ---
 
-## 3. Visual Assets & Product Photography Status
+## 3. Visual Assets & Photography Derivation
 
-All 12 high-resolution studio photoshoot images provided in `New Frontend Pics` have been color-graded, cropped, and deployed across the storefront, completely eliminating generic Framer stock placeholders:
+Twelve original high-resolution studio photographs were processed and integrated into the storefront. These photographs were used to generate the required product gallery assets and category navigation crops. Final client visual approval remains subject to confirmation.
 
-| Asset Name | Product / Component | Source Image | Visual Description |
+### 3.1 Derived Category Navigation Crops
+The seven circular category navigation assets (`/assets/categories/*.png`) are 240×240 pixel derived square crops centered on model busts and garments extracted from the original studio photographs:
+
+| Derived Category Asset | Derived From Original Photo | Garment & Model Framing |
+| :--- | :--- | :--- |
+| `all-circle.png` ("ALL") | `4.45.48 PM.jpeg` | Centered bust crop of the signature Ivory Sherwani model with antique gold wirework. |
+| `kurta-sets.png` ("Kurta Sets") | `4.45.47 PM.jpeg` | Centered chest/neckline crop of the ivory-to-sage ombré silk kurta. |
+| `indian-wear.png` ("Indian Wear") | `4.45.55 PM.jpeg` | Centered chest crop of the midnight navy micro-velvet sherwani. |
+| `best-seller.png` ("Best Seller") | `5.18.20 PM.jpeg` | Centered turban safa, pearls, and mint sherwani collar crop. |
+| `suits-blazers.png` ("Suits & Blazers") | `4.57.52 PM.jpeg` | Centered satin peak-lapel tuxedo crop. |
+| `indo-western.png` ("Indo Western") | `4.45.54 PM.jpeg` | Centered chest crop of the dusty rose mauve bandhgala. |
+| `waistcoats.png` ("Waistcoats") | `5.02.20 PM.jpeg` | Centered antique gold motif embroidery on navy raw silk crop. |
+
+### 3.2 Product Catalog Primary & Gallery Assets
+The nine catalog product primary images and gallery assets are web-optimized representations of the original photoshoot photographs:
+
+| Asset Path | Product Item | Source Photo | Silhouette Specification |
 | :--- | :--- | :--- | :--- |
 | `ivory-sherwani.jpg` | `waak-01` (Ivory Zardozi Sherwani) | `4.45.48 PM.jpeg` | Handcrafted Banarasi silk sherwani with antique gold collar embroidery and shoulder brooch. |
 | `midnight-sherwani.jpg` | `waak-02` (Midnight Velvet Sherwani) | `4.45.55 PM.jpeg` | Navy micro-velvet sherwani with subtle tone-on-tone threadwork. |
@@ -91,53 +109,60 @@ All 12 high-resolution studio photoshoot images provided in `New Frontend Pics` 
 | `cream-occasion-kurta.jpg` | `cream-occasion-kurta` | `5.09.04 PM.jpeg` | Sage green embroidered Indo-Western jacket with tailored trousers. |
 | `regal-ceremonial-sherwani.jpg` | `regal-velvet-sherwani` | `5.18.20 PM.jpeg` | Mint/pistachio sherwani with ivory safa turban, pearls, and stole. |
 | `black-waistcoat.jpg` | `black-waistcoat` | `5.23.38 PM.jpeg` | Double-breasted black formal waistcoat with white dress shirt. |
-| `all-circle.png` | Category Nav ("ALL") | `4.45.48 PM.jpeg` | 240×240 centered bust crop of the signature Ivory Sherwani model. |
-| `kurta-sets.png` | Category Nav ("Kurta Sets") | `4.45.47 PM.jpeg` | 240×240 centered bust crop of the ombré kurta model. |
-| `indian-wear.png` | Category Nav ("Indian Wear") | `4.45.55 PM.jpeg` | 240×240 centered bust crop of the midnight sherwani model. |
-| `best-seller.png` | Category Nav ("Best Seller") | `5.18.20 PM.jpeg` | 240×240 centered bust crop of the turban & pearl sherwani model. |
-| `suits-blazers.png` | Category Nav ("Suits & Blazers") | `4.57.52 PM.jpeg` | 240×240 centered bust crop of the black tuxedo model. |
-| `indo-western.png` | Category Nav ("Indo Western") | `4.45.54 PM.jpeg` | 240×240 centered bust crop of the mauve bandhgala model. |
-| `waistcoats.png` | Category Nav ("Waistcoats") | `5.02.20 PM.jpeg` | 240×240 centered bust crop of the navy waistcoat model. |
 
 ---
 
-## 4. Outstanding Client Dependencies (Launch Readiness Matrix)
+## 4. Launch Readiness: Staging Acceptance vs Production Launch
 
-The following items require business confirmation and materials from the brand owners before public cutover:
+To ensure clear project governance, requirements are split between **Staging Acceptance** (verifying the application in the staging environment) and **Production Launch** (public customer go-live).
 
-```
-[CLIENT ACTION ITEMS]
- ├── 1. Written authorization for WhatsApp: +91 98217 07031
- ├── 2. BodhX token regeneration (replace exposed token 8a15da...76dd0)
- ├── 3. BodhX knowledge base population (products, care, FAQs)
- ├── 4. Approved Shipping Policy & delivery SLAs (replace Draft notice)
- ├── 5. Approved Returns & Exchanges Policy terms (replace Draft notice)
- ├── 6. Promotional coupon discount rules (WAAKFIRST approval)
- ├── 7. Genuine customer reviews & testimonials
- └── 8. Live Razorpay merchant onboarding & Phase 4.0 sign-off
-```
+### 4.1 Staging Acceptance Requirements (Step 9 Scope)
+The following requirements must be completed and demonstrated on the staging environment:
 
-| Item | Dependency Description | Risk if Unresolved | Client Action Needed |
-| :--- | :--- | :--- | :--- |
-| **1. WhatsApp Authorization** | Confirm `+91 98217 07031` is the authorized business account. | Customer inquiries directed to unauthorized or unmonitored devices. | Brand owner provides written sign-off. |
-| **2. BodhX Token Rotation** | Token `8a15da5a4997...` was exposed in unencrypted chat screenshots. | Unauthorized third parties could exhaust account credits or query limits. | Regenerate token in BodhX dashboard. |
-| **3. BodhX Knowledge Configuration** | Ingest catalog data and care guides into BodhX dashboard. | Assistant produces generic or hallucinated answers. | Populate knowledge sources as per Step 8 guide. |
-| **4. Shipping Policy SLA** | Replace draft notice with confirmed courier SLAs and regional delivery windows. | Deceptive shipping claims or delivery disputes. | Supply approved shipping terms and express rates. |
-| **5. Exchange Policy Terms** | Replace draft notice with finalized 7-day or 14-day exchange protocol. | Legal disputes regarding worn or altered luxury garments. | Confirm unworn tag policy and bespoke exceptions. |
-| **6. Promotional Rules** | Confirm validity of advertised `WAAKFIRST` coupon or prepaid discount strip. | Checkout discount errors or margin erosion. | Specify discount percentage, caps, and expiry. |
-| **7. Customer Testimonials** | Provide authentic reviews if rating stars and feedback cards are to display scores. | Violating consumer protection standards with synthetic reviews. | Submit genuine patron feedback or keep empty state. |
-| **8. Production Razorpay** | Switch from test sandbox key to production credentials (`rzp_live_...`). | Orders cannot process real customer credit cards or UPI. | Complete KYC and approve Phase 4.0 cutover. |
+| Requirement | Description | Current Status | Owner |
+| :--- | :--- | :---: | :--- |
+| **Product Photography & Content Review** | Client review of all 12 photos, derived crops, descriptions, and size charts. | Prepared · Pending Review | Client / Atelier Team |
+| **WhatsApp Verification** | Test mobile and desktop `wa.me` links once the proposed number is verified. | Scaffold Ready · Gated | Engineering / Client |
+| **BodhX Configuration & Testing** | Ingest regenerated token; test 6 benchmark queries inside live widget. | Scaffold Ready · Gated | Client / Engineering |
+| **Commerce Regression Testing** | Verify full cart, checkout modal, address validation, and test payments. | 411 Tests Passing | Engineering |
+| **Responsive & Cross-Browser QA** | Verify layout integrity across mobile, tablet, and desktop viewports. | Verified Passing | Engineering |
+| **Client Staging Demonstration** | End-to-end walkthrough and provisional staging sign-off with brand owner. | Scheduled for Step 9 | Client / Engineering |
+
+### 4.2 Production Launch Requirements (Phase 4.0 Cutover)
+The following legal, commercial, and operational approvals are required before public deployment:
+
+| Requirement | Description | Current Status | Owner |
+| :--- | :--- | :---: | :--- |
+| **Approved Shipping Policy** | Replace `(Draft Policy)` notices with binding dispatch SLAs and courier terms. | Draft Notice Active | Brand Owner / Legal |
+| **Approved Returns & Exchange Policy** | Finalize 7-day or 14-day exchange rules, unworn tag conditions, and bespoke terms. | Draft Notice Active | Brand Owner / Legal |
+| **WhatsApp Business Authorization** | Written authorization confirming `+91 98217 07031` as the official brand contact. | Proposed · Pending Sign-off | Brand Owner |
+| **BodhX Production Approval** | Formal sign-off on AI assistant answers, data privacy, and conversational boundaries. | Pending Review | Brand Owner |
+| **Razorpay Merchant KYC & Live Keys** | Complete onboarding with Razorpay to obtain live credentials (`rzp_live_...`). | Blocked on Staging | Brand Owner / Finance |
+| **Promotional Coupon Rules** | Formal approval of advertised `WAAKFIRST` discounts or removal of promo blocks. | Pending Confirmation | Brand Owner / Marketing |
+| **Customer Testimonials (Optional)** | Genuine patron reviews may be added if available; honest empty state is compliant. | Optional for Launch | Brand Owner |
+| **Phase 4.0 Formal Authorization** | Explicit executive approval to cut over DNS and open live customer ordering. | Blocked on Staging | Brand Owner |
 
 ---
 
-## 5. Scope Definition: Step 9 (Client Content Integration, AI Validation & Staging Acceptance)
+## 5. BodhX AI Architecture & Operational Safeguards
 
-Rather than starting new large-scale feature branches, **Step 9** focuses strictly on content completion, end-to-end conversational validation, and client staging demonstration:
+To prevent hallucinated inventory, incorrect pricing, or premature policy commitments, the following safeguards are enforced:
+
+1. **Advisory Role Only**: BodhX may provide product discovery, occasionwear recommendations, and general styling guidance.
+2. **Authoritative Source of Truth**: Backend APIs and the PostgreSQL database remain the sole authority for product prices, stock reservation, and order status. BodhX must not independently confirm order statuses or inventory availability.
+3. **Policy Boundary**: Draft shipping and exchange policies must **not** be presented as approved or legally binding terms. BodhX should direct policy inquiries to the draft policy pages or human support.
+4. **Human Escalation**: Complex, bespoke, custom-tailoring, or uncertain answers must gracefully escalate to the human concierge via WhatsApp (`+91 98217 07031`) or email (`atelier@waak.in`).
+5. **Zero Customer PII / Credential Transmission**: Customer passwords, payment card numbers, UPI PINs, order tokens, and sensitive personal information must never be transmitted to BodhX.
+
+---
+
+## 6. Scope Definition: Step 9 (Client Content Integration, AI Validation & Staging Acceptance)
+
+**Step 9** is strictly defined as a **content, configuration, and acceptance milestone**—not another feature-development phase:
 
 ### Workstream 9.1: Client Content Integration
-- Ingest final approved copy for product subtitles, descriptions, care details, and fabric compositions.
-- Ensure all size variants in the database correspond accurately with the brand’s tailoring patterns.
-- Align promotional coupon rules or disable promotional badges if discounts are not approved.
+- Ingest approved product descriptions, wash/care instructions, and confirmed size matrices.
+- Synchronize promotional discounts or remove unapproved coupon banners.
 
 ### Workstream 9.2: BodhX AI Validation & Conversational Testing
 - Ingest the regenerated client BodhX token into staging environment.
@@ -151,19 +176,18 @@ Rather than starting new large-scale feature branches, **Step 9** focuses strict
 - Verify that unresolved queries gracefully escalate to the WhatsApp concierge.
 
 ### Workstream 9.3: WhatsApp End-to-End Delivery Verification
-- Test mobile and desktop `wa.me` links across Chrome, Safari, iOS, and Android devices.
+- Test mobile and desktop `wa.me` links across Chrome, Safari, iOS, and Android devices once authorized.
 - Verify message template rendering on actual WhatsApp client apps with the authorized business number.
 
 ### Workstream 9.4: Final Staging Acceptance & Demonstration
-- Run complete 12-suite regression harness (411 assertions).
-- Execute comprehensive cross-browser visual QA.
-- Deliver an executive sign-off package for the brand owners.
+- Run complete regression harness and perform cross-browser visual QA.
+- Deliver an executive demonstration and sign-off package for the brand owners.
 
 ---
 
-## 6. Automated Master Test Suite Status
+## 7. Master Test Suite Status & Independent Verification Note
 
-The automated master test harness (`scratch/run_all_tests.mjs`) validates all 12 test suites across the backend, staging containers, checkout flows, trust presentations, and communication integrations:
+The automated master test harness (`scratch/run_all_tests.mjs`) executes 12 test suites across the repository:
 
 ```
 ===============================================================
@@ -188,10 +212,13 @@ Executing Suite 12: Step 8 WhatsApp Concierge & BodhX AI ........ [11/11 passed]
 ===============================================================
 ```
 
+> [!NOTE] Verification Status Notice
+> The 411 passing assertions across 12 suites represent implementation-reported automated test execution from local runners and test logs (`scratch/run_all_tests.mjs`). Independent verification of these results will be conducted during the formal client staging demonstration.
+
 ---
 
-## 7. Next Actions
+## 8. Summary of Next Actions
 
-1. Present this consolidated report to the client team and brand owner.
-2. Await written confirmation for the WhatsApp business number and the regenerated BodhX widget token.
-3. Upon receipt of credentials, proceed with **Step 9: Client Content Integration, AI Validation & Staging Acceptance**.
+1. Present this refined consolidated report to the client team and brand owner.
+2. Await written confirmation for the WhatsApp business contact and receipt of the regenerated BodhX widget token.
+3. Execute **Step 9: Client Content Integration, AI Validation & Staging Acceptance** as a content and demonstration milestone.
