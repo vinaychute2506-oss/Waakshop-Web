@@ -667,7 +667,7 @@ export default function ProductDetail() {
             <div className="pdp-trust-item">
               <span className="pdp-trust-icon" aria-hidden="true">✦</span>
               <div className="pdp-trust-text">
-                <strong>Handcrafted Details:</strong> Artisanal zardozi & tailoring. Live Atelier Crafting with PostgreSQL inventory.
+                <strong>Atelier Craftsmanship:</strong> Handcrafted artisanal finishes. Live PostgreSQL inventory verified in real time.
               </div>
             </div>
             <div className="pdp-trust-item">
@@ -1611,6 +1611,7 @@ export default function ProductDetail() {
         .pdp-add-to-bag-btn {
           flex: 1;
           height: 52px;
+          min-height: 52px;
           background: linear-gradient(135deg, #5A121A 0%, #3D0C13 100%);
           color: var(--color-cream-light, #FBF8F3);
           border: 1px solid var(--color-gold, #C5A265);
@@ -1654,6 +1655,7 @@ export default function ProductDetail() {
         .pdp-buy-it-now-btn {
           flex: 1;
           height: 52px;
+          min-height: 52px;
           background: linear-gradient(135deg, #C5A265 0%, #98783B 100%);
           color: #1A0508;
           border: 1px solid #C5A265;
@@ -2404,10 +2406,14 @@ export default function ProductDetail() {
           .pdp-add-to-bag-btn {
             width: 100%;
             height: 48px;
+            min-height: 48px;
+            flex: none;
           }
           .pdp-buy-it-now-btn {
             width: 100%;
             height: 48px;
+            min-height: 48px;
+            flex: none;
           }
           .pdp-trust-assurance-card {
             grid-template-columns: 1fr;

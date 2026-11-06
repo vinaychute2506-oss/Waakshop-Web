@@ -71,7 +71,7 @@ export default function ProductReviews({ productId, productName }: ProductReview
       date: new Date().toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }),
       title: formTitle.trim() || 'Atelier Experience',
       comment: formComment.trim(),
-      isVerified: true,
+      isVerified: false, // Session submissions are unverified customer feedback (no backend order check)
       sizePurchased: formSize.trim() || undefined,
     };
 
@@ -233,9 +233,13 @@ export default function ProductReviews({ productId, productName }: ProductReview
 
                   <div className="pdp-review-meta">
                     <span className="pdp-review-author">{rev.author}</span>
-                    {rev.isVerified && (
+                    {rev.isVerified ? (
                       <span className="pdp-review-verified-badge">
-                        ✓ Verified Patron
+                        ✓ Verified Order
+                      </span>
+                    ) : (
+                      <span className="pdp-review-unverified-badge">
+                        Customer Feedback
                       </span>
                     )}
                     {rev.sizePurchased && (
@@ -579,6 +583,16 @@ export default function ProductReviews({ productId, productName }: ProductReview
           display: inline-flex;
           align-items: center;
           gap: 3px;
+        }
+        .pdp-review-unverified-badge {
+          color: var(--color-muted, #7A6F66);
+          background-color: rgba(122, 111, 102, 0.1);
+          border: 1px solid rgba(122, 111, 102, 0.2);
+          font-size: 10px;
+          padding: 2px 7px;
+          border-radius: 2px;
+          font-weight: 500;
+          letter-spacing: 0.04em;
         }
         .pdp-review-size-tag {
           color: var(--color-muted, #7A6F66);

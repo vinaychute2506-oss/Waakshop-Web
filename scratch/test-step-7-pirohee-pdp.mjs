@@ -59,7 +59,7 @@ it('Price section calculates real backend savings with tracked dispatch notice',
 
 // 4. 4-Item Luxury Trust Assurance Grid
 it('Trust assurance block features 4 structured items with factual copy and policy links', () => {
-  assert(pdpCode.includes('Handcrafted Details:'), 'Missing Handcrafted Details trust point');
+  assert(pdpCode.includes('Atelier Craftsmanship:'), 'Missing Atelier Craftsmanship trust point');
   assert(pdpCode.includes('Tracked Dispatch:'), 'Missing Tracked Dispatch trust point');
   assert(pdpCode.includes('Exchange Guidance:'), 'Missing Exchange Guidance trust point');
   assert(pdpCode.includes('Secure Checkout:'), 'Missing Secure Checkout trust point');
@@ -77,9 +77,10 @@ it('ProductReviews initializes with honest empty state (zero synthetic testimoni
   assert(reviewsCode.includes('sessionStorage.getItem(`waak_reviews_${productId}`)'), 'Preserves real customer reviews across session');
 });
 
-it('ProductReviews provides interactive rating distribution and verified patron tags', () => {
+it('ProductReviews distinguishes unverified feedback from verified orders', () => {
   assert(reviewsCode.includes('pdp-reviews-bars-block'), 'Missing rating distribution bars');
-  assert(reviewsCode.includes('Verified Patron'), 'Missing verified patron tag capability');
+  assert(reviewsCode.includes('Customer Feedback'), 'Must label unverified session submissions as Customer Feedback');
+  assert(reviewsCode.includes('isVerified: false'), 'Must not mark session submissions as verified purchases');
   assert(reviewsCode.includes('Write an Atelier Review'), 'Missing write review CTA');
 });
 
