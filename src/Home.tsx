@@ -3,6 +3,7 @@ import { useApp } from "./context/AppContext"
 import { PRODUCTS, CATEGORIES, OCCASIONS, PRICE_RANGES, Product } from "./data/products"
 import { useScrollReveal } from "./hooks/useScrollReveal"
 import CurtainReveal from "./components/CurtainReveal"
+import AiAssistantSection from "./components/AiAssistantSection"
 import "./Home.css"
 
 export default function Home() {
@@ -660,6 +661,9 @@ export default function Home() {
           </div>
         )}
       </section>
+
+      {/* 4. AI SHOPPING ASSISTANT INTELLIGENCE SECTION */}
+      <AiAssistantSection />
     </div>
   )
 }

@@ -80,7 +80,8 @@ export function buildInquiryMessage({
 /**
  * WhatsAppInquiryButton
  * 
- * Client Requirement Step 5: Configuration-Gated WhatsApp Inquiry Integration
+ * Client Requirement Step 5 & Step 8: Configuration-Gated WhatsApp Concierge Integration
+ * Proposed Client Contact: +91 98217 07031 (normalized: 919821707031)
  * 
  * Safety & Privacy Rules:
  * 1. Reads official business number from environment (VITE_WHATSAPP_NUMBER).

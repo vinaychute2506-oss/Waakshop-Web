@@ -9,6 +9,7 @@ import Home from "./Home"
 import ProductDetail from "./ProductDetail"
 import Account from "./Account"
 import PolicyView from "./components/PolicyView"
+import BodhXWidget from "./components/BodhXWidget"
 
 function MainContent() {
   const { currentRoute, isCheckoutOpen, setIsCheckoutOpen } = useApp()
@@ -114,6 +115,7 @@ function MainContent() {
       <CartDrawer />
       <WishlistDrawer />
       <CheckoutModal isOpen={isCheckoutOpen} onClose={() => setIsCheckoutOpen(false)} />
+      <BodhXWidget />
 
       {/* Back to Top Floating Button */}
       <button
