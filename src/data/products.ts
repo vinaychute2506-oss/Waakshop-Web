@@ -76,8 +76,7 @@ export const PRODUCTS: Product[] = [
     image: "/assets/products/ivory-sherwani.jpg",
     gallery: [
       "/assets/products/ivory-sherwani.jpg",
-      "https://framerusercontent.com/images/pp3GZI1GsZMhdrNjwaCDmI8enmQ.jpg?scale-down-to=1024&width=1200&height=1800",
-      "https://framerusercontent.com/images/bPaPYk8Lc16P8C7iNgdwFWSYU.jpg?scale-down-to=1024&width=800&height=1067"
+      "/assets/products/ivory-sherwani-detail.jpg"
     ],
     description: "A masterpiece of royal Indian occasionwear, spun from pure Banarasi silk and embellished with meticulous antique gold zardozi wirework along the mandarin collar and cuffs. Tailored to an architectural silhouette for the quintessential modern groom.",
     fabric: "Raw Banarasi silk blend, cotton-silk inner lining, dry clean only.",
@@ -101,8 +100,7 @@ export const PRODUCTS: Product[] = [
     isSale: false,
     image: "/assets/products/midnight-sherwani.jpg",
     gallery: [
-      "/assets/products/midnight-sherwani.jpg",
-      "https://framerusercontent.com/images/bPaPYk8Lc16P8C7iNgdwFWSYU.jpg?scale-down-to=1024&width=800&height=1067"
+      "/assets/products/midnight-sherwani.jpg"
     ],
     description: "Exquisitely sculpted in deep midnight-blue micro-velvet, featuring discreet tone-on-tone resham threadwork that catches the light with subtle sophistication. Paired with churidar trousers for high-evening receptions.",
     fabric: "Matka silk & micro-velvet, dry clean only.",
@@ -126,8 +124,7 @@ export const PRODUCTS: Product[] = [
     isSale: false,
     image: "/assets/products/mauve-bandhgala.jpg",
     gallery: [
-      "/assets/products/mauve-bandhgala.jpg",
-      "https://framerusercontent.com/images/sEjecmCMpBNZkKUzeeEc98FYXIc.jpg?scale-down-to=1024&width=800&height=1422"
+      "/assets/products/mauve-bandhgala.jpg"
     ],
     description: "Understated luxury defined. Cut from crisp Bhagalpur raw silk in a muted dusty mauve tone, accented with custom antique-brass buttons crafted in Varanasi. An elevated statement for Sangeet evenings and cocktail galas.",
     fabric: "Bhagalpur raw silk-wool blend with breathable viscose lining.",
@@ -152,7 +149,7 @@ export const PRODUCTS: Product[] = [
     image: "/assets/products/emerald-kurta.jpg",
     gallery: [
       "/assets/products/emerald-kurta.jpg",
-      "https://framerusercontent.com/images/sEjecmCMpBNZkKUzeeEc98FYXIc.jpg?scale-down-to=1024&width=800&height=1422"
+      "/assets/products/cream-occasion-kurta.jpg"
     ],
     description: "Deep jewel-toned emerald green Tussar silk kurta set highlighted with fine needlework details along the placket. Includes tailored ivory churidar and a matching Chanderi silk stole.",
     fabric: "Pure Banarasi woven silk and chanderi.",
@@ -169,12 +166,13 @@ export const PRODUCTS: Product[] = [
     subcategory: "Suits",
     occasion: "Formal",
     isBestSeller: true,
-    image: "https://framerusercontent.com/images/8OOwfRibO6K52kkHqENwFhHk.jpg?scale-down-to=1024&width=800&height=1200",
+    image: "/assets/products/black-tailored-suit.jpg",
     gallery: [
-      "https://framerusercontent.com/images/8OOwfRibO6K52kkHqENwFhHk.jpg?scale-down-to=1024&width=800&height=1200"
+      "/assets/products/black-tailored-suit.jpg",
+      "/assets/products/ice-blue-blazer.jpg"
     ],
-    description: "Masterfully tailored Italian wool blend two-piece suit with satin peak lapels and structured modern drop.",
-    fabric: "Super 120s wool blend with satin lapels.",
+    description: "Masterfully tailored 3-piece evening tuxedo featuring tone-on-tone hand-embroidered peak lapels, tailored waistcoat with metallic buttons, and structured Italian wool trousers.",
+    fabric: "Super 120s wool blend with embroidered satin lapels.",
     shipping: "Ships in 4 business days.",
     availableSizes: ["38", "40", "42", "44"],
     isAvailableInBackend: false,
@@ -188,11 +186,12 @@ export const PRODUCTS: Product[] = [
     subcategory: "Waistcoats",
     occasion: "Festive",
     isBestSeller: false,
-    image: "https://framerusercontent.com/images/JWwUlA5771fMDk5znHkRenQxbg.jpg?scale-down-to=1024&width=800&height=1200",
+    image: "/assets/products/navy-waistcoat.jpg",
     gallery: [
-      "https://framerusercontent.com/images/JWwUlA5771fMDk5znHkRenQxbg.jpg?scale-down-to=1024&width=800&height=1200"
+      "/assets/products/navy-waistcoat.jpg",
+      "/assets/products/powder-blue-waistcoat.jpg"
     ],
-    description: "Contemporary Nehru jacket in rich navy linen-silk featuring subtle floral hand-embroidery on the chest pocket.",
+    description: "Contemporary Nehru waistcoat in rich midnight navy featuring ornate antique gold motif embroidery. Cut from pure raw silk and paired seamlessly over tailored ivory or cream kurtas.",
     fabric: "Linen silk with breathable cotton lining.",
     shipping: "Ships in 24 hours.",
     availableSizes: ["38", "40", "42", "44"],
@@ -207,11 +206,12 @@ export const PRODUCTS: Product[] = [
     subcategory: "Kurta Sets",
     occasion: "Mehendi / Haldi",
     isBestSeller: false,
-    image: "https://framerusercontent.com/images/sVc5PIkY7R6v5lV2Y29vq3zyLc.jpg?scale-down-to=1024&width=800&height=1200",
+    image: "/assets/products/cream-occasion-kurta.jpg",
     gallery: [
-      "https://framerusercontent.com/images/sVc5PIkY7R6v5lV2Y29vq3zyLc.jpg?scale-down-to=1024&width=800&height=1200"
+      "/assets/products/cream-occasion-kurta.jpg",
+      "/assets/products/powder-blue-waistcoat.jpg"
     ],
-    description: "Pure chanderi silk kurta in soft cream with mirror-work accents and comfortable straight-cut pyjama trousers.",
+    description: "Pure silk festive kurta set featuring an exquisite ombré fade from warm ivory into artisanal sage green, accentuated with detailed floral resham threadwork along the placket and cuffs.",
     fabric: "Pure Chanderi silk, cotton voile inner.",
     shipping: "Complimentary delivery.",
     availableSizes: ["38", "40", "42", "44"],
@@ -226,12 +226,13 @@ export const PRODUCTS: Product[] = [
     subcategory: "Sherwanis",
     occasion: "Wedding",
     isBestSeller: true,
-    image: "https://framerusercontent.com/images/CcjHS0HwXhKoHy6BfqZXfxE9rM.jpg?scale-down-to=1024&width=800&height=1200",
+    image: "/assets/products/regal-ceremonial-sherwani.jpg",
     gallery: [
-      "https://framerusercontent.com/images/CcjHS0HwXhKoHy6BfqZXfxE9rM.jpg?scale-down-to=1024&width=800&height=1200"
+      "/assets/products/regal-ceremonial-sherwani.jpg",
+      "/assets/products/sage-indo-western.jpg"
     ],
-    description: "Deep wine micro-velvet sherwani embellished with antique zardozi and dabka embroidery, tailored for high heritage weddings.",
-    fabric: "Micro-velvet with metallic thread hand embroidery.",
+    description: "Regal mint and pistachio ceremonial sherwani adorned with comprehensive all-over zardozi threadwork, tailored for grand weddings. Complete with a coordinated ivory safa turban, pearl necklace, and embroidered organza stole.",
+    fabric: "Micro-velvet and banarasi silk with metallic thread hand embroidery.",
     shipping: "Custom tailored and insured shipment.",
     availableSizes: ["38", "40", "42", "44"],
     isAvailableInBackend: false,
@@ -245,11 +246,11 @@ export const PRODUCTS: Product[] = [
     subcategory: "Waistcoats",
     occasion: "Formal",
     isBestSeller: false,
-    image: "https://framerusercontent.com/images/AWRFGHLQL2TELtktdZ9LGhrUQ.jpg?scale-down-to=1024&width=800&height=1200",
+    image: "/assets/products/black-waistcoat.jpg",
     gallery: [
-      "https://framerusercontent.com/images/AWRFGHLQL2TELtktdZ9LGhrUQ.jpg?scale-down-to=1024&width=800&height=1200"
+      "/assets/products/black-waistcoat.jpg"
     ],
-    description: "Jet black textured bandhgala waistcoat with brushed metallic buttons and clean minimalist silhouette.",
+    description: "Sleek black double-breasted formal waistcoat with sculpted shawl collar, tailored welt pockets, and dual-column metallic buttons. An architectural modern statement for high-evening galas.",
     fabric: "Textured poly-viscose with satin inner back.",
     shipping: "Ships in 2-3 business days.",
     availableSizes: ["38", "40", "42", "44"],
