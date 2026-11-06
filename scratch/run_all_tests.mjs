@@ -12,6 +12,7 @@ const suites = [
   { name: 'Suite 8: Step 3 Customer Trust Presentation', file: 'scratch/test-step-3-trust.mjs', expected: 25 },
   { name: 'Suite 9: Step 4 Security & Signature Audit', file: 'scratch/test-step-4-security-audit.mjs', expected: 13 },
   { name: 'Suite 10: Step 5 WhatsApp Inquiry Integration', file: 'scratch/test-step-5-whatsapp.mjs', expected: 26 },
+  { name: 'Suite 11: Step 7 Pirohee Benchmark PDP Upgrades', file: 'scratch/test-step-7-pirohee-pdp.mjs', expected: 11 },
 ];
 
 function runCommand(file) {

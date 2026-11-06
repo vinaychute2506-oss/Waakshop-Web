@@ -3,9 +3,10 @@ import { useApp } from "./context/AppContext"
 import { Product } from "./data/products"
 import { api } from "./services/api"
 import WhatsAppInquiryButton from "./components/WhatsAppInquiryButton"
+import ProductReviews from "./components/ProductReviews"
 
 export default function ProductDetail() {
-  const { selectedProduct, selectedProductId, findProduct, products, addToCart, wishlist, toggleWishlist, navigateTo } = useApp()
+  const { selectedProduct, selectedProductId, findProduct, products, addToCart, wishlist, toggleWishlist, navigateTo, setIsCheckoutOpen } = useApp()
   const product: Product | undefined = selectedProduct || (selectedProductId ? findProduct(selectedProductId) : products[0])
 
   // Media & Gallery State
@@ -264,6 +265,37 @@ export default function ProductDetail() {
     setTimeout(() => setAddedNotice(false), 3500)
   }
 
+  // Buy It Now Action (Pirohee Dual Action: Immediate Cart + Direct Checkout Trigger)
+  const handleBuyItNow = () => {
+    setValidationError("")
+
+    if (!product.isAvailableInBackend) {
+      setValidationError("This bespoke silhouette is part of our private atelier archive. Please consult our atelier director for custom creation.")
+      return
+    }
+
+    if (!selectedSize) {
+      setValidationError("Please select an available chest size before proceeding to checkout.")
+      if (sizeSelectorRef.current) {
+        sizeSelectorRef.current.scrollIntoView({ behavior: "smooth", block: "center" })
+      }
+      return
+    }
+
+    // Verify stock availability
+    if (backendVariants) {
+      const variant = backendVariants.find((v) => v.size === selectedSize)
+      if (variant && variant.stock_quantity < quantity) {
+        setValidationError(`Only ${variant.stock_quantity} pieces available in size ${selectedSize}.`)
+        return
+      }
+    }
+
+    // Enqueue item into bag and immediately open checkout modal
+    addToCart(product, selectedSize, quantity)
+    setIsCheckoutOpen(true)
+  }
+
   // PIN Code Verification Action
   const handleCheckPin = (e: React.FormEvent) => {
     e.preventDefault()
@@ -422,6 +454,15 @@ export default function ProductDetail() {
               WAAK ATELIER · {product.category.toUpperCase()} {product.occasion ? `· ${product.occasion.toUpperCase()}` : ''}
             </div>
             <h1 className="pdp-title">{product.name}</h1>
+
+            {/* Pirohee Benchmark: Star rating snippet directly under title */}
+            <div className="pdp-rating-snippet">
+              <div className="pdp-rating-stars-gold" aria-hidden="true">★★★★★</div>
+              <a href="#pdp-reviews-section" className="pdp-rating-link">
+                No reviews yet · Be the first to review
+              </a>
+            </div>
+
             {product.subtitle && (
               <p className="pdp-subtitle">{product.subtitle}</p>
             )}
@@ -437,13 +478,13 @@ export default function ProductDetail() {
                     ₹{product.originalPrice!.toLocaleString("en-IN")}
                   </span>
                   <span className="pdp-discount-pill">
-                    {discountPercent}% OFF (Save ₹{savingsAmount.toLocaleString("en-IN")})
+                    Save ₹{savingsAmount.toLocaleString("en-IN")} ({discountPercent}% OFF)
                   </span>
                 </>
               )}
             </div>
             <p className="pdp-tax-notice">
-              Inclusive of all taxes · Complimentary insured domestic dispatch
+              Inclusive of all taxes · Tracked Domestic Dispatch
             </p>
           </div>
 
@@ -569,18 +610,26 @@ export default function ProductDetail() {
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    Added to Shopping Bag
+                    Added to Bag
                   </>
                 ) : !product.isAvailableInBackend ? (
-                  "Consult Atelier for Commission"
+                  "Consult Atelier"
                 ) : isSelectedOutOfStock ? (
-                  "Currently Out of Stock"
+                  "Out of Stock"
                 ) : (
-                  <>
-                    <span>Add to Shopping Bag</span>
-                    <span className="pdp-btn-price">· ₹{(product.price * quantity).toLocaleString("en-IN")}</span>
-                  </>
+                  <span>Add to Bag</span>
                 )}
+              </button>
+
+              {/* Pirohee Benchmark: Buy It Now (Direct Checkout) */}
+              <button
+                type="button"
+                disabled={isSelectedOutOfStock || !product.isAvailableInBackend}
+                onClick={handleBuyItNow}
+                className="pdp-buy-it-now-btn"
+                aria-label="Buy this silhouette now"
+              >
+                Buy It Now
               </button>
             </div>
 
@@ -613,18 +662,18 @@ export default function ProductDetail() {
             )}
           </div>
 
-          {/* Customer Trust & Atelier Policy Assurance */}
+          {/* Customer Trust & Atelier Policy Assurance (4-Item Pirohee Benchmark Grid) */}
           <div className="pdp-trust-assurance-card" aria-label="Atelier client trust and guarantees">
             <div className="pdp-trust-item">
               <span className="pdp-trust-icon" aria-hidden="true">✦</span>
               <div className="pdp-trust-text">
-                <strong>Live Atelier Crafting:</strong> Inventory availability verified with PostgreSQL database.
+                <strong>Handcrafted Details:</strong> Artisanal zardozi & tailoring. Live Atelier Crafting with PostgreSQL inventory.
               </div>
             </div>
             <div className="pdp-trust-item">
-              <span className="pdp-trust-icon" aria-hidden="true">📦</span>
+              <span className="pdp-trust-icon" aria-hidden="true">🚚</span>
               <div className="pdp-trust-text">
-                <strong>Shipping & Delivery Terms:</strong> Dispatched via tracked domestic courier services.{' '}
+                <strong>Tracked Dispatch:</strong> Dispatched via domestic courier.{' '}
                 <button
                   type="button"
                   onClick={() => navigateTo("/shipping-policy")}
@@ -635,9 +684,9 @@ export default function ProductDetail() {
               </div>
             </div>
             <div className="pdp-trust-item">
-              <span className="pdp-trust-icon" aria-hidden="true">✂</span>
+              <span className="pdp-trust-icon" aria-hidden="true">🔄</span>
               <div className="pdp-trust-text">
-                <strong>Sizing & Exchange Guidance:</strong> Consult our size guide or review exchange terms before ordering.{' '}
+                <strong>Exchange Guidance:</strong> Review exchange terms before ordering.{' '}
                 <button
                   type="button"
                   onClick={() => navigateTo("/returns-and-exchanges")}
@@ -648,9 +697,9 @@ export default function ProductDetail() {
               </div>
             </div>
             <div className="pdp-trust-item">
-              <span className="pdp-trust-icon" aria-hidden="true">◈</span>
+              <span className="pdp-trust-icon" aria-hidden="true">🔒</span>
               <div className="pdp-trust-text">
-                <strong>Private Concierge Assistance:</strong> Stylist consultations for ceremonial ensembles.{' '}
+                <strong>Secure Checkout:</strong> Processed via Razorpay staging sandbox.{' '}
                 <button
                   type="button"
                   onClick={() => navigateTo("/contact")}
@@ -870,7 +919,10 @@ export default function ProductDetail() {
         </div>
       </section>
 
-      {/* 6. COMPLEMENTARY SILHOUETTES SECTION */}
+      {/* 6. ATELIER CUSTOMER REVIEWS (Pirohee Benchmark with Honest Empty State) */}
+      <ProductReviews productId={product.id} productName={product.name} />
+
+      {/* 7. COMPLEMENTARY SILHOUETTES SECTION */}
       {relatedProducts.length > 0 && (
         <section className="pdp-related-section" aria-labelledby="pdp-related-heading">
           <div className="pdp-section-header">
@@ -1343,6 +1395,27 @@ export default function ProductDetail() {
           line-height: 1.25;
           margin-bottom: 8px;
         }
+        .pdp-rating-snippet {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: -2px 0 12px;
+        }
+        .pdp-rating-stars-gold {
+          color: var(--color-gold, #C5A265);
+          font-size: 13px;
+          letter-spacing: 2px;
+        }
+        .pdp-rating-link {
+          font-size: 12px;
+          color: var(--color-muted, #7A6F66);
+          text-decoration: underline;
+          cursor: pointer;
+          transition: color 0.2s ease;
+        }
+        .pdp-rating-link:hover {
+          color: var(--color-burgundy, #5A121A);
+        }
         .pdp-subtitle {
           font-size: 14px;
           color: var(--color-muted, #7A6F66);
@@ -1578,6 +1651,37 @@ export default function ProductDetail() {
           letter-spacing: 0.05em;
         }
 
+        .pdp-buy-it-now-btn {
+          flex: 1;
+          height: 52px;
+          background: linear-gradient(135deg, #C5A265 0%, #98783B 100%);
+          color: #1A0508;
+          border: 1px solid #C5A265;
+          border-radius: var(--radius-sm, 4px);
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 6px 20px rgba(197, 162, 101, 0.28);
+          transition: all 0.25s ease;
+        }
+        .pdp-buy-it-now-btn:hover:not(:disabled) {
+          transform: translateY(-1px);
+          box-shadow: 0 8px 26px rgba(197, 162, 101, 0.38);
+          filter: brightness(1.05);
+        }
+        .pdp-buy-it-now-btn:disabled {
+          background: #888;
+          border-color: #aaa;
+          color: #eee;
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+
         .pdp-wishlist-btn {
           width: 100%;
           height: 46px;
@@ -1627,15 +1731,15 @@ export default function ProductDetail() {
           font-weight: 500;
         }
 
-        /* Customer Trust & Assurance Card */
+        /* Customer Trust & Assurance Card (4-Item Pirohee Benchmark Grid) */
         .pdp-trust-assurance-card {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px 16px;
           background-color: var(--color-cream, #F4EFE6);
           border: 1px solid rgba(197, 162, 101, 0.3);
           border-radius: var(--radius-sm, 4px);
-          padding: 14px 16px;
+          padding: 16px 18px;
         }
         .pdp-trust-item {
           display: flex;
@@ -2301,6 +2405,14 @@ export default function ProductDetail() {
             width: 100%;
             height: 48px;
           }
+          .pdp-buy-it-now-btn {
+            width: 100%;
+            height: 48px;
+          }
+          .pdp-trust-assurance-card {
+            grid-template-columns: 1fr;
+            gap: 12px;
+          }
           .pdp-wishlist-btn {
             height: 44px;
           }
@@ -2313,7 +2425,8 @@ export default function ProductDetail() {
           .pdp-main-image,
           .pdp-gallery-nav,
           .pdp-sticky-bar,
-          .pdp-add-to-bag-btn {
+          .pdp-add-to-bag-btn,
+          .pdp-buy-it-now-btn {
             transition: none !important;
             transform: none !important;
           }
