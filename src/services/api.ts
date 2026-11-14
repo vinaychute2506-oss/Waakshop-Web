@@ -251,9 +251,9 @@ export const api = {
           estimated_delivery_days: string | number;
           estimated_delivery_date?: string;
           shipping_tier: string;
-          shipping_fee: number;
-          isComplimentary: boolean;
-          isStagingFallback?: boolean;
+          shipping_fee?: number;
+          isStagingFallback: boolean;
+          isLiveCarrierResponse: boolean;
           notice?: string;
         };
       }>(`/store/shipping/serviceability?pincode=${encodeURIComponent(pincode)}&weight=${weight}`);

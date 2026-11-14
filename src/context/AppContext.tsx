@@ -115,7 +115,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
             gallery: (bp.images && bp.images.length > 0) ? bp.images : (staticMatch?.gallery || [bp.thumbnail]),
             description: bp.description || staticMatch?.description || "",
             fabric: staticMatch?.fabric || "Raw silk & bespoke Banarasi weave, dry clean only.",
-            shipping: staticMatch?.shipping || "Complimentary express insured shipping across India.",
+            shipping: staticMatch?.shipping || "Standard atelier delivery across India. Timelines verified via Shiprocket.",
             availableSizes,
             variants: bp.variants || staticMatch?.variants,
             isAvailableInBackend: true,

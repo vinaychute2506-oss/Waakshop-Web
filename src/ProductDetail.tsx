@@ -312,23 +312,30 @@ export default function ProductDetail() {
     setIsCheckingPin(true)
     try {
       const res = await api.shipping.checkServiceability(cleaned)
-      if (res && res.data && res.data.serviceable) {
+      if (res && res.data) {
         const regionText = res.data.city ? ` (${res.data.city})` : ''
-        const daysText = res.data.estimated_delivery_days || '3–5 business days'
-        setPinCheckResult({
-          status: 'valid',
-          message: `Delivery available for PIN ${cleaned}${regionText}. Estimated arrival: ${daysText} via ${res.data.shipping_tier}. Complimentary insured shipping on all orders.`
-        })
-      } else {
-        setPinCheckResult({
-          status: 'invalid',
-          message: res?.data?.notice || `PIN ${cleaned} is currently outside our express courier delivery network. Please consult our client concierge for bespoke dispatch.`
-        })
+        if (res.data.isLiveCarrierResponse && res.data.serviceable) {
+          const daysText = res.data.estimated_delivery_days || 'Estimated based on carrier schedule'
+          setPinCheckResult({
+            status: 'valid',
+            message: `Delivery available for PIN ${cleaned}${regionText}. Estimated arrival: ${daysText} via ${res.data.shipping_tier}.`
+          })
+        } else if (res.data.isStagingFallback) {
+          setPinCheckResult({
+            status: 'valid',
+            message: `PIN ${cleaned}${regionText}: Staging simulation. Live delivery timelines and courier availability will be confirmed via Shiprocket once API credentials are provided.`
+          })
+        } else {
+          setPinCheckResult({
+            status: 'invalid',
+            message: res.data.notice || `PIN ${cleaned} is currently outside our express courier delivery network. Please consult our client concierge for bespoke dispatch.`
+          })
+        }
       }
     } catch {
       setPinCheckResult({
-        status: 'valid',
-        message: `Postal code ${cleaned} verified. Complimentary express insured shipping across India. Estimated dispatch within 3–5 business days.`
+        status: 'invalid',
+        message: `Carrier serviceability inquiry for PIN ${cleaned} could not be completed. Please consult client concierge for delivery assistance.`
       })
     } finally {
       setIsCheckingPin(false)

@@ -690,8 +690,8 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                 <span>₹{subtotal.toLocaleString('en-IN')}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                <span style={{ color: 'var(--color-muted, #7A6258)' }}>Express Insured Shipping</span>
-                <span style={{ color: '#2e7d32', fontWeight: 600 }}>Complimentary</span>
+                <span style={{ color: 'var(--color-muted, #7A6258)' }}>Standard Atelier Delivery</span>
+                <span style={{ color: 'var(--color-charcoal, #2B2625)', fontWeight: 500 }}>Included (Test Sandbox)</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: '8px', marginTop: '8px' }}>
                 <strong>Total Amount</strong>

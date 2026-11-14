@@ -5,10 +5,11 @@
  * 1. Authenticates securely server-side using SHIPROCKET_EMAIL & SHIPROCKET_PASSWORD.
  * 2. Never exposes credentials to client-side bundles or frontend JavaScript.
  * 3. Enforces courier partner anonymity: All internal carrier names (e.g. Blue Dart, Delhivery)
- *    are stripped before sending response to client; branded as "Express Insured Atelier Delivery".
- * 4. In-memory token caching with auto-refresh prevents redundant auth roundtrips.
- * 5. Pincode result caching reduces outbound carrier API consumption.
- * 6. Graceful unconfigured staging fallback when credentials are not yet supplied by client.
+ *    are stripped before sending response to client; branded as "Express Atelier Delivery".
+ * 4. In-memory token caching with auto-refresh prevents redundant auth roundtrips (9-day TTL).
+ * 5. Pincode result caching reduces outbound carrier API consumption (1-hour TTL).
+ * 6. Honest staging fallback: Clearly distinguishes unconfigured staging simulation from live
+ *    carrier results, avoiding fabricated delivery promises or unapproved commercial claims.
  */
 
 export interface ServiceabilityResult {
@@ -19,9 +20,9 @@ export interface ServiceabilityResult {
   estimated_delivery_days: string | number;
   estimated_delivery_date?: string;
   shipping_tier: string;
-  shipping_fee: number;
-  isComplimentary: boolean;
-  isStagingFallback?: boolean;
+  shipping_fee?: number;
+  isStagingFallback: boolean;
+  isLiveCarrierResponse: boolean;
   notice?: string;
 }
 
@@ -32,7 +33,7 @@ interface CachedToken {
 
 let tokenCache: CachedToken | null = null;
 const pincodeCache = new Map<string, { result: ServiceabilityResult; expiresAt: number }>();
-const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
+const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour PIN cache TTL
 
 export class ShiprocketService {
   private static getApiBase(): string {
@@ -42,6 +43,14 @@ export class ShiprocketService {
   private static getPickupPincode(): string {
     // English Channel Company registered warehouse coordinates in Gandhi Nagar, Delhi
     return process.env.SHIPROCKET_PICKUP_PINCODE || '110033';
+  }
+
+  /**
+   * Clears token cache (for testing and credential rotation)
+   */
+  public static clearCache(): void {
+    tokenCache = null;
+    pincodeCache.clear();
   }
 
   /**
@@ -69,7 +78,8 @@ export class ShiprocketService {
       });
 
       if (!response.ok) {
-        console.error(`Shiprocket auth failed with status ${response.status}`);
+        console.warn(`Shiprocket authentication failed with status ${response.status}`);
+        tokenCache = null;
         return null;
       }
 
@@ -84,7 +94,8 @@ export class ShiprocketService {
       }
       return null;
     } catch (err: any) {
-      console.error('Shiprocket auth network error:', err.message);
+      console.warn('Shiprocket auth network error:', err.message);
+      tokenCache = null;
       return null;
     }
   }
@@ -92,6 +103,7 @@ export class ShiprocketService {
   /**
    * Checks PIN code serviceability and estimated delivery schedule.
    * Strips all internal courier partner names to maintain luxury WAAK branding.
+   * Accurately flags whether result is a live carrier quote or staging simulation.
    */
   public static async checkPincodeServiceability(
     deliveryPincode: string,
@@ -99,12 +111,12 @@ export class ShiprocketService {
   ): Promise<ServiceabilityResult> {
     const cleaned = String(deliveryPincode || '').trim();
 
-    // Validate 6-digit Indian PIN
+    // Validate 6-digit Indian PIN (standard 100000 - 999999)
     if (!/^[1-9][0-9]{5}$/.test(cleaned)) {
       throw new Error('Invalid PIN code. Please enter a valid 6-digit Indian postal code.');
     }
 
-    // Check cache
+    // Check 1-hour cache
     const now = Date.now();
     const cached = pincodeCache.get(cleaned);
     if (cached && cached.expiresAt > now) {
@@ -113,20 +125,19 @@ export class ShiprocketService {
 
     const token = await this.getAuthToken();
 
-    // Fallback mode if credentials are unconfigured on staging
+    // Honest fallback mode if credentials are unconfigured on staging
     if (!token) {
       const fallbackResult: ServiceabilityResult = {
         serviceable: true,
         pincode: cleaned,
         city: this.deriveApproximateRegion(cleaned),
         state: 'India',
-        estimated_delivery_days: cleaned.startsWith('11') ? '2–3 business days' : '3–5 business days',
-        estimated_delivery_date: cleaned.startsWith('11') ? 'Express Delhi NCR Dispatch' : 'Standard Insured Dispatch',
-        shipping_tier: 'Express Insured Atelier Delivery',
-        shipping_fee: 0,
-        isComplimentary: true,
+        estimated_delivery_days: 'Pending live carrier schedule',
+        estimated_delivery_date: 'Confirmed upon client Shiprocket credential setup',
+        shipping_tier: 'Standard Atelier Delivery',
         isStagingFallback: true,
-        notice: 'Shiprocket API credentials pending client configuration; estimated delivery displayed based on regional postal dispatch windows.',
+        isLiveCarrierResponse: false,
+        notice: 'Staging simulation: Shiprocket API credentials are not yet configured. Real-time carrier serviceability and delivery timelines will be active once credentials are provided.',
       };
 
       pincodeCache.set(cleaned, { result: fallbackResult, expiresAt: now + CACHE_TTL_MS });
@@ -148,6 +159,11 @@ export class ShiprocketService {
         },
       });
 
+      if (response.status === 401 || response.status === 403) {
+        tokenCache = null; // Invalidate cached token on auth rejection
+        throw new Error(`Carrier authentication expired or rejected (HTTP ${response.status})`);
+      }
+
       if (!response.ok) {
         throw new Error(`Carrier serviceability query returned status ${response.status}`);
       }
@@ -159,19 +175,21 @@ export class ShiprocketService {
         const unserviceableResult: ServiceabilityResult = {
           serviceable: false,
           pincode: cleaned,
+          city: data?.data?.city || this.deriveApproximateRegion(cleaned),
+          state: data?.data?.state || 'India',
           estimated_delivery_days: 'N/A',
-          shipping_tier: 'Standard Delivery',
-          shipping_fee: 0,
-          isComplimentary: true,
-          notice: 'This postal area is currently outside our express courier delivery network. Please contact our client concierge.',
+          shipping_tier: 'Standard Atelier Delivery',
+          isStagingFallback: false,
+          isLiveCarrierResponse: true,
+          notice: 'This postal area is currently outside our express courier delivery network. Please contact our client concierge for bespoke delivery arrangements.',
         };
         pincodeCache.set(cleaned, { result: unserviceableResult, expiresAt: now + CACHE_TTL_MS });
         return unserviceableResult;
       }
 
-      // Pick the company with the lowest estimated days or standard etd
-      // CRITICAL: Strip any courier_name or partner brand identifier
-      let minDays = 5;
+      // Pick the company with the lowest estimated days
+      // CRITICAL: Mask any courier_name, partner brand, or courier_company_id
+      let minDays = 7;
       let targetEtd = '';
       for (const comp of companies) {
         const days = parseInt(comp.estimated_delivery_days, 10);
@@ -188,28 +206,26 @@ export class ShiprocketService {
         state: data?.data?.state || 'India',
         estimated_delivery_days: `${minDays} business days`,
         estimated_delivery_date: targetEtd || `${minDays} business days from dispatch`,
-        shipping_tier: 'Express Insured Atelier Delivery',
-        shipping_fee: 0,
-        isComplimentary: true,
+        shipping_tier: 'Express Atelier Delivery',
         isStagingFallback: false,
+        isLiveCarrierResponse: true,
       };
 
       pincodeCache.set(cleaned, { result: liveResult, expiresAt: now + CACHE_TTL_MS });
       return liveResult;
     } catch (error: any) {
-      console.warn('Shiprocket API lookup failed, using reliable fallback:', error.message);
+      console.warn('Shiprocket API lookup failed, falling back to honest staging notice:', error.message);
       const fallbackResult: ServiceabilityResult = {
         serviceable: true,
         pincode: cleaned,
         city: this.deriveApproximateRegion(cleaned),
         state: 'India',
-        estimated_delivery_days: cleaned.startsWith('11') ? '2–3 business days' : '3–5 business days',
-        estimated_delivery_date: 'Estimated 3–5 business days',
-        shipping_tier: 'Express Insured Atelier Delivery',
-        shipping_fee: 0,
-        isComplimentary: true,
+        estimated_delivery_days: 'Pending live carrier schedule',
+        estimated_delivery_date: 'Confirmed upon dispatch',
+        shipping_tier: 'Standard Atelier Delivery',
         isStagingFallback: true,
-        notice: 'Live carrier query temporarily unavailable; standard insured dispatch window applied.',
+        isLiveCarrierResponse: false,
+        notice: 'Live carrier serviceability query temporarily unavailable; delivery schedule confirmed upon order dispatch.',
       };
       return fallbackResult;
     }

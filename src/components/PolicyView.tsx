@@ -1,5 +1,6 @@
 import React from "react"
 import { useApp } from "../context/AppContext"
+import { WAAK_CONFIG } from "../config"
 
 export type PolicyRoute =
   | "/privacy-policy"
@@ -281,10 +282,10 @@ export default function PolicyView({ route }: PolicyViewProps) {
 
             <section style={{ marginBottom: "28px" }}>
               <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "20px", color: "var(--color-burgundy)", marginBottom: "12px" }}>
-                4. Complimentary Express Shipping Threshold
+                4. Domestic Delivery Standards & Shipping Fees (Draft under Commercial Review)
               </h2>
               <p style={{ fontSize: "14px", lineHeight: "1.8", color: "var(--color-charcoal)" }}>
-                Complimentary insured express transit is currently provided on all domestic orders across India as part of our introductory seasonal service. International shipping arrangements for global wedding parties may be coordinated directly with our concierge desk.
+                Standard domestic transit timelines and PIN-level serviceability are calculated in real-time through Shiprocket carrier integration. Final shipping fee structures, insured transit thresholds, and promotional delivery terms are currently under commercial review and will be confirmed prior to public launch. International shipping arrangements for global wedding parties may be coordinated directly with our concierge desk.
               </p>
             </section>
           </article>
@@ -357,7 +358,10 @@ export default function PolicyView({ route }: PolicyViewProps) {
                     Lifetime Store Credit (No Cash Refunds)
                   </h3>
                   <p style={{ fontSize: "13px", lineHeight: "1.7", color: "var(--color-charcoal)" }}>
-                    Following successful quality inspection, WAAK issues a <strong>Lifetime Store Credit</strong> equal to the garment purchase value. This credit never expires and may be applied toward any future ready-to-wear or bespoke ensemble. <em>Cash, bank, or card refunds are strictly not provided under any circumstances.</em>
+                    Following successful quality inspection, WAAK issues a <strong>Lifetime Store Credit</strong> equal to the garment purchase value. This credit never expires and may be applied toward any future ready-to-wear or bespoke ensemble.
+                  </p>
+                  <p style={{ fontSize: "11px", color: "var(--color-charcoal-muted)", marginTop: "8px", fontStyle: "italic" }}>
+                    * Draft operational term under legal review: Client confirmed lifetime store credit as the settlement mechanism; explicit exclusions of cash, card, or bank refunds and specific wear/damage standards are subject to formal legal ratification.
                   </p>
                 </div>
                 <div style={{ border: "1px solid rgba(0,0,0,0.1)", borderRadius: "var(--radius-sm)", padding: "16px", backgroundColor: "#fff" }}>
@@ -442,13 +446,13 @@ export default function PolicyView({ route }: PolicyViewProps) {
                 </h2>
                 <div style={{ fontSize: "13px", lineHeight: "1.8", color: "var(--color-charcoal)" }}>
                   <p style={{ marginBottom: "8px" }}>
-                    <strong>ENGLISH CHANNEL COMPANY</strong><br />
-                    <em>(Trading as WAAK Occasionwear)</em><br />
+                    <strong>{WAAK_CONFIG.business.legalName || "ENGLISH CHANNEL COMPANY"}</strong><br />
+                    <em>(Trading as {WAAK_CONFIG.business.tradeName || "WAAK Occasionwear"})</em><br />
                     37, Furniture Market, Gandhi Nagar<br />
                     Delhi – 110033 · India
                   </p>
                   <p style={{ marginTop: "8px", fontSize: "12px", color: "var(--color-charcoal)" }}>
-                    <strong>GSTIN:</strong> <span style={{ fontFamily: "monospace", color: "var(--color-burgundy)" }}>07AAGFE4560K1ZA</span>
+                    <strong>GSTIN:</strong> <span style={{ fontFamily: "monospace", color: "var(--color-burgundy)" }}>{WAAK_CONFIG.business.gstin || "07AAGFE4560K1ZA"}</span>
                   </p>
                   <p style={{ fontSize: "11px", color: "var(--color-charcoal-muted)", marginTop: "6px", fontStyle: "italic" }}>
                     * Registered business entity coordinates provided by client (pending final tax registration certificate upload)
@@ -463,20 +467,20 @@ export default function PolicyView({ route }: PolicyViewProps) {
                 <div style={{ fontSize: "13px", lineHeight: "1.8", color: "var(--color-charcoal)" }}>
                   <p style={{ marginBottom: "6px" }}>
                     <strong>Client WhatsApp Concierge:</strong><br />
-                    <a href="https://wa.me/919821707031" target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-burgundy)", fontWeight: 600, textDecoration: "underline" }}>
-                      +91 98217 07031
+                    <a href={WAAK_CONFIG.whatsapp.getUrl()} target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-burgundy)", fontWeight: 600, textDecoration: "underline" }}>
+                      {WAAK_CONFIG.whatsapp.display || "+91 98217 07031"}
                     </a>
                   </p>
                   <p style={{ marginBottom: "6px" }}>
                     <strong>Bespoke Styling Consultations:</strong><br />
-                    <span style={{ color: "var(--color-burgundy)" }}>concierge@waak.co.in</span>
+                    <span style={{ color: "var(--color-burgundy)" }}>{WAAK_CONFIG.business.conciergeEmail || "concierge@waak.co.in"}</span>
                   </p>
                   <p style={{ marginBottom: "6px" }}>
                     <strong>Order Status & Dispatch Inquiries:</strong><br />
-                    <span style={{ color: "var(--color-burgundy)" }}>orders@waak.co.in</span>
+                    <span style={{ color: "var(--color-burgundy)" }}>{WAAK_CONFIG.business.ordersEmail || "orders@waak.co.in"}</span>
                   </p>
                   <p style={{ fontSize: "11.5px", color: "var(--color-charcoal-muted)", marginTop: "8px" }}>
-                    Direct WhatsApp response hours: 10:30 AM – 7:30 PM IST (Mon–Sat)
+                    Direct WhatsApp response hours: {WAAK_CONFIG.whatsapp.hours}
                   </p>
                 </div>
               </div>

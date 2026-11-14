@@ -1,4 +1,5 @@
 import React from 'react';
+import { WAAK_CONFIG } from '../config';
 
 export interface WhatsAppInquiryProps {
   productName?: string;
@@ -98,8 +99,8 @@ export default function WhatsAppInquiryButton({
   className = '',
   style = {},
 }: WhatsAppInquiryProps) {
-  // Read configured business number from environment
-  const rawNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '';
+  // Read configured business number from environment or centralized config
+  const rawNumber = import.meta.env.VITE_WHATSAPP_NUMBER || WAAK_CONFIG.whatsapp.number;
   const cleanNumber = validateWhatsAppNumber(rawNumber);
 
   // Guard: If no valid business number is configured, completely hide the button (zero DOM presence)

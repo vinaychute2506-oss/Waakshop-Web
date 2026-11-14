@@ -253,7 +253,7 @@ export default function CartDrawer() {
               </span>
             </div>
             <div style={{ fontSize: "11px", color: "var(--color-muted)", marginBottom: "16px" }}>
-              Taxes and complimentary express shipping calculated at checkout.
+              Taxes and shipping calculated at checkout.
             </div>
             <button
               onClick={() => {
