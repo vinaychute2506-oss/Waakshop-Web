@@ -14,6 +14,7 @@ const suites = [
   { name: 'Suite 10: Step 5 WhatsApp Inquiry Integration', file: 'scratch/test-step-5-whatsapp.mjs', expected: 26 },
   { name: 'Suite 11: Step 7 Pirohee Benchmark PDP Upgrades', file: 'scratch/test-step-7-pirohee-pdp.mjs', expected: 11 },
   { name: 'Suite 12: Step 8 WhatsApp Concierge & BodhX AI Integration', file: 'scratch/test-step-8-whatsapp-bodhx.mjs', expected: 11 },
+  { name: 'Suite 13: Step 9.1 Client-Confirmed Requirements', file: 'scratch/test-step-9-1-client-requirements.mjs', expected: 12 },
 ];
 
 function runCommand(file) {

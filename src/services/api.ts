@@ -237,4 +237,35 @@ export const api = {
       });
     },
   },
+
+  // Shipping & Serviceability (Shiprocket integration)
+  shipping: {
+    async checkServiceability(pincode: string, weight: number = 1.5) {
+      return request<{
+        success: boolean;
+        data: {
+          serviceable: boolean;
+          pincode: string;
+          city?: string;
+          state?: string;
+          estimated_delivery_days: string | number;
+          estimated_delivery_date?: string;
+          shipping_tier: string;
+          shipping_fee: number;
+          isComplimentary: boolean;
+          isStagingFallback?: boolean;
+          notice?: string;
+        };
+      }>(`/store/shipping/serviceability?pincode=${encodeURIComponent(pincode)}&weight=${weight}`);
+    },
+    async getStatus() {
+      return request<{
+        integration: string;
+        status: string;
+        pickup_pincode: string;
+        api_base: string;
+        courier_masking: string;
+      }>('/store/shipping/status');
+    },
+  },
 };

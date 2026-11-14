@@ -95,7 +95,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
           const availableSizes = Array.isArray(bp.variants) && bp.variants.length > 0
             ? bp.variants.map((v: any) => v.size)
-            : (staticMatch?.availableSizes || ["38", "40", "42", "44"])
+            : (staticMatch?.availableSizes || ["36", "38", "40", "42", "44"])
 
           return {
             id: bp.id,

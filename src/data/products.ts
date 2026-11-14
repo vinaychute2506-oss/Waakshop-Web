@@ -81,7 +81,7 @@ export const PRODUCTS: Product[] = [
     description: "A masterpiece of royal Indian occasionwear, spun from pure Banarasi silk and embellished with meticulous antique gold zardozi wirework along the mandarin collar and cuffs. Tailored to an architectural silhouette for the quintessential modern groom.",
     fabric: "Raw Banarasi silk blend, cotton-silk inner lining, dry clean only.",
     shipping: "Complimentary express insured shipping across India. Ships within 3-5 business days.",
-    availableSizes: ["38", "40", "42", "44"],
+    availableSizes: ["36", "38", "40", "42", "44"],
     isAvailableInBackend: true,
   },
   {
@@ -105,7 +105,7 @@ export const PRODUCTS: Product[] = [
     description: "Exquisitely sculpted in deep midnight-blue micro-velvet, featuring discreet tone-on-tone resham threadwork that catches the light with subtle sophistication. Paired with churidar trousers for high-evening receptions.",
     fabric: "Matka silk & micro-velvet, dry clean only.",
     shipping: "Complimentary insured delivery. Custom tailoring and bespoke fittings available.",
-    availableSizes: ["38", "40", "42", "44"],
+    availableSizes: ["36", "38", "40", "42", "44"],
     isAvailableInBackend: true,
   },
   {
@@ -129,7 +129,7 @@ export const PRODUCTS: Product[] = [
     description: "Understated luxury defined. Cut from crisp Bhagalpur raw silk in a muted dusty mauve tone, accented with custom antique-brass buttons crafted in Varanasi. An elevated statement for Sangeet evenings and cocktail galas.",
     fabric: "Bhagalpur raw silk-wool blend with breathable viscose lining.",
     shipping: "Ships in 3-5 business days in custom garment bag.",
-    availableSizes: ["38", "40", "42", "44"],
+    availableSizes: ["36", "38", "40", "42", "44"],
     isAvailableInBackend: true,
   },
   {
@@ -154,7 +154,7 @@ export const PRODUCTS: Product[] = [
     description: "Deep jewel-toned emerald green Tussar silk kurta set highlighted with fine needlework details along the placket. Includes tailored ivory churidar and a matching Chanderi silk stole.",
     fabric: "Pure Banarasi woven silk and chanderi.",
     shipping: "Complimentary delivery and free size exchange.",
-    availableSizes: ["38", "40", "42", "44"],
+    availableSizes: ["36", "38", "40", "42", "44"],
     isAvailableInBackend: true,
   },
   {
@@ -174,7 +174,7 @@ export const PRODUCTS: Product[] = [
     description: "Masterfully tailored 3-piece evening tuxedo featuring tone-on-tone hand-embroidered peak lapels, tailored waistcoat with metallic buttons, and structured Italian wool trousers.",
     fabric: "Super 120s wool blend with embroidered satin lapels.",
     shipping: "Ships in 4 business days.",
-    availableSizes: ["38", "40", "42", "44"],
+    availableSizes: ["36", "38", "40", "42", "44"],
     isAvailableInBackend: false,
   },
   {
@@ -194,7 +194,7 @@ export const PRODUCTS: Product[] = [
     description: "Contemporary Nehru waistcoat in rich midnight navy featuring ornate antique gold motif embroidery. Cut from pure raw silk and paired seamlessly over tailored ivory or cream kurtas.",
     fabric: "Linen silk with breathable cotton lining.",
     shipping: "Ships in 24 hours.",
-    availableSizes: ["38", "40", "42", "44"],
+    availableSizes: ["36", "38", "40", "42", "44"],
     isAvailableInBackend: false,
   },
   {
@@ -214,7 +214,7 @@ export const PRODUCTS: Product[] = [
     description: "Pure silk festive kurta set featuring an exquisite ombré fade from warm ivory into artisanal sage green, accentuated with detailed floral resham threadwork along the placket and cuffs.",
     fabric: "Pure Chanderi silk, cotton voile inner.",
     shipping: "Complimentary delivery.",
-    availableSizes: ["38", "40", "42", "44"],
+    availableSizes: ["36", "38", "40", "42", "44"],
     isAvailableInBackend: false,
   },
   {
@@ -234,7 +234,7 @@ export const PRODUCTS: Product[] = [
     description: "Regal mint and pistachio ceremonial sherwani adorned with comprehensive all-over zardozi threadwork, tailored for grand weddings. Complete with a coordinated ivory safa turban, pearl necklace, and embroidered organza stole.",
     fabric: "Micro-velvet and banarasi silk with metallic thread hand embroidery.",
     shipping: "Custom tailored and insured shipment.",
-    availableSizes: ["38", "40", "42", "44"],
+    availableSizes: ["36", "38", "40", "42", "44"],
     isAvailableInBackend: false,
   },
   {
@@ -253,7 +253,7 @@ export const PRODUCTS: Product[] = [
     description: "Sleek black double-breasted formal waistcoat with sculpted shawl collar, tailored welt pockets, and dual-column metallic buttons. An architectural modern statement for high-evening galas.",
     fabric: "Textured poly-viscose with satin inner back.",
     shipping: "Ships in 2-3 business days.",
-    availableSizes: ["38", "40", "42", "44"],
+    availableSizes: ["36", "38", "40", "42", "44"],
     isAvailableInBackend: false,
   }
 ]

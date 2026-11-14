@@ -23,6 +23,11 @@ async function runAudit() {
   console.log('===============================================================\n');
 
   try {
+    // Reset rate limits before audit
+    try {
+      await fetch(`${API_BASE}/test/reset-rate-limits`, { method: 'POST' });
+    } catch (_) {}
+
     // -------------------------------------------------------------
     // Section 1: Concurrent Newsletter Submission & Unsubscribe Audit
     // -------------------------------------------------------------

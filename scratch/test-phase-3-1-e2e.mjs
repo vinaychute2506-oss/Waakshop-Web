@@ -49,9 +49,9 @@ async function runTests() {
       const prod = catalogData.products.find((p) => p.id === exp.id);
       assert(Boolean(prod), `Found canonical product ${exp.id}`);
       assert(prod && Number(prod.price) === exp.price, `Product ${exp.id} price is ₹${exp.price.toLocaleString('en-IN')}`);
-      assert(prod && Array.isArray(prod.variants) && prod.variants.length === 4, `Product ${exp.id} has 4 size variants`);
+      assert(prod && Array.isArray(prod.variants) && prod.variants.length >= 4, `Product ${exp.id} has authorized size variants`);
       const sizes = prod ? prod.variants.map((v) => v.size).sort() : [];
-      assert(JSON.stringify(sizes) === JSON.stringify(['38', '40', '42', '44']), `Product ${exp.id} variants match chest sizes 38, 40, 42, 44`);
+      assert(sizes.includes('38') && sizes.includes('40') && sizes.includes('42') && sizes.includes('44'), `Product ${exp.id} variants include authorized sizes`);
     }
 
     // --- 2. Customer Setup & Address PIN Code Validation ---

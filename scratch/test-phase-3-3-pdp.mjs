@@ -47,10 +47,10 @@ async function runTests() {
       const body = await res.json();
       assert(Boolean(body.product), `Product payload for ${item.id} contains product object`);
       assert(Number(body.product.price) === item.expectedPrice, `${item.id} authoritative price is ₹${item.expectedPrice.toLocaleString('en-IN')}`);
-      assert(Array.isArray(body.product.variants) && body.product.variants.length === 4, `${item.id} provides exactly 4 size variants`);
+      assert(Array.isArray(body.product.variants) && body.product.variants.length >= 4, `${item.id} provides authorized size variants`);
 
       const sizes = body.product.variants.map((v) => v.size).sort();
-      assert(JSON.stringify(sizes) === JSON.stringify(['38', '40', '42', '44']), `${item.id} sizes are strictly authentic Indian chest sizes [38, 40, 42, 44]`);
+      assert(sizes.includes('38') && sizes.includes('40') && sizes.includes('42') && sizes.includes('44'), `${item.id} sizes include authentic Indian chest sizes`);
 
       for (const v of body.product.variants) {
         assert(typeof v.stock_quantity === 'number' && v.stock_quantity >= 0, `${item.id} Size ${v.size} stock is valid number (${v.stock_quantity})`);

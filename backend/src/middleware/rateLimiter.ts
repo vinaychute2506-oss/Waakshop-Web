@@ -8,6 +8,7 @@ interface RateLimitRecord {
 const loginAttempts = new Map<string, RateLimitRecord>();
 const registerAttempts = new Map<string, RateLimitRecord>();
 const newsletterAttempts = new Map<string, RateLimitRecord>();
+const shippingAttempts = new Map<string, RateLimitRecord>();
 
 function cleanExpiredRecords(map: Map<string, RateLimitRecord>) {
   const now = Date.now();
@@ -23,6 +24,7 @@ setInterval(() => {
   cleanExpiredRecords(loginAttempts);
   cleanExpiredRecords(registerAttempts);
   cleanExpiredRecords(newsletterAttempts);
+  cleanExpiredRecords(shippingAttempts);
 }, 5 * 60 * 1000);
 
 export function loginRateLimiter(req: Request, res: Response, next: NextFunction): void {
@@ -104,3 +106,33 @@ export function newsletterRateLimiter(req: Request, res: Response, next: NextFun
   next();
 }
 
+export function shippingRateLimiter(req: Request, res: Response, next: NextFunction): void {
+  const ip = req.ip || req.socket.remoteAddress || 'unknown';
+  const now = Date.now();
+  const windowMs = 60 * 1000; // 1 minute
+  const maxAttempts = 30; // Max 30 lookups per minute
+
+  const record = shippingAttempts.get(ip);
+  if (!record || now > record.resetTime) {
+    shippingAttempts.set(ip, { count: 1, resetTime: now + windowMs });
+    next();
+    return;
+  }
+
+  if (record.count >= maxAttempts) {
+    res.status(429).json({
+      error: 'Too many delivery check requests. Please wait a moment before trying another PIN code.',
+    });
+    return;
+  }
+
+  record.count += 1;
+  next();
+}
+
+export function resetRateLimits(): void {
+  loginAttempts.clear();
+  registerAttempts.clear();
+  newsletterAttempts.clear();
+  shippingAttempts.clear();
+}

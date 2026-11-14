@@ -11,8 +11,10 @@ import checkoutRoutes from './routes/checkout';
 import orderRoutes from './routes/orders';
 import wishlistRoutes from './routes/wishlist';
 import newsletterRoutes from './routes/newsletter';
+import shippingRoutes from './routes/shipping';
 import adminRoutes from './routes/admin';
 import { adminDashboardHtml } from './admin/adminHtml';
+import { resetRateLimits } from './middleware/rateLimiter';
 
 const app = express();
 const PORT = config.port;
@@ -135,6 +137,13 @@ app.get('/admin', (_req, res) => {
 });
 
 // Mount Routes
+app.post('/test/reset-rate-limits', (_req, res) => {
+  if (config.nodeEnv !== 'production') {
+    resetRateLimits();
+    return res.json({ status: 'ok', message: 'Rate limits cleared' });
+  }
+  res.status(403).json({ error: 'Not permitted in production' });
+});
 app.use('/auth', authRoutes);
 app.use('/store/customers', customerRoutes);
 app.use('/store/products', productRoutes);
@@ -143,6 +152,8 @@ app.use('/store', checkoutRoutes);
 app.use('/store/orders', orderRoutes);
 app.use('/store/wishlist', wishlistRoutes);
 app.use('/store/newsletter', newsletterRoutes);
+app.use('/store/shipping', shippingRoutes);
+app.use('/api/shipping', shippingRoutes);
 app.use('/admin', adminRoutes);
 
 // Global Error Handler (Sanitizes error details in production/staging)

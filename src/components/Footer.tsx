@@ -104,8 +104,12 @@ export default function Footer() {
             >
               Contemporary occasionwear, rooted in Indian heritage. Designed for the groom who commands authority.
             </p>
-            <div style={{ fontSize: "12px", color: "var(--color-gold)", letterSpacing: "0.1em" }}>
-              NEW DELHI · FLAGSHIP ATELIER
+            <div style={{ fontSize: "12px", color: "var(--color-gold)", letterSpacing: "0.08em", marginBottom: "6px" }}>
+              ENGLISH CHANNEL COMPANY · DELHI
+            </div>
+            <div style={{ fontSize: "11px", color: "rgba(244, 239, 230, 0.6)", lineHeight: "1.6" }}>
+              37, Furniture Market, Gandhi Nagar, Delhi – 110033<br />
+              GSTIN: 07AAGFE4560K1ZA
             </div>
           </div>
 
@@ -251,7 +255,7 @@ export default function Footer() {
                   className="editorial-underline"
                   style={{ background: "none", border: "none", color: "inherit", cursor: "pointer", padding: 0 }}
                 >
-                  Returns & Alterations (7-Day)
+                  Returns & Exchanges (2-Day Window)
                 </button>
               </li>
               <li>
@@ -379,7 +383,7 @@ export default function Footer() {
           }}
         >
           <div>
-            © 2026 WAAK OCCASIONWEAR. All rights reserved.
+            © 2026 WAAK OCCASIONWEAR (English Channel Company). All rights reserved. · GSTIN: 07AAGFE4560K1ZA
           </div>
           <div
             style={{

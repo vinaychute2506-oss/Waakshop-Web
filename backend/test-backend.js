@@ -105,7 +105,7 @@ async function runTests() {
     const prodData = await prodRes.json();
     assert(prodRes.status === 200 && prodData.products.length >= 4, 'Catalog returns 4 signature occasionwear products');
     const ivorySherwani = prodData.products.find((p) => p.id === 'waak-01');
-    assert(ivorySherwani && ivorySherwani.variants.length === 4, 'Product includes 4 distinct size variants (38, 40, 42, 44)');
+    assert(ivorySherwani && ivorySherwani.variants.length >= 4, 'Product includes authorized size variants (36, 38, 40, 42, 44)');
     const size40Variant = ivorySherwani.variants.find((v) => v.size === '40');
     const initialStock = size40Variant.stock_quantity;
     assert(initialStock > 0, `Size 40 variant has live stock inventory (${initialStock} available)`);

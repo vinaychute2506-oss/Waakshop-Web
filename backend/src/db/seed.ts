@@ -88,9 +88,9 @@ export async function seedDatabase(): Promise<void> {
         [p.id, p.title, p.subtitle, p.description, p.price, p.category, p.occasion, p.is_new_arrival, p.is_bestseller, p.on_sale, p.thumbnail, p.images]
       );
 
-      // Seed Variants (sizes 38, 40, 42, 44)
-      const sizes = ['38', '40', '42', '44'];
-      const stockCounts: Record<string, number> = { '38': 6, '40': 10, '42': 8, '44': 4 };
+      // Seed Variants (sizes 36, 38, 40, 42, 44)
+      const sizes = ['36', '38', '40', '42', '44'];
+      const stockCounts: Record<string, number> = { '36': 0, '38': 6, '40': 10, '42': 8, '44': 4 };
 
       for (const size of sizes) {
         const variantId = `var_${p.id}_${size}`;

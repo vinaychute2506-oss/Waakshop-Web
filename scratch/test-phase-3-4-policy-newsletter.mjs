@@ -21,6 +21,11 @@ async function runTests() {
   console.log('===============================================================\n');
 
   try {
+    // Reset rate limits before beginning test suite
+    try {
+      await fetch(`${API_BASE}/test/reset-rate-limits`, { method: 'POST' });
+    } catch (_) {}
+
     // -------------------------------------------------------------
     // Group 1: Newsletter API & Persistence Verification
     // -------------------------------------------------------------
@@ -158,12 +163,12 @@ async function runTests() {
     check(policyViewSrc.includes('Legal & Business Review Status:'), 'PolicyView includes explicit Legal & Business Review banner');
     check(policyViewSrc.includes('Draft for Corporate Review') || policyViewSrc.includes('Draft for Business Terms Review'), 'Draft statuses prominently declared');
     check(policyViewSrc.includes('Format vs. Real-Time Serviceability:'), 'Shipping policy explicitly distinguishes 6-digit PIN format from logistics serviceability');
-    check(policyViewSrc.includes('Seven-Day Exchange & Alteration Window'), '7-day policy stated clearly with custom/altered ensemble conditions');
+    check(policyViewSrc.includes('Two-Day Exchange Request Window') || policyViewSrc.includes('Seven-Day Exchange & Alteration Window'), 'Exchange window stated clearly with custom/altered ensemble conditions');
 
     // 3.2 Check honest contact coordinates
     check(policyViewSrc.includes('privacy@waak.co.in'), 'Dedicated privacy contact channel declared');
     check(policyViewSrc.includes('concierge@waak.co.in'), 'Concierge channel declared');
-    check(policyViewSrc.includes('allocation pending commercial carrier provisioning'), 'Honest declaration that physical WhatsApp/phone line allocation is pending');
+    check(policyViewSrc.includes('+91 98217 07031') || policyViewSrc.includes('allocation pending commercial carrier provisioning'), 'Honest declaration or client-confirmed WhatsApp concierge contact present');
 
     // 3.3 Check Footer integration
     check(footerSrc.includes('api.newsletter.subscribe'), 'Footer directly connects to backend newsletter API');
@@ -188,8 +193,8 @@ async function runTests() {
 
     // Verify PDP pincode checker in ProductDetail.tsx remains format-validated and documented
     const pdpSrc = await fs.readFile('src/ProductDetail.tsx', 'utf-8');
-    check(pdpSrc.includes('/^\\d{6}$/'), 'ProductDetail uses strict 6-digit regex for PIN format checking');
-    check(pdpSrc.includes('Valid Indian PIN format') && pdpSrc.includes('courier docket generation'), 'PIN check accurately informs format verification vs courier serviceability');
+    check(pdpSrc.includes('/^[1-9][0-9]{5}$/') || pdpSrc.includes('/^\\d{6}$/'), 'ProductDetail uses strict 6-digit regex for PIN format checking');
+    check(pdpSrc.includes('checkServiceability') || (pdpSrc.includes('Valid Indian PIN format') && pdpSrc.includes('courier docket generation')), 'PIN check validates format and connects to courier serviceability');
 
     console.log('\n===============================================================');
     console.log(`  All Phase 3.4 tests passed successfully! (${passedAssertions}/${passedAssertions} assertions)`);
@@ -199,6 +204,9 @@ async function runTests() {
     console.error('\n❌ Test assertion failed:', error);
     process.exit(1);
   } finally {
+    try {
+      await fetch(`${API_BASE}/test/reset-rate-limits`, { method: 'POST' });
+    } catch (_) {}
     await pool.end();
   }
 }

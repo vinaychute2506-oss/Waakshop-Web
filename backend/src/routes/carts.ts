@@ -126,9 +126,9 @@ router.post('/:id/line-items', optionalCustomerAuth, async (req: Request, res: R
       return;
     }
 
-    const validSizes = ['38', '40', '42', '44'];
+    const validSizes = ['36', '38', '40', '42', '44'];
     if (!validSizes.includes(String(size))) {
-      res.status(400).json({ error: `Invalid size '${size}'. Valid occasionwear sizes are 38, 40, 42, 44.` });
+      res.status(400).json({ error: `Invalid size '${size}'. Valid occasionwear sizes are 36, 38, 40, 42, 44.` });
       return;
     }
 

@@ -295,58 +295,80 @@ export default function PolicyView({ route }: PolicyViewProps) {
           <article>
             <div style={{ marginBottom: "24px" }}>
               <span style={{ fontSize: "11px", letterSpacing: "0.2em", color: "var(--color-gold)", textTransform: "uppercase" }}>
-                Atelier Guarantee
+                Client Assurance & Care
               </span>
               <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "36px", color: "var(--color-burgundy)", marginTop: "6px" }}>
-                Returns, Exchanges & Alteration Policy
+                Returns, Exchanges & Lifetime Store Credit Policy
               </h1>
               <p style={{ fontSize: "13px", color: "var(--color-charcoal-muted)", marginTop: "4px" }}>
-                Effective Date: November 2026 · Version 1.0 (Draft for Business Terms Review)
+                Effective Date: November 2026 · Client-Authorized Terms (Draft for Formal Legal Signoff)
               </p>
             </div>
 
-            {renderNotice("Returns, Cancellations & Alteration Policy")}
+            {renderNotice("Returns, Exchanges & Lifetime Store Credit Policy")}
 
             <section style={{ marginBottom: "28px" }}>
               <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "20px", color: "var(--color-burgundy)", marginBottom: "12px" }}>
-                1. Seven-Day Exchange & Alteration Window
+                1. Two-Day Exchange Request Window
               </h2>
               <p style={{ fontSize: "14px", lineHeight: "1.8", color: "var(--color-charcoal)", marginBottom: "12px" }}>
-                To ensure complete sartorial satisfaction for your wedding or ceremonial occasion, WAAK offers an exchange and complimentary alteration window of seven (7) calendar days from the date of confirmed delivery.
+                To maintain the highest standards of artisanal couture hygiene and inventory integrity, exchange requests must be formally initiated within <strong>two (2) calendar days</strong> of the courier delivery completion notification. Exchange requests received after this strict 48-hour window cannot be accommodated.
               </p>
             </section>
 
             <section style={{ marginBottom: "28px" }}>
               <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "20px", color: "var(--color-burgundy)", marginBottom: "12px" }}>
-                2. Standard Sizing vs. Custom Tailored Ensembles
+                2. Mandatory Return Authorization Before Shipment
               </h2>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px", marginBottom: "16px" }}>
-                <div style={{ border: "1px solid rgba(0,0,0,0.1)", borderRadius: "var(--radius-sm)", padding: "16px", backgroundColor: "#fff" }}>
-                  <h3 style={{ fontSize: "14px", fontWeight: 600, color: "var(--color-burgundy)", marginBottom: "8px" }}>
-                    Standard Catalog Sizes (38, 40, 42, 44)
-                  </h3>
-                  <p style={{ fontSize: "13px", lineHeight: "1.7", color: "var(--color-charcoal)" }}>
-                    Eligible for size exchange or store credit within 7 days, provided the garment is unworn, unwashed, unaltered, and retained in original packaging with all security tags intact.
-                  </p>
-                </div>
-                <div style={{ border: "1px solid rgba(197, 162, 101, 0.3)", borderRadius: "var(--radius-sm)", padding: "16px", backgroundColor: "rgba(197, 162, 101, 0.04)" }}>
-                  <h3 style={{ fontSize: "14px", fontWeight: 600, color: "var(--color-burgundy)", marginBottom: "8px" }}>
-                    Bespoke & Altered Ensembles
-                  </h3>
-                  <p style={{ fontSize: "13px", lineHeight: "1.7", color: "var(--color-charcoal)" }}>
-                    Garments customized to specific anatomical measurements or personalized monogramming are crafted solely for the patron. While ineligible for cash refunds, WAAK provides complimentary master tailoring adjustment until perfect fit is achieved.
-                  </p>
-                </div>
+              <p style={{ fontSize: "14px", lineHeight: "1.8", color: "var(--color-charcoal)", marginBottom: "12px" }}>
+                The patron must receive written return authorization and confirmation from WAAK Client Concierge before shipping the garment back to our facility. Packages dispatched without prior written confirmation will not be accepted at our receiving desk.
+              </p>
+              <div style={{ backgroundColor: "rgba(197, 162, 101, 0.08)", padding: "16px", borderRadius: "var(--radius-sm)", borderLeft: "3px solid var(--color-gold)", marginTop: "12px" }}>
+                <p style={{ fontSize: "13px", lineHeight: "1.7", color: "var(--color-charcoal)" }}>
+                  <strong>Reverse Transit Responsibility:</strong> All return courier arrangements and reverse shipping charges are the sole responsibility of the customer. WAAK does not provide pre-paid return shipping labels. We strongly recommend using a reputable, insured, and trackable courier service.
+                </p>
               </div>
             </section>
 
             <section style={{ marginBottom: "28px" }}>
               <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "20px", color: "var(--color-burgundy)", marginBottom: "12px" }}>
-                3. Quality Verification & Reverse Transit
+                3. Garment Condition & Pristine Packaging
               </h2>
-              <p style={{ fontSize: "14px", lineHeight: "1.8", color: "var(--color-charcoal)" }}>
-                To initiate an exchange, contact <span style={{ fontFamily: "monospace", color: "var(--color-burgundy)" }}>concierge@waak.co.in</span> with your Order ID and photograph of the garment. Our concierge arranges complimentary reverse courier pickup from your address. Returned pieces undergo rigorous inspection by our quality master before replacement dispatch or credit authorization.
+              <p style={{ fontSize: "14px", lineHeight: "1.8", color: "var(--color-charcoal)", marginBottom: "12px" }}>
+                To be eligible for an exchange or store credit, the piece must be in strictly pristine, original condition:
               </p>
+              <ul style={{ paddingLeft: "20px", fontSize: "13.5px", lineHeight: "1.8", color: "var(--color-charcoal)" }}>
+                <li>Completely unused, unworn, unwashed, and unaltered in any manner.</li>
+                <li>Free of any blemishes, perfume or cologne scents, makeup smudges, deodorant marks, or fabric pulls.</li>
+                <li>Accompanied by all original WAAK tags, seals, garment bags, hangers, and luxury packaging intact.</li>
+              </ul>
+            </section>
+
+            <section style={{ marginBottom: "28px" }}>
+              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "20px", color: "var(--color-burgundy)", marginBottom: "12px" }}>
+                4. Mandatory Atelier Quality Inspection & Lifetime Store Credit
+              </h2>
+              <p style={{ fontSize: "14px", lineHeight: "1.8", color: "var(--color-charcoal)", marginBottom: "12px" }}>
+                Upon physical receipt at the WAAK atelier, every returned garment undergoes an exhaustive quality inspection by our master artisans to verify condition integrity.
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px", marginTop: "16px" }}>
+                <div style={{ border: "1px solid rgba(197, 162, 101, 0.4)", borderRadius: "var(--radius-sm)", padding: "16px", backgroundColor: "#fff" }}>
+                  <h3 style={{ fontSize: "14px", fontWeight: 600, color: "var(--color-burgundy)", marginBottom: "8px" }}>
+                    Lifetime Store Credit (No Cash Refunds)
+                  </h3>
+                  <p style={{ fontSize: "13px", lineHeight: "1.7", color: "var(--color-charcoal)" }}>
+                    Following successful quality inspection, WAAK issues a <strong>Lifetime Store Credit</strong> equal to the garment purchase value. This credit never expires and may be applied toward any future ready-to-wear or bespoke ensemble. <em>Cash, bank, or card refunds are strictly not provided under any circumstances.</em>
+                  </p>
+                </div>
+                <div style={{ border: "1px solid rgba(0,0,0,0.1)", borderRadius: "var(--radius-sm)", padding: "16px", backgroundColor: "#fff" }}>
+                  <h3 style={{ fontSize: "14px", fontWeight: 600, color: "var(--color-burgundy)", marginBottom: "8px" }}>
+                    Catalog Sizing (Sizes 36, 38, 40, 42, 44)
+                  </h3>
+                  <p style={{ fontSize: "13px", lineHeight: "1.7", color: "var(--color-charcoal)" }}>
+                    Standard catalog silhouettes across chest sizes 36 through 44 are eligible for one-time size exchange (subject to real-time atelier stock availability) or store credit upon approved return.
+                  </p>
+                </div>
+              </div>
             </section>
           </article>
         )
@@ -416,25 +438,35 @@ export default function PolicyView({ route }: PolicyViewProps) {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px", marginBottom: "32px" }}>
               <div style={{ border: "1px solid rgba(197, 162, 101, 0.3)", borderRadius: "var(--radius-sm)", padding: "24px", backgroundColor: "#fff" }}>
                 <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "18px", color: "var(--color-burgundy)", marginBottom: "12px" }}>
-                  Flagship Atelier
+                  Registered Business Office
                 </h2>
                 <div style={{ fontSize: "13px", lineHeight: "1.8", color: "var(--color-charcoal)" }}>
                   <p style={{ marginBottom: "8px" }}>
-                    <strong>WAAK Occasionwear Flagship</strong><br />
-                    Mehrauli Heritage Couture District<br />
-                    New Delhi, 110030 · India
+                    <strong>ENGLISH CHANNEL COMPANY</strong><br />
+                    <em>(Trading as WAAK Occasionwear)</em><br />
+                    37, Furniture Market, Gandhi Nagar<br />
+                    Delhi – 110033 · India
                   </p>
-                  <p style={{ fontSize: "12px", color: "var(--color-charcoal-muted)", fontStyle: "italic" }}>
-                    (Physical bridal salon viewings strictly by prior appointment)
+                  <p style={{ marginTop: "8px", fontSize: "12px", color: "var(--color-charcoal)" }}>
+                    <strong>GSTIN:</strong> <span style={{ fontFamily: "monospace", color: "var(--color-burgundy)" }}>07AAGFE4560K1ZA</span>
+                  </p>
+                  <p style={{ fontSize: "11px", color: "var(--color-charcoal-muted)", marginTop: "6px", fontStyle: "italic" }}>
+                    * Registered business entity coordinates provided by client (pending final tax registration certificate upload)
                   </p>
                 </div>
               </div>
 
               <div style={{ border: "1px solid rgba(197, 162, 101, 0.3)", borderRadius: "var(--radius-sm)", padding: "24px", backgroundColor: "#fff" }}>
                 <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "18px", color: "var(--color-burgundy)", marginBottom: "12px" }}>
-                  Digital Concierge Desks
+                  Digital Concierge & WhatsApp
                 </h2>
                 <div style={{ fontSize: "13px", lineHeight: "1.8", color: "var(--color-charcoal)" }}>
+                  <p style={{ marginBottom: "6px" }}>
+                    <strong>Client WhatsApp Concierge:</strong><br />
+                    <a href="https://wa.me/919821707031" target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-burgundy)", fontWeight: 600, textDecoration: "underline" }}>
+                      +91 98217 07031
+                    </a>
+                  </p>
                   <p style={{ marginBottom: "6px" }}>
                     <strong>Bespoke Styling Consultations:</strong><br />
                     <span style={{ color: "var(--color-burgundy)" }}>concierge@waak.co.in</span>
@@ -443,12 +475,8 @@ export default function PolicyView({ route }: PolicyViewProps) {
                     <strong>Order Status & Dispatch Inquiries:</strong><br />
                     <span style={{ color: "var(--color-burgundy)" }}>orders@waak.co.in</span>
                   </p>
-                  <p style={{ marginBottom: "6px" }}>
-                    <strong>Corporate & Press Relations:</strong><br />
-                    <span style={{ color: "var(--color-burgundy)" }}>press@waak.co.in</span>
-                  </p>
-                  <p style={{ fontSize: "12px", color: "var(--color-charcoal-muted)", marginTop: "8px" }}>
-                    Direct WhatsApp & Telephonic Line: Dedicated line allocation pending commercial carrier provisioning.
+                  <p style={{ fontSize: "11.5px", color: "var(--color-charcoal-muted)", marginTop: "8px" }}>
+                    Direct WhatsApp response hours: 10:30 AM – 7:30 PM IST (Mon–Sat)
                   </p>
                 </div>
               </div>

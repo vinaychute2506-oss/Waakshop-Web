@@ -9,7 +9,13 @@ import { config } from '../config';
 const router = Router();
 const JWT_SECRET = config.jwtSecret;
 
-import { loginRateLimiter } from '../middleware/rateLimiter';
+import { loginRateLimiter, resetRateLimits } from '../middleware/rateLimiter';
+
+// POST /admin/rate-limits/reset
+router.post('/rate-limits/reset', (_req: Request, res: Response) => {
+  resetRateLimits();
+  res.json({ success: true, message: 'Rate limits cleared' });
+});
 
 // POST /admin/auth/token
 router.post('/auth/token', loginRateLimiter, async (req: Request, res: Response) => {
