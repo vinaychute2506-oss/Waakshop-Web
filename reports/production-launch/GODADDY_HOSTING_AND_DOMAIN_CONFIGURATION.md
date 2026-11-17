@@ -69,7 +69,25 @@ WAAK requires a 4-tier stack:
 
 ---
 
-## 3. GoDaddy DNS Configuration Protocol
+## 3. Domain Ambiguity Resolution: waakshop.com vs. waak.co.in
+
+### Critical Domain & DNS Provider Check
+During audit verification, two domain assets were identified across client communications:
+1. **`waakshop.com`**: Previously observed active with DNS managed via **Cloudflare**.
+2. **`waak.co.in`**: Associated with the newly provided **GoDaddy** account access.
+
+### Comparison & Impact on Production Deployment:
+| Domain | DNS Provider | SSL / TLS Provisioning | DDoS & Edge Caching | Recommended Configuration |
+| :--- | :--- | :--- | :--- | :--- |
+| **`waakshop.com`** | **Cloudflare** | Automated Cloudflare Edge SSL + Origin CA | Built-in Cloudflare CDN & WAF | Point Cloudflare A-record to Production Server IP with Proxy Status: **Proxied (Orange Cloud)**. |
+| **`waak.co.in`** | **GoDaddy** | Let's Encrypt Certbot via Nginx on VPS | Direct Nginx Gateway | Point GoDaddy A-record `@` to Production Server IP with Let's Encrypt automated certbot renewal. |
+
+> [!IMPORTANT]
+> **Client Clarification Required**: We must confirm with Ankur whether the primary storefront domain for public launch is **`waakshop.com`** or **`waak.co.in`** (with the other set up as a 301 canonical permanent redirect).
+
+---
+
+## 4. GoDaddy DNS Configuration Protocol
 
 Before modifying any DNS records in GoDaddy:
 

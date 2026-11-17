@@ -64,15 +64,13 @@ WAAK Occasionwear is engineered as a modern, high-performance, 4-tier luxury com
 
 ## 3. Automated Test Verification Summary
 
-The full master regression suite ([scratch/run_all_tests.mjs](file:///C:/Users/Takemichi/Desktop/Waak%20Shop%20Web/scratch/run_all_tests.mjs)) was executed against the active environment:
-- **Total Test Suites**: 13
-- **Total Assertions Executed**: **427**
-- **Passed**: **427 (100%)**
-- **Failed**: **0**
-- **Skipped**: **0**
+The full master regression suite ([scratch/run_all_tests.mjs](file:///C:/Users/Takemichi/Desktop/Waak%20Shop%20Web/scratch/run_all_tests.mjs)) and the dedicated Shiprocket API v2 contract verification suite ([scratch/test-shiprocket-contract.mjs](file:///C:/Users/Takemichi/Desktop/Waak%20Shop%20Web/scratch/test-shiprocket-contract.mjs)) were executed against the active environment:
+- **13 Master Regression Suites**: **427 passing assertions** (0 failed)
+- **Shiprocket API v2 Contract Audit**: **7 passing assertions** (0 failed)
+- **Grand Total Automated Assertions**: **434 passed / 434 executed (100% PASS, 0 Failed, 0 Skipped)**
 - **Build Status**:
-  - `npm run build`: Success (51 modules, 2.00s)
-  - `npm --prefix backend run build`: Success (TypeScript, 1.4s)
+  - `npm run build`: Success (51 modules transformed, 2.00s, 119 kB gzip)
+  - `npm --prefix backend run build`: Success (TypeScript compile, 1.4s, exit code 0)
 
 ---
 

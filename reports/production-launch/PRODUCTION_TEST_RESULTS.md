@@ -2,9 +2,9 @@
 
 **Execution Date**: November 18, 2026  
 **Execution Environment**: Node v20, PostgreSQL 16, Redis 7, Nginx Gateway  
-**Test Runner**: `scratch/run_all_tests.mjs`  
-**Total Assertions Executed**: **427**  
-**Total Passed**: **427 (100%)**  
+**Test Runners**: `scratch/run_all_tests.mjs` & `scratch/test-shiprocket-contract.mjs`  
+**Total Assertions Executed**: **434** (427 across 13 Regression Suites + 7 in Shiprocket API v2 Contract Suite)  
+**Total Passed**: **434 (100%)**  
 **Total Failed**: **0**  
 **Total Skipped**: **0**
 
