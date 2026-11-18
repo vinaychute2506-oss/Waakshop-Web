@@ -11,3 +11,7 @@ dist
 
 # Scratch & temporary test profiles
 scratch/
+
+WAAK_CLIENT_HANDOVER/
+*.zip
+/*.mp4
