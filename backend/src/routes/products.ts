@@ -27,7 +27,7 @@ router.get('/', async (req: Request, res: Response) => {
       LEFT JOIN product_variants v ON v.product_id = p.id
     `;
 
-    const whereClauses: string[] = [];
+    const whereClauses: string[] = ['COALESCE(p.is_published, TRUE) = TRUE'];
     const values: any[] = [];
 
     if (category && category !== 'All') {
@@ -82,7 +82,7 @@ router.get('/:id', async (req: Request, res: Response) => {
         ) as variants
       FROM products p
       LEFT JOIN product_variants v ON v.product_id = p.id
-      WHERE p.id = $1
+      WHERE p.id = $1 AND COALESCE(p.is_published, TRUE) = TRUE
       GROUP BY p.id
     `;
 
