@@ -1,8 +1,10 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import multer from 'multer';
 import { pool } from '../db';
 import { adminAuth } from '../middleware/auth';
+import { uploadImageBuffer, isCloudinaryConfigured } from '../services/cloudinary';
 
 import { config } from '../config';
 
@@ -151,6 +153,87 @@ router.put('/orders/:id/status', adminAuth, async (req: Request, res: Response) 
   } catch (error: any) {
     res.status(500).json({ error: 'Failed to update order status' });
   }
+});
+
+// Configure Multer for secure, memory-buffered image uploads
+const imageUpload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5 MB per image max
+    files: 10,                 // Up to 10 images per batch
+  },
+  fileFilter: (_req, file, cb) => {
+    const allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (allowedMimes.includes(file.mimetype.toLowerCase())) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file format. Only JPEG, PNG, and WebP images are allowed.'));
+    }
+  },
+});
+
+// POST /admin/upload/images
+router.post('/upload/images', adminAuth, (req: Request, res: Response) => {
+  imageUpload.array('images', 10)(req, res, async (err: any) => {
+    if (err) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        res.status(400).json({ error: 'File size exceeds maximum allowable limit of 5 MB per image.' });
+        return;
+      }
+      if (err.code === 'LIMIT_FILE_COUNT') {
+        res.status(400).json({ error: 'Maximum 10 images can be uploaded simultaneously.' });
+        return;
+      }
+      res.status(400).json({ error: err.message || 'Image upload validation failed.' });
+      return;
+    }
+
+    const files = req.files as Express.Multer.File[];
+    if (!files || files.length === 0) {
+      res.status(400).json({ error: 'No image files provided for upload.' });
+      return;
+    }
+
+    // Verify magic bytes
+    const isValidImageMagic = (buf: Buffer): boolean => {
+      if (!buf || buf.length < 4) return false;
+      // JPEG: FF D8 FF
+      if (buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) return true;
+      // PNG: 89 50 4E 47
+      if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4e && buf[3] === 0x47) return true;
+      // WEBP: RIFF ... WEBP
+      if (
+        buf.length >= 12 &&
+        buf.toString('ascii', 0, 4) === 'RIFF' &&
+        buf.toString('ascii', 8, 12) === 'WEBP'
+      ) return true;
+      return false;
+    };
+
+    try {
+      const results = [];
+      for (const file of files) {
+        if (!isValidImageMagic(file.buffer)) {
+          res.status(400).json({
+            error: `File '${file.originalname}' has invalid image headers and cannot be accepted.`,
+          });
+          return;
+        }
+        const uploaded = await uploadImageBuffer(file.buffer, file.originalname);
+        results.push(uploaded);
+      }
+
+      res.json({
+        success: true,
+        count: results.length,
+        isCloudinaryConfigured: isCloudinaryConfigured(),
+        images: results,
+      });
+    } catch (uploadError: any) {
+      console.error('Image upload processing error:', uploadError);
+      res.status(500).json({ error: uploadError.message || 'Failed to process and store image upload.' });
+    }
+  });
 });
 
 // GET /admin/products

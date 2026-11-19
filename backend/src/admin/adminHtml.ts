@@ -399,6 +399,93 @@ export const adminDashboardHtml = `<!DOCTYPE html>
     }
     .size-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
+    /* Media Manager & Dropzone */
+    .image-dropzone {
+      border: 1px dashed var(--border-gold);
+      background: rgba(42, 8, 13, 0.4);
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s ease;
+      margin-bottom: 10px;
+    }
+    .image-dropzone:hover, .image-dropzone.dragover {
+      background: rgba(197, 162, 101, 0.12);
+      border-color: var(--accent-gold);
+    }
+    .gallery-tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+      max-height: 180px;
+      overflow-y: auto;
+      padding: 6px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border-gold);
+      border-radius: 2px;
+    }
+    .gallery-tile {
+      position: relative;
+      width: 100%;
+      height: 94px;
+      border: 1px solid var(--border-gold);
+      background: #120507;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .gallery-tile.is-cover {
+      border: 2px solid var(--accent-gold);
+      box-shadow: 0 0 8px rgba(197, 162, 101, 0.5);
+    }
+    .gallery-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .tile-cover-badge {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      background: var(--accent-gold);
+      color: #1a0407;
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 4px;
+      letter-spacing: 0.5px;
+      border-radius: 1px;
+    }
+    .tile-overlay-btns {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 2, 4, 0.88);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 3px 2px;
+    }
+    .tile-btn {
+      background: transparent;
+      border: none;
+      color: var(--accent-gold);
+      cursor: pointer;
+      font-size: 11px;
+      padding: 1px 3px;
+      line-height: 1;
+    }
+    .tile-btn:hover {
+      color: #ffffff;
+      transform: scale(1.15);
+    }
+    .tile-btn.btn-del:hover {
+      color: #ef9a9a;
+    }
+
     /* Toast Notification */
     #toast-notification {
       position: fixed;
@@ -664,23 +751,43 @@ export const adminDashboardHtml = `<!DOCTYPE html>
           <!-- Column 2: Imagery & Sizing Matrix -->
           <div>
             <div class="form-group">
-              <label class="form-label">Primary Thumbnail Image URL *</label>
-              <input type="text" id="form-thumbnail" class="form-input" required placeholder="/assets/products/ivory-sherwani.jpg or https://..." oninput="updateThumbPreview()" />
-              <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
-                <img id="form-thumb-preview" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='75' viewBox='0 0 60 75' fill='%232a080d'><rect width='60' height='75' fill='%232a080d' stroke='%23c5a265' stroke-width='1'/><text x='50%' y='44%' dominant-baseline='middle' text-anchor='middle' fill='%23dfc28d' font-family='serif' font-size='9' font-weight='600'>WAAK</text><text x='50%' y='60%' dominant-baseline='middle' text-anchor='middle' fill='%23bfa79f' font-family='sans-serif' font-size='6'>ATELIER</text></svg>" style="width:60px; height:75px; object-fit:cover; border:1px solid var(--border-gold);" onerror="this.onerror=null; this.src=FALLBACK_THUMB;" />
-                <div style="font-size:11px; color:var(--text-muted);">
-                  <span>Quick Studio Presets:</span><br/>
-                  <a href="#" onclick="setFormImage('/assets/products/ivory-sherwani.jpg'); return false;" style="color:var(--accent-gold); margin-right:6px;">Ivory</a>
-                  <a href="#" onclick="setFormImage('/assets/products/midnight-sherwani.jpg'); return false;" style="color:var(--accent-gold); margin-right:6px;">Midnight</a>
-                  <a href="#" onclick="setFormImage('/assets/products/emerald-kurta.jpg'); return false;" style="color:var(--accent-gold); margin-right:6px;">Emerald</a>
-                  <a href="#" onclick="setFormImage('/assets/products/mauve-bandhgala.jpg'); return false;" style="color:var(--accent-gold);">Mauve</a>
+              <label class="form-label">Garment Photography & Gallery *</label>
+              
+              <!-- Cloudinary Dropzone -->
+              <div id="image-dropzone" class="image-dropzone" onclick="document.getElementById('file-upload-input').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c5a265" stroke-width="1.6"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <div style="color:var(--text-ivory); font-size:12px; font-weight:600; margin-top:4px;">Upload Photos from Computer</div>
+                <div style="color:var(--text-muted); font-size:10px;">Drag & drop or click to browse (JPEG, PNG, WebP · Max 5MB each)</div>
+                <input type="file" id="file-upload-input" multiple accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="handleFileSelect(event)" />
+              </div>
+
+              <div id="upload-progress-box" style="display:none; margin-bottom:8px; font-size:11px; color:var(--accent-gold); align-items:center; gap:8px;">
+                <span id="upload-progress-text">Uploading to Atelier media storage...</span>
+              </div>
+
+              <!-- Visual Gallery Tiles -->
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                <span style="font-size:11px; color:var(--text-muted);">Current Garment Photos (<span id="gallery-count">0</span>):</span>
+                <span style="font-size:10px; color:var(--accent-gold);">Click ★ to set Cover Photo</span>
+              </div>
+              <div id="gallery-tiles-container" class="gallery-tiles-grid">
+                <!-- Injected via renderGalleryTiles() -->
+              </div>
+
+              <!-- Quick Studio Presets -->
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11px; color:var(--text-muted);">
+                <span>Quick Studio Presets:</span>
+                <div>
+                  <a href="#" onclick="addPresetImage('/assets/products/ivory-sherwani.jpg'); return false;" style="color:var(--accent-gold); margin-right:6px;">Ivory</a>
+                  <a href="#" onclick="addPresetImage('/assets/products/midnight-sherwani.jpg'); return false;" style="color:var(--accent-gold); margin-right:6px;">Midnight</a>
+                  <a href="#" onclick="addPresetImage('/assets/products/emerald-kurta.jpg'); return false;" style="color:var(--accent-gold); margin-right:6px;">Emerald</a>
+                  <a href="#" onclick="addPresetImage('/assets/products/mauve-bandhgala.jpg'); return false;" style="color:var(--accent-gold);">Mauve</a>
                 </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="form-label">Additional Gallery Image URLs (1 per line)</label>
-              <textarea id="form-images" class="form-textarea" placeholder="/assets/products/ivory-sherwani.jpg&#10;/assets/products/ivory-sherwani-detail.jpg" style="height:70px;"></textarea>
+              <!-- Synchronized Storage Fields -->
+              <input type="hidden" id="form-thumbnail" required />
+              <textarea id="form-images" style="display:none;"></textarea>
             </div>
 
             <div class="form-group">
@@ -1001,15 +1108,17 @@ export const adminDashboardHtml = `<!DOCTYPE html>
       document.getElementById('form-new-arrival').checked = true;
       document.getElementById('form-on-sale').checked = false;
       document.getElementById('form-description').value = '';
-      document.getElementById('form-thumbnail').value = '/assets/products/ivory-sherwani.jpg';
-      document.getElementById('form-images').value = '/assets/products/ivory-sherwani.jpg';
+
+      // Reset media manager
+      currentModalImages = ['/assets/products/ivory-sherwani.jpg'];
+      currentCoverImage = '/assets/products/ivory-sherwani.jpg';
+      renderGalleryTiles();
 
       // Reset stock
       ['36','38','40','42','44'].forEach(sz => {
         document.getElementById('size-stock-' + sz).value = sz === '36' ? '0' : '6';
       });
       updateSkuPreviews('waak-new');
-      updateThumbPreview();
       document.getElementById('product-modal').style.display = 'flex';
     }
 
@@ -1042,8 +1151,17 @@ export const adminDashboardHtml = `<!DOCTYPE html>
         document.getElementById('form-new-arrival').checked = Boolean(p.is_new_arrival);
         document.getElementById('form-on-sale').checked = Boolean(p.on_sale);
         document.getElementById('form-description').value = p.description || '';
-        document.getElementById('form-thumbnail').value = p.thumbnail || '';
-        document.getElementById('form-images').value = (p.images || []).join('\\n');
+
+        // Non-destructive image loading: preserve all existing photos
+        const existingThumb = (p.thumbnail || '').trim();
+        const existingImgs = (p.images || []).map(s => (s || '').trim()).filter(Boolean);
+        const combined = [existingThumb, ...existingImgs].filter(Boolean);
+        currentModalImages = Array.from(new Set(combined));
+        if (currentModalImages.length === 0) {
+          currentModalImages = ['/assets/products/ivory-sherwani.jpg'];
+        }
+        currentCoverImage = existingThumb || currentModalImages[0];
+        renderGalleryTiles();
 
         // Populate sizes
         const sizeMap = {};
@@ -1053,7 +1171,6 @@ export const adminDashboardHtml = `<!DOCTYPE html>
         });
 
         updateSkuPreviews(p.id);
-        updateThumbPreview();
         document.getElementById('product-modal').style.display = 'flex';
       } catch (err) {
         showToast(err.message, true);
@@ -1079,19 +1196,165 @@ export const adminDashboardHtml = `<!DOCTYPE html>
       });
     }
 
-    function updateThumbPreview() {
-      const url = (document.getElementById('form-thumbnail').value || '').trim();
-      const preview = document.getElementById('form-thumb-preview');
-      preview.onerror = function() {
-        this.onerror = null;
-        this.src = FALLBACK_THUMB;
-      };
-      preview.src = url || FALLBACK_THUMB;
+    // Media Manager Studio State & Methods
+    let currentModalImages = [];
+    let currentCoverImage = '';
+
+    function renderGalleryTiles() {
+      const container = document.getElementById('gallery-tiles-container');
+      const countEl = document.getElementById('gallery-count');
+      if (!container) return;
+
+      if (!currentModalImages || currentModalImages.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1 / -1; text-align:center; padding:16px; font-size:11px; color:var(--text-muted);">No photos attached. Upload photos from your computer or choose a preset.</div>';
+        if (countEl) countEl.innerText = '0';
+        document.getElementById('form-thumbnail').value = '';
+        document.getElementById('form-images').value = '';
+        return;
+      }
+
+      if (!currentCoverImage || !currentModalImages.includes(currentCoverImage)) {
+        currentCoverImage = currentModalImages[0];
+      }
+
+      if (countEl) countEl.innerText = currentModalImages.length;
+      document.getElementById('form-thumbnail').value = currentCoverImage;
+      document.getElementById('form-images').value = currentModalImages.join('\\n');
+
+      container.innerHTML = currentModalImages.map((url, idx) => {
+        const isCover = url === currentCoverImage;
+        const leftDisabled = idx === 0 ? 'opacity:0.25; pointer-events:none;' : '';
+        const rightDisabled = idx === currentModalImages.length - 1 ? 'opacity:0.25; pointer-events:none;' : '';
+        const safeUrl = url.replace(/'/g, "\\\\'");
+
+        return '<div class="gallery-tile ' + (isCover ? 'is-cover' : '') + '">' +
+          '<img src="' + url + '" onerror="this.onerror=null; this.src=FALLBACK_THUMB;" />' +
+          (isCover ? '<span class="tile-cover-badge">★ Cover</span>' : '') +
+          '<div class="tile-overlay-btns">' +
+            '<button type="button" class="tile-btn" title="Set as Cover Photo" onclick="setCoverPhoto(\\'' + safeUrl + '\\')">' + (isCover ? '★' : '☆') + '</button>' +
+            '<button type="button" class="tile-btn" style="' + leftDisabled + '" title="Move Left" onclick="moveGalleryPhoto(' + idx + ', -1)">◀</button>' +
+            '<button type="button" class="tile-btn" style="' + rightDisabled + '" title="Move Right" onclick="moveGalleryPhoto(' + idx + ', 1)">▶</button>' +
+            '<button type="button" class="tile-btn btn-del" title="Remove Photo" onclick="removeGalleryPhoto(' + idx + ')">×</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
     }
 
-    function setFormImage(url) {
-      document.getElementById('form-thumbnail').value = url;
-      updateThumbPreview();
+    function setCoverPhoto(url) {
+      currentCoverImage = url;
+      renderGalleryTiles();
+    }
+
+    function moveGalleryPhoto(idx, dir) {
+      const targetIdx = idx + dir;
+      if (targetIdx < 0 || targetIdx >= currentModalImages.length) return;
+      const temp = currentModalImages[idx];
+      currentModalImages[idx] = currentModalImages[targetIdx];
+      currentModalImages[targetIdx] = temp;
+      renderGalleryTiles();
+    }
+
+    function removeGalleryPhoto(idx) {
+      const removed = currentModalImages.splice(idx, 1)[0];
+      if (currentCoverImage === removed) {
+        currentCoverImage = currentModalImages[0] || '';
+      }
+      renderGalleryTiles();
+    }
+
+    function addPresetImage(url) {
+      if (!currentModalImages.includes(url)) {
+        currentModalImages.push(url);
+      }
+      if (!currentCoverImage) currentCoverImage = url;
+      renderGalleryTiles();
+    }
+
+    // Drag and Drop & File Upload Handlers
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const el = document.getElementById('image-dropzone');
+      if (el) el.classList.add('dragover');
+    }
+
+    function handleDragLeave(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const el = document.getElementById('image-dropzone');
+      if (el) el.classList.remove('dragover');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const el = document.getElementById('image-dropzone');
+      if (el) el.classList.remove('dragover');
+      const files = e.dataTransfer && e.dataTransfer.files;
+      if (files && files.length > 0) {
+        uploadFilesToServer(files);
+      }
+    }
+
+    function handleFileSelect(e) {
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        uploadFilesToServer(files);
+      }
+      e.target.value = '';
+    }
+
+    async function uploadFilesToServer(fileList) {
+      if (!adminToken) return;
+      const progressBox = document.getElementById('upload-progress-box');
+      const progressText = document.getElementById('upload-progress-text');
+
+      const formData = new FormData();
+      let validCount = 0;
+
+      for (let i = 0; i < fileList.length; i++) {
+        const file = fileList[i];
+        if (file.size > 5 * 1024 * 1024) {
+          showToast('Image ' + file.name + ' exceeds 5MB limit.', true);
+          continue;
+        }
+        formData.append('images', file);
+        validCount++;
+      }
+
+      if (validCount === 0) return;
+
+      if (progressBox) progressBox.style.display = 'flex';
+      if (progressText) progressText.innerText = 'Uploading ' + validCount + ' image(s) to Atelier cloud storage...';
+
+      try {
+        const res = await fetch('/admin/upload/images', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + adminToken },
+          body: formData,
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Upload failed');
+
+        (data.images || []).forEach(img => {
+          const url = img.secure_url;
+          if (!currentModalImages.includes(url)) {
+            currentModalImages.push(url);
+          }
+        });
+
+        if (!currentCoverImage && currentModalImages.length > 0) {
+          currentCoverImage = currentModalImages[0];
+        }
+
+        renderGalleryTiles();
+        showToast('Successfully uploaded ' + (data.images ? data.images.length : validCount) + ' image(s)');
+      } catch (err) {
+        showToast('Upload error: ' + err.message, true);
+      } finally {
+        if (progressBox) progressBox.style.display = 'none';
+      }
     }
 
     // Submit Add or Edit Form
@@ -1112,11 +1375,11 @@ export const adminDashboardHtml = `<!DOCTYPE html>
         stock_quantity: parseInt(document.getElementById('size-stock-' + sz).value || '0', 10),
       }));
 
-      // Prepare gallery images
-      const rawImages = document.getElementById('form-images').value
-        .split('\\n')
-        .map(s => s.trim())
-        .filter(s => s.length > 0);
+      // Prepare gallery images from media manager
+      const rawImages = currentModalImages.length > 0
+        ? currentModalImages
+        : [currentCoverImage || document.getElementById('form-thumbnail').value || FALLBACK_THUMB];
+      const thumbnailVal = currentCoverImage || rawImages[0] || FALLBACK_THUMB;
 
       const payload = {
         id: document.getElementById('form-custom-id').value.trim(),
@@ -1132,8 +1395,8 @@ export const adminDashboardHtml = `<!DOCTYPE html>
         is_bestseller: document.getElementById('form-bestseller').checked,
         is_new_arrival: document.getElementById('form-new-arrival').checked,
         on_sale: document.getElementById('form-on-sale').checked,
-        thumbnail: document.getElementById('form-thumbnail').value.trim(),
-        images: rawImages.length > 0 ? rawImages : [document.getElementById('form-thumbnail').value.trim()],
+        thumbnail: thumbnailVal,
+        images: rawImages,
         variants: variants,
       };
 
