@@ -26,7 +26,12 @@ export const pool = new Pool({
 
 import bcrypt from 'bcryptjs';
 
+let isBootstrapping = false;
+
 async function bootstrapDatabaseData(): Promise<void> {
+  if (isBootstrapping) return;
+  isBootstrapping = true;
+
   try {
     const adminEmail = config.admin.email;
     const adminPassword = process.env.ADMIN_PASSWORD;
@@ -36,7 +41,7 @@ async function bootstrapDatabaseData(): Promise<void> {
     if (parseInt(countRes.rows[0].count, 10) === 0) {
       console.log('ℹ️ Empty database detected; bootstrapping signature Atelier collection...');
       const { seedDatabase } = await import('./seed');
-      await seedDatabase();
+      await seedDatabase(true);
       return;
     }
 
@@ -70,6 +75,8 @@ async function bootstrapDatabaseData(): Promise<void> {
     }
   } catch (err: any) {
     console.warn('Database bootstrap notice:', err.message || err);
+  } finally {
+    isBootstrapping = false;
   }
 }
 

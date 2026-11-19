@@ -1,8 +1,10 @@
 import { pool, initDatabase } from './index';
 import bcrypt from 'bcryptjs';
 
-export async function seedDatabase(): Promise<void> {
-  await initDatabase();
+export async function seedDatabase(skipInit = false): Promise<void> {
+  if (!skipInit) {
+    await initDatabase();
+  }
   const client = await pool.connect();
 
   try {
