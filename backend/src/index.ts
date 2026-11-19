@@ -161,6 +161,7 @@ app.use('/store/newsletter', newsletterRoutes);
 app.use('/store/shipping', shippingRoutes);
 app.use('/api/shipping', shippingRoutes);
 app.use('/admin', adminRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Global Error Handler (Sanitizes error details in production/staging)
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
