@@ -12,17 +12,26 @@ const RAZORPAY_KEY_ID = config.razorpay.keyId;
 const RAZORPAY_KEY_SECRET = config.razorpay.keySecret;
 
 let razorpayClient: Razorpay | null = null;
-try {
-  razorpayClient = new Razorpay({
-    key_id: RAZORPAY_KEY_ID,
-    key_secret: RAZORPAY_KEY_SECRET,
-  });
-} catch (e) {
-  console.warn('Razorpay client initialization warning:', e);
+if (RAZORPAY_KEY_ID && RAZORPAY_KEY_SECRET) {
+  try {
+    razorpayClient = new Razorpay({
+      key_id: RAZORPAY_KEY_ID,
+      key_secret: RAZORPAY_KEY_SECRET,
+    });
+  } catch (e) {
+    console.warn('Razorpay client initialization warning:', e);
+  }
 }
 
 // POST /store/carts/:id/checkout
 router.post('/carts/:id/checkout', optionalCustomerAuth, async (req: Request, res: Response) => {
+  if (!config.razorpay.isConfigured || !RAZORPAY_KEY_ID || !RAZORPAY_KEY_SECRET) {
+    res.status(503).json({
+      error: 'Payment processing is currently unavailable: Razorpay credentials are not configured on this server.',
+    });
+    return;
+  }
+
   const client = await pool.connect();
   try {
     const cartId = String(req.params.id);
@@ -171,6 +180,13 @@ function safeCompare(a: string, b: string): boolean {
 
 // POST /store/payment/razorpay/verify
 router.post('/payment/razorpay/verify', async (req: Request, res: Response) => {
+  if (!config.razorpay.isConfigured || !RAZORPAY_KEY_SECRET) {
+    res.status(503).json({
+      error: 'Payment verification is disabled: Razorpay credentials are not configured on this server.',
+    });
+    return;
+  }
+
   const client = await pool.connect();
   try {
     const { order_id, razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
@@ -305,6 +321,13 @@ router.post('/payment/razorpay/webhook', async (req: Request, res: Response) => 
   try {
     const signature = req.headers['x-razorpay-signature'] as string;
     const secret = config.razorpay.webhookSecret;
+
+    if (!secret) {
+      res.status(503).json({
+        error: 'Razorpay webhook processing is disabled: RAZORPAY_WEBHOOK_SECRET is not configured on this server.',
+      });
+      return;
+    }
 
     if (!signature) {
       res.status(400).json({ error: 'Missing x-razorpay-signature header' });
