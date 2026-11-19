@@ -3,6 +3,8 @@ import path from 'path';
 
 // Load .env if present
 dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config({ path: path.resolve(process.cwd(), 'backend/.env') });
 
 export interface AppConfig {
   nodeEnv: 'development' | 'staging' | 'production' | 'test';
@@ -32,14 +34,24 @@ const DEFAULT_DEV_WEBHOOK_SECRET = 'waak_webhook_secret_2026';
 
 function parseCorsOrigins(raw?: string, port = 9000): string[] {
   const localSelf = [`http://localhost:${port}`, `http://127.0.0.1:${port}`];
+  const defaults = [
+    'https://waakshop-web.vercel.app',
+    'https://waakshop-web.onrender.com',
+    'https://waakshop.com',
+    'https://www.waakshop.com',
+  ];
+  if (process.env.RENDER_EXTERNAL_URL) {
+    defaults.push(process.env.RENDER_EXTERNAL_URL.replace(/\/+$/, ''));
+  }
+
   if (!raw) {
-    return ['http://localhost:5173', 'http://127.0.0.1:5173', ...localSelf];
+    return Array.from(new Set(['http://localhost:5173', 'http://127.0.0.1:5173', ...defaults, ...localSelf]));
   }
   const custom = raw
     .split(',')
     .map((o) => o.trim().replace(/\/+$/, ''))
     .filter(Boolean);
-  return Array.from(new Set([...custom, ...localSelf]));
+  return Array.from(new Set([...defaults, ...custom, ...localSelf]));
 }
 
 function validateAndLoadConfig(): AppConfig {

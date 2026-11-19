@@ -36,10 +36,16 @@ app.use(
     origin: (origin, callback) => {
       // Allow requests with no origin (e.g. mobile apps, curl, server-to-server)
       if (!origin) return callback(null, true);
-      if (config.corsOrigins.includes(origin) || config.corsOrigins.includes('*')) {
+      const normalizedOrigin = origin.replace(/\/+$/, '');
+      if (config.corsOrigins.includes(normalizedOrigin) || config.corsOrigins.includes('*')) {
         return callback(null, true);
       }
-      return callback(new Error(`CORS blocked for origin: ${origin}`));
+      // Allow Vercel preview environments: https://waakshop-web-*.vercel.app
+      if (/^https:\/\/waakshop-web(-[a-z0-9-]+)?\.vercel\.app$/i.test(normalizedOrigin)) {
+        return callback(null, true);
+      }
+      console.warn(`[CORS] Blocked request from unauthorized origin: ${normalizedOrigin}`);
+      return callback(null, false);
     },
     credentials: true,
   })
@@ -158,10 +164,11 @@ app.use('/admin', adminRoutes);
 
 // Global Error Handler (Sanitizes error details in production/staging)
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  console.error('Unhandled server error:', err.message || err);
+  const statusCode = err.status || err.statusCode || 500;
+  console.error(`Unhandled server error [HTTP ${statusCode}]:`, err.message || err);
   const isProd = config.nodeEnv === 'production' || config.nodeEnv === 'staging';
-  res.status(500).json({
-    error: isProd ? 'Internal server error occurred in Atelier service' : err.message || 'Internal server error',
+  res.status(statusCode).json({
+    error: isProd && statusCode === 500 ? 'Internal server error occurred in Atelier service' : err.message || 'Internal server error',
   });
 });
 

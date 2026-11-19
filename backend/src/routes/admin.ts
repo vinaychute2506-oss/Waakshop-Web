@@ -21,21 +21,25 @@ router.post('/rate-limits/reset', (_req: Request, res: Response) => {
 router.post('/auth/token', loginRateLimiter, async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) {
+    if (!email || !password || typeof email !== 'string' || typeof password !== 'string') {
       res.status(400).json({ error: 'Email and password required' });
       return;
     }
 
+    const cleanEmail = email.toLowerCase().trim();
+
     // Production credential hardening guard
     if (config.admin.defaultPasswordBlocked && password === 'waakAdmin2026!') {
+      console.warn(`[Admin Auth] Rejected default development credentials for '${cleanEmail}' in production/staging mode.`);
       res.status(403).json({
         error: 'Default development credentials prohibited in production/staging mode. Set ADMIN_PASSWORD in environment.',
       });
       return;
     }
 
-    const result = await pool.query('SELECT * FROM admin_users WHERE email = $1', [email.toLowerCase().trim()]);
+    const result = await pool.query('SELECT * FROM admin_users WHERE email = $1', [cleanEmail]);
     if (result.rows.length === 0) {
+      console.warn(`[Admin Auth] Failed login attempt: No admin account found with email '${cleanEmail}'.`);
       res.status(401).json({ error: 'Invalid admin credentials' });
       return;
     }
@@ -43,11 +47,13 @@ router.post('/auth/token', loginRateLimiter, async (req: Request, res: Response)
     const admin = result.rows[0];
     const match = await bcrypt.compare(password, admin.password_hash);
     if (!match) {
+      console.warn(`[Admin Auth] Failed login attempt: Incorrect password for '${cleanEmail}'.`);
       res.status(401).json({ error: 'Invalid admin credentials' });
       return;
     }
 
     const token = jwt.sign({ id: admin.id, email: admin.email, role: 'admin' }, JWT_SECRET, { expiresIn: '7d' });
+    console.log(`✓ [Admin Auth] Admin session created successfully for '${cleanEmail}'`);
     res.json({
       token,
       admin: {
@@ -59,8 +65,8 @@ router.post('/auth/token', loginRateLimiter, async (req: Request, res: Response)
       },
     });
   } catch (error: any) {
-    console.error('Admin login error:', error);
-    res.status(500).json({ error: 'Admin login failed' });
+    console.error('[Admin Auth] Unexpected server error during authentication:', error.message || error);
+    res.status(500).json({ error: 'Admin login failed due to an unexpected server error' });
   }
 });
 
