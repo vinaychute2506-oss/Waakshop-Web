@@ -270,7 +270,9 @@ export const adminDashboardHtml = `<!DOCTYPE html>
       border: 1px solid var(--border-gold);
       background: #120507;
       border-radius: 2px;
-      transition: transform 0.2s;
+      transition: transform 0.2s ease;
+      will-change: transform;
+      transform-origin: center;
     }
     .product-thumb:hover {
       transform: scale(1.6);
@@ -282,13 +284,15 @@ export const adminDashboardHtml = `<!DOCTYPE html>
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(15, 2, 4, 0.82);
+      background: rgba(15, 2, 4, 0.88);
       backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 1000;
       padding: 20px;
+      will-change: opacity;
     }
     .modal-card {
       background: var(--bg-card);
@@ -474,11 +478,11 @@ export const adminDashboardHtml = `<!DOCTYPE html>
           </button>
         </div>
 
-        <!-- Filter & Search Toolbar -->
+        <!-- Filter & Search Toolbar (Instant in-memory filtering) -->
         <div class="filter-bar">
-          <input type="text" id="prod-search" class="filter-input" placeholder="Search by garment title, ID, or SKU..." oninput="debounceFilterProducts()" />
+          <input type="text" id="prod-search" class="filter-input" placeholder="Search by garment title, ID, or SKU..." oninput="applyLocalFilters()" />
           
-          <select id="prod-category-filter" class="filter-select" onchange="loadProducts()">
+          <select id="prod-category-filter" class="filter-select" onchange="applyLocalFilters()">
             <option value="All">All Categories</option>
             <option value="Sherwanis">Sherwanis</option>
             <option value="Kurta Sets">Kurta Sets</option>
@@ -488,20 +492,20 @@ export const adminDashboardHtml = `<!DOCTYPE html>
             <option value="Indian Wear">Indian Wear</option>
           </select>
 
-          <select id="prod-status-filter" class="filter-select" onchange="loadProducts()">
+          <select id="prod-status-filter" class="filter-select" onchange="applyLocalFilters()">
             <option value="all">All Visibility</option>
             <option value="published">Published in Store</option>
             <option value="draft">Draft / Unpublished</option>
           </select>
 
-          <select id="prod-stock-filter" class="filter-select" onchange="loadProducts()">
+          <select id="prod-stock-filter" class="filter-select" onchange="applyLocalFilters()">
             <option value="all">All Stock Levels</option>
             <option value="in_stock">In Stock (>4)</option>
             <option value="low_stock">Low Stock (1-4)</option>
             <option value="out_of_stock">Out of Stock (0)</option>
           </select>
 
-          <button class="btn btn-outline" style="padding:7px 12px; font-size:11px;" onclick="loadProducts()">Refresh</button>
+          <button class="btn btn-outline" style="padding:7px 12px; font-size:11px;" onclick="fetchProductsFromServer(true)">Refresh</button>
         </div>
 
         <!-- Products Table -->
@@ -663,7 +667,7 @@ export const adminDashboardHtml = `<!DOCTYPE html>
               <label class="form-label">Primary Thumbnail Image URL *</label>
               <input type="text" id="form-thumbnail" class="form-input" required placeholder="/assets/products/ivory-sherwani.jpg or https://..." oninput="updateThumbPreview()" />
               <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
-                <img id="form-thumb-preview" src="/assets/products/ivory-sherwani.jpg" style="width:60px; height:75px; object-fit:cover; border:1px solid var(--border-gold);" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2275%22 fill=%22%232a080d%22><text x=%2210%22 y=%2240%22 fill=%22%23c5a265%22 font-size=%2210%22>No Preview</text></svg>'" />
+                <img id="form-thumb-preview" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='75' viewBox='0 0 60 75' fill='%232a080d'><rect width='60' height='75' fill='%232a080d' stroke='%23c5a265' stroke-width='1'/><text x='50%' y='44%' dominant-baseline='middle' text-anchor='middle' fill='%23dfc28d' font-family='serif' font-size='9' font-weight='600'>WAAK</text><text x='50%' y='60%' dominant-baseline='middle' text-anchor='middle' fill='%23bfa79f' font-family='sans-serif' font-size='6'>ATELIER</text></svg>" style="width:60px; height:75px; object-fit:cover; border:1px solid var(--border-gold);" onerror="this.onerror=null; this.src=FALLBACK_THUMB;" />
                 <div style="font-size:11px; color:var(--text-muted);">
                   <span>Quick Studio Presets:</span><br/>
                   <a href="#" onclick="setFormImage('/assets/products/ivory-sherwani.jpg'); return false;" style="color:var(--accent-gold); margin-right:6px;">Ivory</a>
@@ -740,8 +744,8 @@ export const adminDashboardHtml = `<!DOCTYPE html>
 
   <script>
     let adminToken = localStorage.getItem('waak_admin_token');
-    let loadedProducts = [];
-    let filterDebounceTimer = null;
+    let allProducts = [];
+    const FALLBACK_THUMB = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='75' viewBox='0 0 60 75' fill='%232a080d'><rect width='60' height='75' fill='%232a080d' stroke='%23c5a265' stroke-width='1'/><text x='50%' y='44%' dominant-baseline='middle' text-anchor='middle' fill='%23dfc28d' font-family='serif' font-size='9' font-weight='600' letter-spacing='1'>WAAK</text><text x='50%' y='60%' dominant-baseline='middle' text-anchor='middle' fill='%23bfa79f' font-family='sans-serif' font-size='6' letter-spacing='0.5'>ATELIER</text></svg>";
 
     // Tab Switching
     function switchTab(tab) {
@@ -750,7 +754,13 @@ export const adminDashboardHtml = `<!DOCTYPE html>
       document.getElementById('tab-btn-products').className = 'tab-btn ' + (tab === 'products' ? 'active' : '');
       document.getElementById('tab-btn-orders').className = 'tab-btn ' + (tab === 'orders' ? 'active' : '');
       if (tab === 'orders') loadOrders();
-      if (tab === 'products') loadProducts();
+      if (tab === 'products') {
+        if (allProducts.length === 0) {
+          fetchProductsFromServer();
+        } else {
+          applyLocalFilters();
+        }
+      }
     }
 
     // Toast Alert
@@ -792,6 +802,7 @@ export const adminDashboardHtml = `<!DOCTYPE html>
       localStorage.removeItem('waak_admin_token');
       localStorage.removeItem('waak_admin_user');
       adminToken = null;
+      allProducts = [];
       document.getElementById('dashboard-panel').style.display = 'none';
       document.getElementById('nav-actions').style.display = 'none';
       document.getElementById('auth-panel').style.display = 'block';
@@ -804,7 +815,7 @@ export const adminDashboardHtml = `<!DOCTYPE html>
       const user = JSON.parse(localStorage.getItem('waak_admin_user') || '{}');
       document.getElementById('admin-user-label').innerText = 'Signed in as ' + (user.email || 'Admin');
       loadStats();
-      loadProducts();
+      fetchProductsFromServer();
     }
 
     async function loadStats() {
@@ -820,41 +831,72 @@ export const adminDashboardHtml = `<!DOCTYPE html>
       }
     }
 
-    // Load Products with Filters
-    async function loadProducts() {
+    // Fast In-Memory Catalogue Synchronization
+    async function fetchProductsFromServer(notify = false) {
       if (!adminToken) return;
-      const search = document.getElementById('prod-search').value.trim();
-      const category = document.getElementById('prod-category-filter').value;
-      const status = document.getElementById('prod-status-filter').value;
-      const stock = document.getElementById('prod-stock-filter').value;
-
-      const params = new URLSearchParams();
-      if (search) params.append('search', search);
-      if (category && category !== 'All') params.append('category', category);
-      if (status && status !== 'all') params.append('status', status);
-      if (stock && stock !== 'all') params.append('stock', stock);
-
       try {
-        const res = await fetch('/admin/products?' + params.toString(), {
+        const res = await fetch('/admin/products', {
           headers: { 'Authorization': 'Bearer ' + adminToken }
         });
         if (res.status === 401 || res.status === 403) return logoutAdmin();
         const data = await res.json();
-        loadedProducts = data.products || [];
-        renderProductsTable(loadedProducts);
+        allProducts = data.products || [];
 
-        // Update counts
-        document.getElementById('stat-products').innerText = loadedProducts.length;
-        const totalUnits = loadedProducts.reduce((acc, p) => acc + (p.total_inventory || 0), 0);
+        // Update aggregate counts
+        document.getElementById('stat-products').innerText = allProducts.length;
+        const totalUnits = allProducts.reduce((acc, p) => acc + (p.total_inventory || 0), 0);
         document.getElementById('stat-total-stock').innerText = totalUnits;
+
+        applyLocalFilters();
+        if (notify) showToast('Catalogue synchronized with database');
       } catch (err) {
         showToast('Failed to load products: ' + err.message, true);
       }
     }
 
-    function debounceFilterProducts() {
-      clearTimeout(filterDebounceTimer);
-      filterDebounceTimer = setTimeout(loadProducts, 280);
+    // Instant Synchronous Client-Side Filtering (0ms network latency on typing/filter changes)
+    function applyLocalFilters() {
+      const search = (document.getElementById('prod-search').value || '').trim().toLowerCase();
+      const category = document.getElementById('prod-category-filter').value;
+      const status = document.getElementById('prod-status-filter').value;
+      const stock = document.getElementById('prod-stock-filter').value;
+
+      const filtered = allProducts.filter(p => {
+        // 1. Search filter: matches title, id, subtitle, or variant sku
+        if (search) {
+          const matchTitle = (p.title || '').toLowerCase().includes(search);
+          const matchId = (p.id || '').toLowerCase().includes(search);
+          const matchSubtitle = (p.subtitle || '').toLowerCase().includes(search);
+          const matchSku = (p.variants || []).some(v => (v.sku || '').toLowerCase().includes(search));
+          if (!matchTitle && !matchId && !matchSubtitle && !matchSku) return false;
+        }
+
+        // 2. Category filter
+        if (category && category !== 'All' && category !== 'all') {
+          if ((p.category || '').toLowerCase() !== category.toLowerCase()) return false;
+        }
+
+        // 3. Status filter
+        if (status === 'published') {
+          if (p.is_published === false) return false;
+        } else if (status === 'draft') {
+          if (p.is_published !== false) return false;
+        }
+
+        // 4. Stock filter
+        const totalStock = p.total_inventory !== undefined ? p.total_inventory : (p.variants || []).reduce((acc, v) => acc + (v.stock_quantity || 0), 0);
+        if (stock === 'in_stock') {
+          if (totalStock <= 4) return false;
+        } else if (stock === 'low_stock') {
+          if (totalStock === 0 || totalStock > 4) return false;
+        } else if (stock === 'out_of_stock') {
+          if (totalStock > 0) return false;
+        }
+
+        return true;
+      });
+
+      renderProductsTable(filtered);
     }
 
     function renderProductsTable(products) {
@@ -865,7 +907,7 @@ export const adminDashboardHtml = `<!DOCTYPE html>
       }
 
       tbody.innerHTML = products.map(p => {
-        const totalStock = p.total_inventory || 0;
+        const totalStock = p.total_inventory !== undefined ? p.total_inventory : (p.variants || []).reduce((acc, v) => acc + (v.stock_quantity || 0), 0);
         let stockBadge = '<span class="status-badge badge-instock">' + totalStock + ' in stock</span>';
         if (totalStock === 0) {
           stockBadge = '<span class="status-badge badge-nostock">Out of Stock</span>';
@@ -886,7 +928,7 @@ export const adminDashboardHtml = `<!DOCTYPE html>
         const comparePrice = p.original_price ? '<span style="text-decoration:line-through; font-size:11px; color:var(--text-muted); margin-left:6px;">₹' + p.original_price.toLocaleString('en-IN') + '</span>' : '';
 
         return '<tr>' +
-          '<td><img src="' + (p.thumbnail || '/assets/products/ivory-sherwani.jpg') + '" class="product-thumb" alt="' + p.title + '" onerror="this.src=\\'/assets/products/ivory-sherwani.jpg\\'" /></td>' +
+          '<td><img src="' + (p.thumbnail || FALLBACK_THUMB) + '" class="product-thumb" alt="' + p.title + '" loading="lazy" onerror="this.onerror=null; this.src=FALLBACK_THUMB;" /></td>' +
           '<td>' +
             '<strong style="color:var(--text-ivory); font-size:14px;">' + p.title + '</strong><br/>' +
             '<small style="font-family:monospace; color:var(--accent-gold); font-size:11px;">' + p.id + '</small>' +
@@ -931,7 +973,7 @@ export const adminDashboardHtml = `<!DOCTYPE html>
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to update publication status');
         showToast('Garment ' + (newStatus ? 'published in store' : 'moved to draft'));
-        loadProducts();
+        await fetchProductsFromServer();
       } catch (err) {
         showToast(err.message, true);
       }
@@ -1038,8 +1080,13 @@ export const adminDashboardHtml = `<!DOCTYPE html>
     }
 
     function updateThumbPreview() {
-      const url = document.getElementById('form-thumbnail').value;
-      document.getElementById('form-thumb-preview').src = url;
+      const url = (document.getElementById('form-thumbnail').value || '').trim();
+      const preview = document.getElementById('form-thumb-preview');
+      preview.onerror = function() {
+        this.onerror = null;
+        this.src = FALLBACK_THUMB;
+      };
+      preview.src = url || FALLBACK_THUMB;
     }
 
     function setFormImage(url) {
@@ -1108,7 +1155,7 @@ export const adminDashboardHtml = `<!DOCTYPE html>
 
         closeProductModal();
         showToast('Garment saved to Atelier catalogue successfully');
-        loadProducts();
+        await fetchProductsFromServer();
       } catch (err) {
         showToast(err.message, true);
       } finally {
@@ -1140,7 +1187,7 @@ export const adminDashboardHtml = `<!DOCTYPE html>
         }
         closeProductModal();
         showToast('Garment deleted successfully');
-        loadProducts();
+        await fetchProductsFromServer();
       } catch (err) {
         alert(err.message);
       }
